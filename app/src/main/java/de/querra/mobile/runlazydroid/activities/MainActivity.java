@@ -1,6 +1,7 @@
 package de.querra.mobile.runlazydroid.activities;
 
 import android.app.Fragment;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -19,11 +20,16 @@ import com.facebook.Profile;
 
 import de.querra.mobile.runlazydroid.R;
 import de.querra.mobile.runlazydroid.entities.User;
-import de.querra.mobile.runlazydroid.fragments.MainFragment;
+import de.querra.mobile.runlazydroid.fragments.OverviewFragment;
+import de.querra.mobile.runlazydroid.fragments.PenaltyFragment;
+import de.querra.mobile.runlazydroid.fragments.RunningDataFragment;
+import de.querra.mobile.runlazydroid.fragments.SettingsFragment;
 import de.querra.mobile.runlazydroid.widgets.ProfilePictureView;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, OverviewFragment.OnFragmentInteractionListener {
+
+    private static final String USER = "user";
 
     private User user;
 
@@ -35,8 +41,12 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        Profile profile = Profile.getCurrentProfile();
-        this.user = new User(profile);
+        if (savedInstanceState != null){
+            this.user = savedInstanceState.getParcelable(USER);
+        }
+        else {
+            this.user = new User(Profile.getCurrentProfile());
+        }
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -79,6 +89,8 @@ public class MainActivity extends AppCompatActivity
             navigationView.setNavigationItemSelectedListener(this);
             navigationView.setCheckedItem(R.id.nav_overview);
         }
+
+        switchFragment(new OverviewFragment());
     }
 
     private void updateDrawer() {
@@ -131,17 +143,17 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_overview) {
-            switchFragment(new MainFragment());
+            switchFragment(new OverviewFragment());
         } else if (id == R.id.nav_enter_running_data) {
-
+            switchFragment(new RunningDataFragment());
         } else if (id == R.id.nav_add_penalty) {
-
+            switchFragment(new PenaltyFragment());
         } else if (id == R.id.nav_settings) {
-
+            switchFragment(new SettingsFragment());
         } else if (id == R.id.nav_share) {
-
+            // TODO: share intent
         } else if (id == R.id.nav_send) {
-
+            // TODO: share intent
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -151,5 +163,18 @@ public class MainActivity extends AppCompatActivity
 
     private void switchFragment(Fragment fragment) {
         getFragmentManager().beginTransaction().replace(R.id.content_main, fragment).commit();
+    }
+
+    @Override
+    public void onOverviewFragmentInteraction(Uri uri) {
+
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        if (this.user != null) {
+            outState.putParcelable(USER, this.user);
+        }
     }
 }

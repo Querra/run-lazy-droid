@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 24
-    buildToolsVersion "23.0.2"
+    buildToolsVersion "24.0.2"
     defaultConfig {
         applicationId "de.querra.mobile.runlazydroid"
         minSdkVersion 17
@@ -25,12 +25,15 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
 
-    compile 'com.android.support:design:24.2.0'
-    compile 'com.android.support:appcompat-v7:24.2.0'
-    compile 'com.android.support:support-v4:24.2.0'
+    compile 'com.android.support:design:24.2.1'
+    compile 'com.android.support:appcompat-v7:24.2.1'
+    compile 'com.android.support:support-v4:24.2.1'
 
     // facebook sdk
     compile 'com.facebook.android:facebook-android-sdk:[4,5)'
+
+    // parcelable support
+    compile 'org.parceler:parceler-api:1.1.5'
 
     testCompile 'junit:junit:4.12'
 }

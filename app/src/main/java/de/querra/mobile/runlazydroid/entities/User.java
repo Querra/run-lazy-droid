@@ -1,13 +1,14 @@
 package de.querra.mobile.runlazydroid.entities;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.facebook.Profile;
 
-import java.util.Locale;
-
-public class User {
-    private String firstName;
-    private String lastName;
-    private String id;
+public class User implements Parcelable {
+    String firstName;
+    String lastName;
+    String id;
 
     public User(Profile profile) {
         this.firstName = profile.getFirstName();
@@ -31,15 +32,42 @@ public class User {
         this.lastName = lastName;
     }
 
-    public String getFullName(){
-        return String.format(Locale.GERMANY, "%s %s", this.firstName, this.lastName);
-    }
-
     public String getId() {
         return this.id;
     }
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(this.firstName);
+        parcel.writeString(this.lastName);
+        parcel.writeString(this.id);
+    }
+
+    // Creator
+    public static final Parcelable.Creator CREATOR
+            = new Parcelable.Creator() {
+        public User createFromParcel(Parcel in) {
+            return new User(in);
+        }
+
+        public User[] newArray(int size) {
+            return new User[size];
+        }
+    };
+
+    // "De-parcel object
+    public User(Parcel in) {
+        this.firstName = in.readString();
+        this.lastName = in.readString();
+        this.id = in.readString();
     }
 }
