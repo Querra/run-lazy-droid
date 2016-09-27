@@ -11,4 +11,6 @@
     <string name="communicate">Mitteilen</string>
     <string name="share">Teilen</string>
     <string name="send">Senden</string>
+    <string name="loading_data">Daten werden geladen…</string>
+    <string name="log_in_to_continue">Bitte einloggen um fortzufahren</string>
 </resources>

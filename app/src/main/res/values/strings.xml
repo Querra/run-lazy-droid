@@ -13,4 +13,11 @@
     <string name="communicate">Communicate</string>
     <string name="share">Share</string>
     <string name="send">Send</string>
+    <string name="loading_data">Loading data…</string>
+    <string name="log_in_to_continue">Please log in to continue</string>
+    <string name="distance_run">distance_run</string>
+    <string name="penalties">penalties</string>
+    <string name="start_date">start_date</string>
+    <string name="week_goal">week_goal</string>
+    <string name="penalty_distance">penalty_distance</string>
 </resources>
