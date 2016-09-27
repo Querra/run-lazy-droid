@@ -5,13 +5,9 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
-import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
-import com.facebook.FacebookSdk;
-import com.facebook.Profile;
-import com.facebook.appevents.AppEventsLogger;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 
@@ -25,16 +21,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        FacebookSdk.sdkInitialize(getApplicationContext());
-        AppEventsLogger.activateApp(getApplication());
         this.callbackManager = CallbackManager.Factory.create();
-
-        AccessToken currentAccessToken = AccessToken.getCurrentAccessToken();
-        Profile profile = Profile.getCurrentProfile();
-
-        if (profile != null){
-            startMainActivity();
-        }
 
         setContentView(R.layout.activity_login);
         LoginButton loginButton = (LoginButton) findViewById(R.id.login_button);
@@ -59,15 +46,17 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    private void startMainActivity() {
-        startActivity(new Intent(LoginActivity.this, MainActivity.class));
-        finish();
-    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         this.callbackManager.onActivityResult(requestCode, resultCode, data);
+    }
+
+
+    private void startMainActivity() {
+        startActivity(new Intent(this, MainActivity.class));
+        finish();
     }
 
 }
