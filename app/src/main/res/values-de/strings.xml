@@ -13,4 +13,6 @@
     <string name="send">Senden</string>
     <string name="loading_data">Daten werden geladen…</string>
     <string name="log_in_to_continue">Bitte einloggen um fortzufahren</string>
+    <string name="options">Optionen</string>
+    <string name="logout">Ausloggen</string>
 </resources>

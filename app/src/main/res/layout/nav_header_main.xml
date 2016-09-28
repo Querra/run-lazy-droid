@@ -1,45 +1,114 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/nav_header_height"
-    android:background="@drawable/side_nav_bar"
-    android:gravity="center_vertical"
-    android:orientation="horizontal"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="36dp"
+    android:layout_height="160dp"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
-    <de.querra.mobile.runlazydroid.widgets.ProfilePictureView
-        android:id="@+id/profilePicture"
-        android:layout_height="100dp"
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/background"
+        android:layout_alignEnd="@+id/background"
+        android:layout_alignStart="@+id/background"
+        android:layout_alignTop="@+id/background"
+        android:background="#000">
+
+    </FrameLayout>
+
+    <ImageView
+        android:id="@+id/background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0.4"
+        android:scaleType="centerCrop"
+        android:src="@drawable/retro_race_track" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="140dp"
+        android:layout_alignParentBottom="true">
+
+    <RelativeLayout
+        android:id="@+id/profilePictureContainer"
         android:layout_width="100dp"
-        android:gravity="center_horizontal"/>
+        android:layout_height="100dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="20dp"
+        android:layout_marginStart="20dp">
+
+        <de.querra.mobile.runlazydroid.widgets.ProfilePictureView
+            android:id="@+id/nav_header_main__profilePicture"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:layout_margin="5dp"
+            android:gravity="center_horizontal" />
+    </RelativeLayout>
+
+    <com.mikhaellopez.circularprogressbar.CircularProgressBar
+        android:id="@+id/nav_header_main__progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/profilePictureContainer"
+        android:layout_alignEnd="@+id/profilePictureContainer"
+        android:layout_alignStart="@+id/profilePictureContainer"
+        android:layout_alignTop="@+id/profilePictureContainer"
+        android:layout_margin="-10dp"
+        app:cpb_background_progressbar_color="#CCC"
+        app:cpb_background_progressbar_width="5dp"
+        app:cpb_progressbar_color="@color/colorAccent"
+        app:cpb_progressbar_width="8dp" />
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingStart="8dp">
-    <TextView
-        android:id="@+id/nav_header_main__user_first_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingStart="@dimen/nav_header_first_name_spacing"
-        android:paddingBottom="@dimen/nav_header_first_name_spacing"
-        android:text="First Name"
-        android:textSize="20sp"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+        android:layout_marginBottom="24dp"
+        android:layout_marginStart="20dp"
+        android:layout_toEndOf="@+id/profilePictureContainer"
+        android:layout_centerVertical="true"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/nav_header_main__user_last_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingStart="@dimen/nav_header_last_name_spacing"
-        android:text="Last Name"
-        android:textSize="20sp"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+        <TextView
+            android:id="@+id/nav_header_main__user_first_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="6dp"
+            android:layout_marginStart="4dp"
+            android:text="First Name"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textSize="24sp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/nav_header_main__goal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Goal"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:gravity="center_vertical"
+            android:drawableStart="@drawable/ic_flag"
+            android:drawablePadding="8dp"
+            android:layout_marginBottom="4dp"
+            />
+
+        <TextView
+            android:id="@+id/nav_header_main__days_left"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Days Left"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:gravity="center_vertical"
+            android:drawableStart="@drawable/ic_time"
+            android:drawablePadding="8dp"
+            />
+
     </LinearLayout>
-</LinearLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>

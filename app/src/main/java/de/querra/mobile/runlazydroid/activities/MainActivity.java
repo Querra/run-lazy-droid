@@ -1,6 +1,7 @@
 package de.querra.mobile.runlazydroid.activities;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -17,6 +18,10 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.facebook.Profile;
+import com.facebook.login.LoginManager;
+import com.mikhaellopez.circularprogressbar.CircularProgressBar;
+
+import java.util.Locale;
 
 import de.querra.mobile.runlazydroid.R;
 import de.querra.mobile.runlazydroid.entities.User;
@@ -24,6 +29,9 @@ import de.querra.mobile.runlazydroid.fragments.OverviewFragment;
 import de.querra.mobile.runlazydroid.fragments.PenaltyFragment;
 import de.querra.mobile.runlazydroid.fragments.RunningDataFragment;
 import de.querra.mobile.runlazydroid.fragments.SettingsFragment;
+import de.querra.mobile.runlazydroid.helper.DateHelper;
+import de.querra.mobile.runlazydroid.helper.Formatter;
+import de.querra.mobile.runlazydroid.helper.PreferencesHelper;
 import de.querra.mobile.runlazydroid.widgets.ProfilePictureView;
 
 public class MainActivity extends AppCompatActivity
@@ -41,12 +49,7 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        if (savedInstanceState != null){
-            this.user = savedInstanceState.getParcelable(USER);
-        }
-        else {
-            this.user = new User(Profile.getCurrentProfile());
-        }
+        this.user = new User(Profile.getCurrentProfile());
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -64,12 +67,12 @@ public class MainActivity extends AppCompatActivity
         drawer.addDrawerListener(new DrawerLayout.DrawerListener() {
             @Override
             public void onDrawerSlide(View drawerView, float slideOffset) {
-                //NOOP
+                updateUser(drawerView);
             }
 
             @Override
             public void onDrawerOpened(View drawerView) {
-                updateDrawer();
+                updateUser(drawerView);
             }
 
             @Override
@@ -93,15 +96,22 @@ public class MainActivity extends AppCompatActivity
         switchFragment(new OverviewFragment());
     }
 
-    private void updateDrawer() {
-        ProfilePictureView profileImage = (ProfilePictureView) findViewById(R.id.profilePicture);
+    private void updateUser(View view) {
+        ProfilePictureView profileImage = (ProfilePictureView) view.findViewById(R.id.nav_header_main__profilePicture);
         profileImage.setProfileId(this.user.getId());
 
-        TextView userFirstName = (TextView) findViewById(R.id.nav_header_main__user_first_name);
+        CircularProgressBar progress = (CircularProgressBar) view.findViewById(R.id.nav_header_main__progress);
+        progress.setProgressWithAnimation(70f);
+        //progress.setProgressWithAnimation(Formatter.getProgress()*100f);
+
+        TextView userFirstName = (TextView) view.findViewById(R.id.nav_header_main__user_first_name);
         userFirstName.setText(this.user.getFirstName());
 
-        TextView userLastName = (TextView) findViewById(R.id.nav_header_main__user_last_name);
-        userLastName.setText(this.user.getLastName());
+        TextView goal = (TextView) view.findViewById(R.id.nav_header_main__goal);
+        goal.setText(Formatter.asKilometers(PreferencesHelper.getWeekGoal()));
+
+        TextView penalty = (TextView) view.findViewById(R.id.nav_header_main__days_left);
+        penalty.setText(Formatter.getDaysLeft(Locale.getDefault(), DateHelper.getNextSunday()));
     }
 
     @Override
@@ -150,6 +160,10 @@ public class MainActivity extends AppCompatActivity
             switchFragment(new PenaltyFragment());
         } else if (id == R.id.nav_settings) {
             switchFragment(new SettingsFragment());
+        } else if (id == R.id.nav_logout) {
+            LoginManager.getInstance().logOut();
+            startActivity(new Intent(this, LoginActivity.class));
+            finish();
         } else if (id == R.id.nav_share) {
             // TODO: share intent
         } else if (id == R.id.nav_send) {
@@ -176,5 +190,9 @@ public class MainActivity extends AppCompatActivity
         if (this.user != null) {
             outState.putParcelable(USER, this.user);
         }
+    }
+
+    public User getUser() {
+        return this.user;
     }
 }

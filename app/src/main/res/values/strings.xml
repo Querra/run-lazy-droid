@@ -20,4 +20,6 @@
     <string name="start_date">start_date</string>
     <string name="week_goal">week_goal</string>
     <string name="penalty_distance">penalty_distance</string>
+    <string name="options">Options</string>
+    <string name="logout">Logout</string>
 </resources>
