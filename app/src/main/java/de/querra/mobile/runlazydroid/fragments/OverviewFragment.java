@@ -4,12 +4,14 @@ import android.app.Fragment;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import de.querra.mobile.runlazydroid.R;
+import de.querra.mobile.runlazydroid.adapters.LabeledCardAdapter;
 import de.querra.mobile.runlazydroid.helper.Formatter;
 import de.querra.mobile.runlazydroid.helper.PreferencesHelper;
 
@@ -28,14 +30,18 @@ public class OverviewFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_overview, container, false);
 
-        TextView distance = (TextView) view.findViewById(R.id.fragment_overview__distance);
-        distance.setText(Formatter.asKilometers(PreferencesHelper.getDistanceRun()));
-        TextView start = (TextView) view.findViewById(R.id.fragment_overview__start);
-        start.setText(Formatter.dateToString(PreferencesHelper.getStartDate()));
-        TextView penalty = (TextView) view.findViewById(R.id.fragment_overview__penalty);
-        penalty.setText(Formatter.penaltyToKilometers(PreferencesHelper.getPenalties()));
-        TextView goal = (TextView) view.findViewById(R.id.fragment_overview__target);
-        goal.setText(Formatter.asKilometers(PreferencesHelper.getWeekGoal()));
+        RecyclerView list = (RecyclerView) view.findViewById(R.id.fragment_overview__list);
+        list.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
+        LabeledCardAdapter adapter = new LabeledCardAdapter();
+
+        getActivity().getApplication().getApplicationContext();
+
+        adapter.addItem("Distance run", Formatter.asKilometers(PreferencesHelper.getDistanceRun(getActivity())));
+        adapter.addItem("Target", Formatter.asKilometers(PreferencesHelper.getWeekGoal(getActivity())));
+        adapter.addItem("Penalty", Formatter.penaltyToKilometers(getActivity(), PreferencesHelper.getPenalties(getActivity())));
+        adapter.addItem("Start", Formatter.dateToString(PreferencesHelper.getStartDate(getActivity())));
+
+        list.setAdapter(adapter);
 
         return view;
     }

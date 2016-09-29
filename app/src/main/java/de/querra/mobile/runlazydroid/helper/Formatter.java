@@ -1,5 +1,8 @@
 package de.querra.mobile.runlazydroid.helper;
 
+import android.content.Context;
+import android.support.annotation.NonNull;
+
 import org.joda.time.LocalDate;
 
 import java.text.SimpleDateFormat;
@@ -16,16 +19,16 @@ public class Formatter {
         return String.format(Locale.GERMANY, "%.2f km", kilometers);
     }
 
-    public static String penaltyToKilometers(int penalty){
-        return asKilometers(getPenaltyDistance(penalty));
+    public static String penaltyToKilometers(@NonNull Context context, int penalty){
+        return asKilometers(getPenaltyDistance(context, penalty));
     }
 
-    public static float getPenaltyDistance(int penalty){
-        return penalty*PreferencesHelper.getPenaltyDistance();
+    public static float getPenaltyDistance(@NonNull Context context, int penalty){
+        return penalty*PreferencesHelper.getPenaltyDistance(context);
     }
 
-    public static float getProgress(){
-        return PreferencesHelper.getDistanceRun()/(PreferencesHelper.getWeekGoal()+getPenaltyDistance(PreferencesHelper.getPenalties()));
+    public static float getProgress(@NonNull Context context){
+        return PreferencesHelper.getDistanceRun(context)/(PreferencesHelper.getWeekGoal(context)+getPenaltyDistance(context, PreferencesHelper.getPenalties(context)));
     }
 
     public static String getDaysLeft(Locale locale, LocalDate future){

@@ -8,6 +8,19 @@
     android:fitsSystemWindows="true"
     tools:openDrawer="start">
 
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#000" />
+
+    <ImageView
+        android:id="@+id/background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0.4"
+        android:scaleType="centerCrop"
+        android:src="@drawable/wood_track" />
+
     <include
         layout="@layout/app_bar_main"
         android:layout_width="match_parent"

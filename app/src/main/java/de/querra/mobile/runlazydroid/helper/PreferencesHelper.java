@@ -3,10 +3,9 @@ package de.querra.mobile.runlazydroid.helper;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.support.annotation.NonNull;
 
 import java.util.Date;
-
-import de.querra.mobile.runlazydroid.RunLazyDroidApplication;
 
 public class PreferencesHelper {
 
@@ -19,117 +18,69 @@ public class PreferencesHelper {
     private static final String SAVED_PREFERENCES = "run_lazy_droid_saved_preferences";
     private static final String DEFAULTS_SET = "defaults_set";
 
-    public static float getDistanceRun(){
-        Context context = RunLazyDroidApplication.getContext();
-        if (context == null){
-            return 0f;
-        }
+    public static float getDistanceRun(@NonNull Context context){
         SharedPreferences sharedPreferences = context.getSharedPreferences(SAVED_PREFERENCES, Context.MODE_PRIVATE);
         return sharedPreferences.getFloat(DISTANCE_RUN, 0f);
     }
 
-    public static void setDistanceRun(float distanceRun){
-        Context context = RunLazyDroidApplication.getContext();
-        if (context == null){
-            return;
-        }
+    public static void setDistanceRun(@NonNull Context context, float distanceRun){
         SharedPreferences sharedPreferences = context.getSharedPreferences(SAVED_PREFERENCES, Context.MODE_PRIVATE);
         sharedPreferences.edit().putFloat(DISTANCE_RUN, distanceRun).apply();
     }
 
-    public static int getPenalties(){
-        Context context = RunLazyDroidApplication.getContext();
-        if (context == null){
-            return 0;
-        }
+    public static int getPenalties(@NonNull Context context){
         SharedPreferences sharedPreferences = context.getSharedPreferences(SAVED_PREFERENCES, Context.MODE_PRIVATE);
         return sharedPreferences.getInt(PENALTIES, 0);
     }
 
-    public static void setPenalties(int penalties){
-        Context context = RunLazyDroidApplication.getContext();
-        if (context == null){
-            return;
-        }
+    public static void setPenalties(@NonNull Context context, int penalties){
         SharedPreferences sharedPreferences = context.getSharedPreferences(SAVED_PREFERENCES, Context.MODE_PRIVATE);
         sharedPreferences.edit().putInt(PENALTIES, penalties).apply();
     }
 
-    public static Date getStartDate(){
-        Context context = RunLazyDroidApplication.getContext();
-        if (context == null){
-            return null;
-        }
+    public static Date getStartDate(@NonNull Context context){
         SharedPreferences sharedPreferences = context.getSharedPreferences(SAVED_PREFERENCES, Context.MODE_PRIVATE);
         long millis = sharedPreferences.getLong(START_DATE, 0);
         return new Date(millis);
     }
 
-    public static void setStartDate(Date date){
-        Context context = RunLazyDroidApplication.getContext();
-        if (context == null){
-            return;
-        }
+    public static void setStartDate(@NonNull Context context, Date date){
         SharedPreferences sharedPreferences = context.getSharedPreferences(SAVED_PREFERENCES, Context.MODE_PRIVATE);
         sharedPreferences.edit().putLong(START_DATE, date.getTime()).apply();
     }
 
-    public static float getWeekGoal(){
-        Context context = RunLazyDroidApplication.getContext();
-        if (context == null){
-            return 0f;
-        }
+    public static float getWeekGoal(@NonNull Context context){
         SharedPreferences sharedPreferences = context.getSharedPreferences(SAVED_PREFERENCES, Context.MODE_PRIVATE);
         return sharedPreferences.getFloat(WEEK_GOAL, 0f);
     }
 
-    public static void setWeekGoal(float weekGoal){
-        Context context = RunLazyDroidApplication.getContext();
-        if (context == null){
-            return;
-        }
+    public static void setWeekGoal(@NonNull Context context, float weekGoal){
         SharedPreferences sharedPreferences = context.getSharedPreferences(SAVED_PREFERENCES, Context.MODE_PRIVATE);
         sharedPreferences.edit().putFloat(WEEK_GOAL, weekGoal).apply();
     }
 
-    public static float getPenaltyDistance() {
-        Context context = RunLazyDroidApplication.getContext();
-        if (context == null){
-            return 0f;
-        }
+    public static float getPenaltyDistance(@NonNull Context context) {
         SharedPreferences sharedPreferences = context.getSharedPreferences(SAVED_PREFERENCES, Context.MODE_PRIVATE);
         return sharedPreferences.getFloat(PENALTY_DISTANCE, 0f);
     }
 
-    public static void setPenaltyDistance(float penaltyDistance){
-        Context context = RunLazyDroidApplication.getContext();
-        if (context == null){
-            return;
-        }
+    public static void setPenaltyDistance(@NonNull Context context, float penaltyDistance){
         SharedPreferences sharedPreferences = context.getSharedPreferences(SAVED_PREFERENCES, Context.MODE_PRIVATE);
         sharedPreferences.edit().putFloat(PENALTY_DISTANCE, penaltyDistance).apply();
     }
 
-    private static boolean areDefaultsSet(){
-        Context context = RunLazyDroidApplication.getContext();
-        if (context == null){
-            return false;
-        }
+    private static boolean areDefaultsSet(@NonNull Context context){
         SharedPreferences sharedPreferences = context.getSharedPreferences(SAVED_PREFERENCES, Context.MODE_PRIVATE);
         return sharedPreferences.getBoolean(DEFAULTS_SET, false);
     }
 
-    public static void setDefaultValues(boolean override){
-        Context context = RunLazyDroidApplication.getContext();
-        if (context == null){
-            return;
-        }
-        if (!areDefaultsSet() || override) {
-            setDistanceRun(0f);
-            setPenalties(0);
-            setStartDate(new Date());
-            setWeekGoal(10f);
-            setPenaltyDistance(5f);
+    public static void setDefaultValues(@NonNull Context context, boolean override){
+        if (!areDefaultsSet(context) || override) {
+            setDistanceRun(context, 0f);
+            setPenalties(context, 0);
+            setStartDate(context, new Date());
+            setWeekGoal(context, 10f);
+            setPenaltyDistance(context, 5f);
         }
 
         SharedPreferences sharedPreferences = context.getSharedPreferences(SAVED_PREFERENCES, Context.MODE_PRIVATE);

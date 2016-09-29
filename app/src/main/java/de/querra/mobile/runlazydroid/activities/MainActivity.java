@@ -101,14 +101,13 @@ public class MainActivity extends AppCompatActivity
         profileImage.setProfileId(this.user.getId());
 
         CircularProgressBar progress = (CircularProgressBar) view.findViewById(R.id.nav_header_main__progress);
-        progress.setProgressWithAnimation(70f);
-        //progress.setProgressWithAnimation(Formatter.getProgress()*100f);
+        progress.setProgressWithAnimation(Formatter.getProgress(this)*100f);
 
         TextView userFirstName = (TextView) view.findViewById(R.id.nav_header_main__user_first_name);
         userFirstName.setText(this.user.getFirstName());
 
         TextView goal = (TextView) view.findViewById(R.id.nav_header_main__goal);
-        goal.setText(Formatter.asKilometers(PreferencesHelper.getWeekGoal()));
+        goal.setText(Formatter.asKilometers(PreferencesHelper.getWeekGoal(this)));
 
         TextView penalty = (TextView) view.findViewById(R.id.nav_header_main__days_left);
         penalty.setText(Formatter.getDaysLeft(Locale.getDefault(), DateHelper.getNextSunday()));
