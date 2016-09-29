@@ -29,6 +29,7 @@ import de.querra.mobile.runlazydroid.fragments.OverviewFragment;
 import de.querra.mobile.runlazydroid.fragments.PenaltyFragment;
 import de.querra.mobile.runlazydroid.fragments.RunningDataFragment;
 import de.querra.mobile.runlazydroid.fragments.SettingsFragment;
+import de.querra.mobile.runlazydroid.fragments.StatisticsFragment;
 import de.querra.mobile.runlazydroid.helper.DateHelper;
 import de.querra.mobile.runlazydroid.helper.Formatter;
 import de.querra.mobile.runlazydroid.helper.PreferencesHelper;
@@ -159,6 +160,8 @@ public class MainActivity extends AppCompatActivity
             switchFragment(new PenaltyFragment());
         } else if (id == R.id.nav_settings) {
             switchFragment(new SettingsFragment());
+        } else if (id == R.id.nav_statistics) {
+            switchFragment(new StatisticsFragment());
         } else if (id == R.id.nav_logout) {
             LoginManager.getInstance().logOut();
             startActivity(new Intent(this, LoginActivity.class));

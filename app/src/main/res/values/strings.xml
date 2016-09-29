@@ -22,4 +22,5 @@
     <string name="penalty_distance">penalty_distance</string>
     <string name="options">Options</string>
     <string name="logout">Logout</string>
+    <string name="statistics">Statistics</string>
 </resources>

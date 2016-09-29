@@ -7,23 +7,28 @@ import io.realm.annotations.PrimaryKey;
 
 public class RunEntry extends RealmObject{
 
+    public static final String DATE_FIELD = "date";
+    public static final String TIME_FIELD = "time";
+    public static final String DISTANCE_FIELD = "distance";
+
     @PrimaryKey
-    private int id;
+    long id;
 
     private Date date;
     private float time;
     private float distance;
 
-    public int getId() {
-        return id;
+    public long getId() {
+        return this.id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
+
     public Date getDate() {
-        return date;
+        return this.date;
     }
 
     public void setDate(Date date) {
@@ -31,7 +36,7 @@ public class RunEntry extends RealmObject{
     }
 
     public float getTime() {
-        return time;
+        return this.time;
     }
 
     public void setTime(float time) {
@@ -39,7 +44,7 @@ public class RunEntry extends RealmObject{
     }
 
     public float getDistance() {
-        return distance;
+        return this.distance;
     }
 
     public void setDistance(float distance) {

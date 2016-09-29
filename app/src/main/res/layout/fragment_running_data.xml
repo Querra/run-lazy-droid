@@ -1,12 +1,66 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="de.querra.mobile.runlazydroid.fragments.OverviewFragment">
+    android:padding="10dp"
+    tools:context="de.querra.mobile.runlazydroid.fragments.RunningDataFragment">
 
     <TextView
+        android:id="@+id/fragment_running_data__title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Running data"/>
+        android:textColor="#FFF"
+        android:textSize="20sp"
+        android:text="Add Running Data"/>
 
-</FrameLayout>
+    <TextView
+        android:id="@+id/fragment_running_data__distance_label"
+        android:layout_below="@+id/fragment_running_data__title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#FFF"
+        android:textSize="16sp"
+        android:text="Distance"
+        android:layout_marginTop="10dp"/>
+
+    <EditText
+        android:id="@+id/fragment_running_data__distance"
+        android:layout_below="@+id/fragment_running_data__distance_label"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:background="@color/colorAccent"
+        android:hint="Distance in km"
+        />
+
+    <TextView
+        android:id="@+id/fragment_running_data__time_label"
+        android:layout_below="@+id/fragment_running_data__distance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#FFF"
+        android:textSize="16sp"
+        android:text="Time"
+        android:layout_marginTop="10dp"/>
+
+    <EditText
+        android:id="@+id/fragment_running_data__time"
+        android:layout_below="@+id/fragment_running_data__time_label"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:background="@color/colorAccent"
+        android:hint="Time in min"
+        />
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/fragment_running_data__submit"
+        android:layout_below="@+id/fragment_running_data__time"
+        android:layout_width="180dp"
+        android:layout_height="50dp"
+        android:background="@color/colorAccent"
+        android:textColor="#FFF"
+        android:text="Add Entry"
+        android:layout_marginTop="20dp"/>
+
+</RelativeLayout>

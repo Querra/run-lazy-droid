@@ -34,8 +34,6 @@ public class OverviewFragment extends Fragment {
         list.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
         LabeledCardAdapter adapter = new LabeledCardAdapter();
 
-        getActivity().getApplication().getApplicationContext();
-
         adapter.addItem("Distance run", Formatter.asKilometers(PreferencesHelper.getDistanceRun(getActivity())));
         adapter.addItem("Target", Formatter.asKilometers(PreferencesHelper.getWeekGoal(getActivity())));
         adapter.addItem("Penalty", Formatter.penaltyToKilometers(getActivity(), PreferencesHelper.getPenalties(getActivity())));

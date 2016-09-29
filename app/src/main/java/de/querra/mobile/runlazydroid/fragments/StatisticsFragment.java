@@ -4,50 +4,46 @@ import android.app.Fragment;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v7.widget.AppCompatButton;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 
-import java.util.Date;
+import java.util.Locale;
 
 import de.querra.mobile.runlazydroid.R;
+import de.querra.mobile.runlazydroid.adapters.LabeledCardAdapter;
 import de.querra.mobile.runlazydroid.data.entities.RunEntry;
-import de.querra.mobile.runlazydroid.helper.RealmHelper;
+import io.realm.Realm;
+import io.realm.RealmResults;
 
-public class RunningDataFragment extends Fragment {
+public class StatisticsFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_running_data, container, false);
+        View view = inflater.inflate(R.layout.fragment_statistics, container, false);
 
-        final EditText distance = (EditText) view.findViewById(R.id.fragment_running_data__distance);
-        final EditText time = (EditText) view.findViewById(R.id.fragment_running_data__time);
-        AppCompatButton button = (AppCompatButton) view.findViewById(R.id.fragment_running_data__submit);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                float distanceInKm = Float.parseFloat(distance.getText().toString());
-                float timeInMin = Float.parseFloat(time.getText().toString());
-                RunEntry runEntry = new RunEntry();
-                Date now = new Date();
-                runEntry.setId(now.getTime());
-                runEntry.setDate(now);
-                runEntry.setDistance(distanceInKm);
-                runEntry.setTime(timeInMin);
-                RealmHelper.saveOrUpdate(runEntry);
-            }
-        });
+        RecyclerView list = (RecyclerView) view.findViewById(R.id.fragment_statistics__list);
+        list.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
+        LabeledCardAdapter adapter = new LabeledCardAdapter();
+
+        RealmResults<RunEntry> runEntries = Realm.getDefaultInstance().where(RunEntry.class).findAll();
+
+        for (RunEntry runEntry : runEntries){
+            adapter.addItem(runEntry.getDate().toString(), String.format(Locale.getDefault(), "Distance: %.2f km| Time: %.2f", runEntry.getDistance(), runEntry.getTime()));
+        }
+
+        list.setAdapter(adapter);
 
         return view;
     }
@@ -78,4 +74,5 @@ public class RunningDataFragment extends Fragment {
     public interface OnFragmentInteractionListener {
         void onOverviewFragmentInteraction(Uri uri);
     }
+
 }
