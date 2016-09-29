@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import com.facebook.AccessToken;
 import com.facebook.Profile;
 import com.facebook.login.LoginManager;
 import com.mikhaellopez.circularprogressbar.CircularProgressBar;
@@ -47,7 +48,7 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        this.user = new User(Profile.getCurrentProfile());
+        initUser();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -85,7 +86,23 @@ public class MainActivity extends AppCompatActivity
         switchFragment(new OverviewFragment());
     }
 
+    private void initUser() {
+        if(AccessToken.getCurrentAccessToken() != null){
+            Profile.fetchProfileForCurrentAccessToken();
+        }
+        if(Profile.getCurrentProfile() != null) {
+            this.user = new User(Profile.getCurrentProfile());
+        }
+    }
+
     private void updateUser(View view) {
+        if (this.user == null){
+            initUser();
+            if (this.user == null){
+                return;
+            }
+        }
+
         ProfilePictureView profileImage = (ProfilePictureView) view.findViewById(R.id.nav_header_main__profilePicture);
         profileImage.setProfileId(this.user.getId());
 
