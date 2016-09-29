@@ -40,7 +40,7 @@ public class Formatter {
         return String.format(locale, "%d %s", days, daysLiteral);
     }
 
-    public static String inMinutes(float time) {
-        return String.format(Locale.getDefault(), "%.2f Minuten", time);
+    public static String inMinutes(int time) {
+        return String.format(Locale.getDefault(), "%d Minuten", time);
     }
 }

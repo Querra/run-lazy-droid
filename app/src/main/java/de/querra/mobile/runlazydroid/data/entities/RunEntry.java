@@ -12,11 +12,11 @@ public class RunEntry extends RealmObject {
     public static final String DISTANCE_FIELD = "distance";
 
     @PrimaryKey
-    long id;
+    private long id;
 
     private String type;
     private Date date;
-    private float time;
+    private int time;
     private float distance;
 
     public long getId() {return this.id;}
@@ -31,10 +31,10 @@ public class RunEntry extends RealmObject {
     public void setDate(Date date) {
         this.date = date;
     }
-    public float getTime() {
+    public int getTime() {
         return this.time;
     }
-    public void setTime(float time) {
+    public void setTime(int time) {
         this.time = time;
     }
     public float getDistance() {

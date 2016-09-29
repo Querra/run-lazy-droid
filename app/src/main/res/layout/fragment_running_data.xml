@@ -15,6 +15,8 @@
         android:layout_height="wrap_content"
         android:textColor="#FFF"
         android:textSize="20sp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="20dp"
         android:text="Add Running Data"/>
 
     <TextView
@@ -25,17 +27,27 @@
         android:textColor="#FFF"
         android:textSize="16sp"
         android:text="Distance"
-        android:layout_marginTop="10dp"/>
+        android:layout_marginTop="20dp"/>
 
-    <EditText
-        android:id="@+id/fragment_running_data__distance"
+    <SeekBar
+        android:id="@+id/fragment_running_data__distance_bar"
         android:layout_below="@+id/fragment_running_data__distance_label"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:max="250"/>
+
+    <TextView
+        android:id="@+id/fragment_running_data__distance"
+        android:layout_below="@+id/fragment_running_data__distance_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="16sp"
         android:background="@color/colorAccent"
-        android:hint="Distance in km"
+        android:paddingStart="8dp"
+        android:text="0.0 km"
         />
+
 
     <TextView
         android:id="@+id/fragment_running_data__time_label"
@@ -45,24 +57,44 @@
         android:textColor="#FFF"
         android:textSize="16sp"
         android:text="Time"
-        android:layout_marginTop="10dp"/>
+        android:layout_marginTop="20dp"/>
 
-    <EditText
-        android:id="@+id/fragment_running_data__time"
+    <SeekBar
+        android:id="@+id/fragment_running_data__time_bar"
         android:layout_below="@+id/fragment_running_data__time_label"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:max="180"/>
+
+    <TextView
+        android:id="@+id/fragment_running_data__time"
+        android:layout_below="@+id/fragment_running_data__time_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="16sp"
         android:background="@color/colorAccent"
-        android:hint="Time in min"
+        android:paddingStart="8dp"
+        android:text="0 min"
         />
+
+    <TextView
+        android:id="@+id/fragment_running_data__run_type_label"
+        android:layout_below="@+id/fragment_running_data__time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#FFF"
+        android:textSize="16sp"
+        android:text="Track type"
+        android:layout_marginTop="20dp"/>
 
     <Spinner
         android:id="@+id/fragment_running_data__run_type_spinner"
-        android:layout_below="@+id/fragment_running_data__time"
+        android:layout_below="@+id/fragment_running_data__run_type_label"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/colorAccent"
         >
 
     </Spinner>
