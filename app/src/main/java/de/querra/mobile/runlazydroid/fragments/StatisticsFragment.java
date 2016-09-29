@@ -15,6 +15,7 @@ import de.querra.mobile.runlazydroid.adapters.StatisticsCardAdapter;
 import de.querra.mobile.runlazydroid.data.entities.RunEntry;
 import io.realm.Realm;
 import io.realm.RealmResults;
+import io.realm.Sort;
 
 public class StatisticsFragment extends Fragment {
 
@@ -35,7 +36,7 @@ public class StatisticsFragment extends Fragment {
         list.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
         StatisticsCardAdapter adapter = new StatisticsCardAdapter(getResources());
 
-        RealmResults<RunEntry> runEntries = Realm.getDefaultInstance().where(RunEntry.class).findAll();
+        RealmResults<RunEntry> runEntries = Realm.getDefaultInstance().where(RunEntry.class).findAll().sort(RunEntry.DATE_FIELD, Sort.DESCENDING);
 
         adapter.addItems(runEntries);
 

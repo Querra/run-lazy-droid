@@ -66,7 +66,7 @@ public class RunningDataFragment extends Fragment{
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-
+                //NOOP
             }
         });
 
