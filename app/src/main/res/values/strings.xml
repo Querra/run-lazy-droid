@@ -26,4 +26,7 @@
     <string name="track">Track</string>
     <string name="treadmill">Treadmill</string>
     <string name="unknown">Unknown</string>
+    <string name="penalty">Penalty</string>
+    <string name="penalty_text1">I\'m disappointed…</string>
+    <string name="penalty_text2">So disappointed in you…</string>
 </resources>

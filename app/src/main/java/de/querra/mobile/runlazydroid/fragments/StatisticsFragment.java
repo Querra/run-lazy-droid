@@ -10,10 +10,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+
 import de.querra.mobile.runlazydroid.R;
 import de.querra.mobile.runlazydroid.adapters.StatisticsCardAdapter;
+import de.querra.mobile.runlazydroid.data.SortableByDate;
+import de.querra.mobile.runlazydroid.data.entities.Penalty;
 import de.querra.mobile.runlazydroid.data.entities.RunEntry;
 import io.realm.Realm;
+import io.realm.RealmObject;
 import io.realm.RealmResults;
 import io.realm.Sort;
 
@@ -36,9 +44,25 @@ public class StatisticsFragment extends Fragment {
         list.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
         StatisticsCardAdapter adapter = new StatisticsCardAdapter(getResources());
 
-        RealmResults<RunEntry> runEntries = Realm.getDefaultInstance().where(RunEntry.class).findAll().sort(RunEntry.DATE_FIELD, Sort.DESCENDING);
+        Realm realm = Realm.getDefaultInstance();
+        RealmResults<RunEntry> runEntries = realm.where(RunEntry.class).findAll().sort(RunEntry.CREATED_FIELD, Sort.DESCENDING);
+        RealmResults<Penalty> penalties = realm.where(Penalty.class).findAll().sort(Penalty.CREATED_FIELD, Sort.DESCENDING);
 
-        adapter.addItems(runEntries);
+        List<SortableByDate> dateSortList = new ArrayList<>();
+        dateSortList.addAll(runEntries);
+        dateSortList.addAll(penalties);
+        Collections.sort(dateSortList, new Comparator<SortableByDate>() {
+            @Override
+            public int compare(SortableByDate sortableByDate, SortableByDate t1) {
+                return sortableByDate.getSortDate().compareTo(t1.getSortDate());
+            }
+        });
+        List<RealmObject> realmObjects = new ArrayList<>();
+        for (SortableByDate sortableByDate : dateSortList){
+            realmObjects.add((RealmObject) sortableByDate);
+        }
+
+        adapter.addItems(realmObjects);
 
         list.setAdapter(adapter);
 

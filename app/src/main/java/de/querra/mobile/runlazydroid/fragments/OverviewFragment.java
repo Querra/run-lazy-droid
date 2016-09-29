@@ -10,11 +10,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.Date;
+
 import de.querra.mobile.runlazydroid.R;
 import de.querra.mobile.runlazydroid.activities.MainActivity;
 import de.querra.mobile.runlazydroid.adapters.LabeledCardAdapter;
+import de.querra.mobile.runlazydroid.data.entities.Penalty;
+import de.querra.mobile.runlazydroid.data.entities.RunEntry;
+import de.querra.mobile.runlazydroid.helper.DateHelper;
 import de.querra.mobile.runlazydroid.helper.Formatter;
 import de.querra.mobile.runlazydroid.helper.PreferencesHelper;
+import io.realm.Realm;
+import io.realm.RealmResults;
 
 public class OverviewFragment extends Fragment {
 
@@ -42,10 +49,36 @@ public class OverviewFragment extends Fragment {
         list.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
         LabeledCardAdapter adapter = new LabeledCardAdapter();
 
-        adapter.addItem("Distance run", Formatter.asKilometers(PreferencesHelper.getDistanceRun(getActivity())));
-        adapter.addItem("Target", Formatter.asKilometers(PreferencesHelper.getWeekGoal(getActivity())));
-        adapter.addItem("Penalty", Formatter.penaltyToKilometers(getActivity(), PreferencesHelper.getPenalties(getActivity())));
-        adapter.addItem("Start", Formatter.dateToString(PreferencesHelper.getStartDate(getActivity())));
+        Date from = DateHelper.getLastSunday().toDate();
+        Date to = DateHelper.getNextSunday().toDate();
+
+        Realm realm = Realm.getDefaultInstance();
+        RealmResults<RunEntry> thisWeeksEntries = realm.where(RunEntry.class).between(RunEntry.CREATED_FIELD, from, to).findAll();
+        float distanceRun = 0f;
+        for (RunEntry runEntry : thisWeeksEntries){
+            distanceRun += runEntry.getDistance();
+        }
+
+        RealmResults<Penalty> penalties = realm.where(Penalty.class).between(Penalty.CREATED_FIELD, from, to).findAll();
+        int numberOfPenalties = 0;
+        for (Penalty penalty : penalties){
+            numberOfPenalties += 1;
+        }
+        float penaltyDistance = Formatter.getPenaltyDistance(getActivity(), numberOfPenalties);
+
+        float weekGoal = PreferencesHelper.getWeekGoal(getActivity())+penaltyDistance;
+        float distanceLeft = (weekGoal-distanceRun);
+        String target = "Target";
+        if(distanceLeft<0f){
+            distanceLeft = 0f;
+            target += " - achieved";
+        }
+
+        adapter.addItem("Distance run", Formatter.asKilometers(distanceRun));
+        adapter.addItem(target, Formatter.asKilometers(weekGoal));
+        adapter.addItem("Distance left", Formatter.asKilometers(distanceLeft));
+        adapter.addItem("Penalty", Formatter.penaltyToKilometers(getActivity(), numberOfPenalties));
+        adapter.addItem("Time left", Formatter.getDaysLeft(DateHelper.getNextSunday()));
 
         list.setAdapter(adapter);
 

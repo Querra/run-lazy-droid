@@ -2,12 +2,13 @@ package de.querra.mobile.runlazydroid.data.entities;
 
 import java.util.Date;
 
+import de.querra.mobile.runlazydroid.data.SortableByDate;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
-public class RunEntry extends RealmObject {
+public class RunEntry extends RealmObject implements SortableByDate{
 
-    public static final String DATE_FIELD = "date";
+    public static final String CREATED_FIELD = "created";
     public static final String TIME_FIELD = "time";
     public static final String DISTANCE_FIELD = "distance";
 
@@ -15,7 +16,7 @@ public class RunEntry extends RealmObject {
     private long id;
 
     private String type;
-    private Date date;
+    private Date created;
     private int time;
     private float distance;
 
@@ -25,11 +26,11 @@ public class RunEntry extends RealmObject {
     }
     public String getType() {return type;}
     public void setType(String type) {this.type = type;}
-    public Date getDate() {
-        return this.date;
+    public Date getCreated() {
+        return this.created;
     }
-    public void setDate(Date date) {
-        this.date = date;
+    public void setCreated(Date created) {
+        this.created = created;
     }
     public int getTime() {
         return this.time;
@@ -42,5 +43,10 @@ public class RunEntry extends RealmObject {
     }
     public void setDistance(float distance) {
         this.distance = distance;
+    }
+
+    @Override
+    public Date getSortDate() {
+        return this.created;
     }
 }

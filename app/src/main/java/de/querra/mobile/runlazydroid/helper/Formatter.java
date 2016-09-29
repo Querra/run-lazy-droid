@@ -16,7 +16,7 @@ public class Formatter {
     }
 
     public static String asKilometers(float kilometers){
-        return String.format(Locale.GERMANY, "%.2f km", kilometers);
+        return String.format(Locale.GERMANY, "%.1f km", kilometers);
     }
 
     public static String penaltyToKilometers(@NonNull Context context, int penalty){
@@ -31,16 +31,25 @@ public class Formatter {
         return PreferencesHelper.getDistanceRun(context)/(PreferencesHelper.getWeekGoal(context)+getPenaltyDistance(context, PreferencesHelper.getPenalties(context)));
     }
 
-    public static String getDaysLeft(Locale locale, LocalDate future){
+    public static String getDaysLeft(LocalDate future){
         int days = future.getDayOfYear() - LocalDate.now().getDayOfYear();
-        String daysLiteral = "days";
+        Locale locale = Locale.getDefault();
+        boolean single = days == 1;
+        String daysLiteral = single?"day":"days";
         if (locale == Locale.GERMANY || locale == Locale.GERMAN){
-            daysLiteral = "Tage";
+            daysLiteral = single?"Tag":"Tage";
         }
         return String.format(locale, "%d %s", days, daysLiteral);
     }
 
     public static String inMinutes(int time) {
-        return String.format(Locale.getDefault(), "%d Minuten", time);
+        Locale locale = Locale.getDefault();
+        boolean single = time == 1;
+        String timeLiteral = single?"minute":"minutes";
+        if (locale == Locale.GERMANY || locale == Locale.GERMAN){
+            timeLiteral = single?"Minute":"Minuten";
+        }
+
+        return String.format(Locale.getDefault(), "%d %s", time, timeLiteral);
     }
 }

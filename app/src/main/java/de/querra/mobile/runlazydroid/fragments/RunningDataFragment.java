@@ -23,6 +23,7 @@ import java.util.Locale;
 import de.querra.mobile.runlazydroid.R;
 import de.querra.mobile.runlazydroid.data.entities.RunEntry;
 import de.querra.mobile.runlazydroid.entities.RunType;
+import de.querra.mobile.runlazydroid.helper.Formatter;
 import de.querra.mobile.runlazydroid.helper.MathHelper;
 import de.querra.mobile.runlazydroid.helper.RealmHelper;
 import de.querra.mobile.runlazydroid.helper.RunTypeHelper;
@@ -51,6 +52,7 @@ public class RunningDataFragment extends Fragment{
         View view = inflater.inflate(R.layout.fragment_running_data, container, false);
 
         final TextView distance = (TextView) view.findViewById(R.id.fragment_running_data__distance);
+        distance.setText(Formatter.asKilometers(0f));
         final SeekBar distanceBar = (SeekBar) view.findViewById(R.id.fragment_running_data__distance_bar);
         distanceBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -71,12 +73,13 @@ public class RunningDataFragment extends Fragment{
         });
 
         final TextView time = (TextView) view.findViewById(R.id.fragment_running_data__time);
+        time.setText(Formatter.inMinutes(0));
         final SeekBar timeBar = (SeekBar) view.findViewById(R.id.fragment_running_data__time_bar);
         timeBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean userChange) {
                 RunningDataFragment.this.roundedTime = (int) (progress / (float) TIME_SEEKBAR_MAX * TIME_MAX);
-                time.setText(String.format(Locale.getDefault(), "%d min", RunningDataFragment.this.roundedTime));
+                time.setText(Formatter.inMinutes(RunningDataFragment.this.roundedTime));
             }
 
             @Override
@@ -116,7 +119,7 @@ public class RunningDataFragment extends Fragment{
                 RunEntry runEntry = new RunEntry();
                 Date now = new Date();
                 runEntry.setId(now.getTime());
-                runEntry.setDate(now);
+                runEntry.setCreated(now);
                 runEntry.setDistance(RunningDataFragment.this.roundedDistance);
                 runEntry.setTime(RunningDataFragment.this.roundedTime);
                 runEntry.setType(RunTypeHelper.localStringToName(RunningDataFragment.this.runType, getResources()));

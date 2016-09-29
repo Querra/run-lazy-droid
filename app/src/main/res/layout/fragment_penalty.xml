@@ -1,12 +1,36 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="de.querra.mobile.runlazydroid.fragments.OverviewFragment">
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp"
+    android:paddingStart="30dp"
+    android:paddingEnd="30dp"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    tools:context="de.querra.mobile.runlazydroid.fragments.PenaltyFragment">
 
     <TextView
-        android:layout_width="wrap_content"
+        android:id="@+id/fragment_penalty__title"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Penalty"/>
+        android:gravity="center"
+        android:textColor="#FFF"
+        android:textSize="19sp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="20dp"
+        android:text="Have you been a naughty boy or girl?"/>
 
-</FrameLayout>
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/fragment_penalty__submit"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/colorButton"
+        android:textColor="#FFF"
+        android:text="Yes, Please add my Penalty"
+        android:layout_marginTop="20dp"/>
+
+</LinearLayout>

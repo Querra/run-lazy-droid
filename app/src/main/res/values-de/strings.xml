@@ -19,4 +19,7 @@
     <string name="track">Strecke</string>
     <string name="treadmill">Laufband</string>
     <string name="unknown">Unbekannt</string>
+    <string name="penalty">Strafe</string>
+    <string name="penalty_text1">Ich bin so enttäuscht…</string>
+    <string name="penalty_text2">So enttäuscht von dir…</string>
 </resources>

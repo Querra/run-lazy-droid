@@ -19,8 +19,6 @@ import com.facebook.Profile;
 import com.facebook.login.LoginManager;
 import com.mikhaellopez.circularprogressbar.CircularProgressBar;
 
-import java.util.Locale;
-
 import de.querra.mobile.runlazydroid.R;
 import de.querra.mobile.runlazydroid.entities.User;
 import de.querra.mobile.runlazydroid.fragments.OverviewFragment;
@@ -116,7 +114,7 @@ public class MainActivity extends AppCompatActivity
         goal.setText(Formatter.asKilometers(PreferencesHelper.getWeekGoal(this)));
 
         TextView penalty = (TextView) view.findViewById(R.id.nav_header_main__days_left);
-        penalty.setText(Formatter.getDaysLeft(Locale.getDefault(), DateHelper.getNextSunday()));
+        penalty.setText(Formatter.getDaysLeft(DateHelper.getNextSunday()));
     }
 
     @Override
