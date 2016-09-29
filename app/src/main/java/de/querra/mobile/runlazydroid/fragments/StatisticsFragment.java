@@ -10,10 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.util.Locale;
-
 import de.querra.mobile.runlazydroid.R;
-import de.querra.mobile.runlazydroid.adapters.LabeledCardAdapter;
+import de.querra.mobile.runlazydroid.adapters.StatisticsCardAdapter;
 import de.querra.mobile.runlazydroid.data.entities.RunEntry;
 import io.realm.Realm;
 import io.realm.RealmResults;
@@ -35,13 +33,11 @@ public class StatisticsFragment extends Fragment {
 
         RecyclerView list = (RecyclerView) view.findViewById(R.id.fragment_statistics__list);
         list.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
-        LabeledCardAdapter adapter = new LabeledCardAdapter();
+        StatisticsCardAdapter adapter = new StatisticsCardAdapter(getResources());
 
         RealmResults<RunEntry> runEntries = Realm.getDefaultInstance().where(RunEntry.class).findAll();
 
-        for (RunEntry runEntry : runEntries){
-            adapter.addItem(runEntry.getDate().toString(), String.format(Locale.getDefault(), "Distance: %.2f km| Time: %.2f", runEntry.getDistance(), runEntry.getTime()));
-        }
+        adapter.addItems(runEntries);
 
         list.setAdapter(adapter);
 

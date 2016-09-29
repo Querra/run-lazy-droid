@@ -16,4 +16,7 @@
     <string name="options">Optionen</string>
     <string name="logout">Ausloggen</string>
     <string name="statistics">Statistik</string>
+    <string name="track">Strecke</string>
+    <string name="treadmill">Laufband</string>
+    <string name="unknown">Unbekannt</string>
 </resources>

@@ -2,11 +2,8 @@ package de.querra.mobile.runlazydroid.activities;
 
 import android.app.Fragment;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -36,7 +33,7 @@ import de.querra.mobile.runlazydroid.helper.PreferencesHelper;
 import de.querra.mobile.runlazydroid.widgets.ProfilePictureView;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, OverviewFragment.OnFragmentInteractionListener {
+        implements NavigationView.OnNavigationItemSelectedListener{
 
     private static final String USER = "user";
 
@@ -51,15 +48,6 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         this.user = new User(Profile.getCurrentProfile());
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -178,12 +166,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void switchFragment(Fragment fragment) {
-        getFragmentManager().beginTransaction().replace(R.id.content_main, fragment).commit();
-    }
-
-    @Override
-    public void onOverviewFragmentInteraction(Uri uri) {
-
+        getFragmentManager().beginTransaction().replace(R.id.content_main, fragment).addToBackStack(fragment.getTag()).commit();
     }
 
     @Override
@@ -194,7 +177,7 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    public User getUser() {
-        return this.user;
+    public void onAddEntryRequested() {
+        switchFragment(new RunningDataFragment());
     }
 }

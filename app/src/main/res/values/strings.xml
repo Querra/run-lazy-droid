@@ -23,4 +23,7 @@
     <string name="options">Options</string>
     <string name="logout">Logout</string>
     <string name="statistics">Statistics</string>
+    <string name="track">Track</string>
+    <string name="treadmill">Treadmill</string>
+    <string name="unknown">Unknown</string>
 </resources>
