@@ -43,5 +43,8 @@ dependencies {
     //date support
     compile 'net.danlew:android.joda:2.9.4.1'
 
+    // dependancy injection
+    compile 'com.squareup.dagger:dagger-compiler:1.2.5'
+
     testCompile 'junit:junit:4.12'
 }

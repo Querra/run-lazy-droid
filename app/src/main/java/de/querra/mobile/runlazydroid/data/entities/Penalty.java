@@ -2,11 +2,11 @@ package de.querra.mobile.runlazydroid.data.entities;
 
 import java.util.Date;
 
-import de.querra.mobile.runlazydroid.data.SortableByDate;
+import de.querra.mobile.runlazydroid.data.RealmInterface;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
-public class Penalty extends RealmObject implements SortableByDate{
+public class Penalty extends RealmObject implements RealmInterface {
 
     public static final String ID_FIELD = "id";
     public static final String CREATED_FIELD = "created";
@@ -35,5 +35,20 @@ public class Penalty extends RealmObject implements SortableByDate{
     @Override
     public Date getSortDate() {
         return this.created;
+    }
+
+    @Override
+    public long getRealmId() {
+        return this.id;
+    }
+
+    @Override
+    public String getIdField() {
+        return ID_FIELD;
+    }
+
+    @Override
+    public Class getRealmClass() {
+        return Penalty.class;
     }
 }

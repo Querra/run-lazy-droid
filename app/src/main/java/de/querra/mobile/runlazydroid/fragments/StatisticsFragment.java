@@ -17,7 +17,7 @@ import java.util.List;
 
 import de.querra.mobile.runlazydroid.R;
 import de.querra.mobile.runlazydroid.adapters.StatisticsCardAdapter;
-import de.querra.mobile.runlazydroid.data.SortableByDate;
+import de.querra.mobile.runlazydroid.data.RealmInterface;
 import de.querra.mobile.runlazydroid.data.entities.Penalty;
 import de.querra.mobile.runlazydroid.data.entities.RunEntry;
 import io.realm.Realm;
@@ -42,24 +42,24 @@ public class StatisticsFragment extends Fragment {
 
         RecyclerView list = (RecyclerView) view.findViewById(R.id.fragment_statistics__list);
         list.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
-        StatisticsCardAdapter adapter = new StatisticsCardAdapter(getResources());
+        StatisticsCardAdapter adapter = new StatisticsCardAdapter(getActivity());
 
         Realm realm = Realm.getDefaultInstance();
         RealmResults<RunEntry> runEntries = realm.where(RunEntry.class).findAll().sort(RunEntry.CREATED_FIELD, Sort.DESCENDING);
         RealmResults<Penalty> penalties = realm.where(Penalty.class).findAll().sort(Penalty.CREATED_FIELD, Sort.DESCENDING);
 
-        List<SortableByDate> dateSortList = new ArrayList<>();
+        List<RealmInterface> dateSortList = new ArrayList<>();
         dateSortList.addAll(runEntries);
         dateSortList.addAll(penalties);
-        Collections.sort(dateSortList, new Comparator<SortableByDate>() {
+        Collections.sort(dateSortList, new Comparator<RealmInterface>() {
             @Override
-            public int compare(SortableByDate sortableByDate, SortableByDate t1) {
-                return sortableByDate.getSortDate().compareTo(t1.getSortDate());
+            public int compare(RealmInterface realmInterface, RealmInterface t1) {
+                return realmInterface.getSortDate().compareTo(t1.getSortDate());
             }
         });
         List<RealmObject> realmObjects = new ArrayList<>();
-        for (SortableByDate sortableByDate : dateSortList){
-            realmObjects.add((RealmObject) sortableByDate);
+        for (RealmInterface realmInterface : dateSortList){
+            realmObjects.add((RealmObject) realmInterface);
         }
 
         adapter.addItems(realmObjects);

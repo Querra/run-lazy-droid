@@ -1,32 +1,92 @@
 package de.querra.mobile.runlazydroid.adapters;
 
+import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import de.querra.mobile.runlazydroid.R;
-import de.querra.mobile.runlazydroid.adapters.viewholders.StatisticsCardViewHolder;
+import de.querra.mobile.runlazydroid.data.RealmInterface;
 import de.querra.mobile.runlazydroid.data.entities.Penalty;
 import de.querra.mobile.runlazydroid.data.entities.RunEntry;
 import de.querra.mobile.runlazydroid.entities.RunType;
 import de.querra.mobile.runlazydroid.helper.Formatter;
 import de.querra.mobile.runlazydroid.helper.RunTypeHelper;
+import de.querra.mobile.runlazydroid.widgets.DeleteEntryDialogBuilder;
 import io.realm.RealmObject;
 
 public class StatisticsCardAdapter extends RecyclerView.Adapter{
 
+    private static final int RUN = 0;
+    private static final int PENALTY = 1;
+
     private List<RealmObject> data = new ArrayList<>();
     private Resources resources;
+    private Context context;
 
-    public StatisticsCardAdapter(Resources resources){
+    public StatisticsCardAdapter(Context context){
         super();
-        this.resources = resources;
+        this.context = context;
+        this.resources = context.getResources();
+    }
+
+    private class StatisticsCardViewHolder extends RecyclerView.ViewHolder implements View.OnLongClickListener{
+
+        private ImageView typeImage;
+        private TextView type;
+        private TextView distance;
+        private TextView time;
+        private TextView date;
+
+        StatisticsCardViewHolder(View itemView) {
+            super(itemView);
+            this.typeImage = (ImageView) itemView.findViewById(R.id.view_statistics_card__type_image);
+            this.type = (TextView) itemView.findViewById(R.id.view_statistics_card__type);
+            this.distance = (TextView) itemView.findViewById(R.id.view_statistics_card__distance);
+            this.time = (TextView) itemView.findViewById(R.id.view_statistics_card__time);
+            this.date = (TextView) itemView.findViewById(R.id.view_statistics_card__date);
+            itemView.setOnLongClickListener(this);
+        }
+
+        void setTypeImage(Drawable drawable){
+            this.typeImage.setImageDrawable(drawable);
+        }
+
+        void setTypeText(String typeText) {
+            this.type.setText(typeText);
+        }
+
+        void setDistanceText(String distanceText) {
+            this.distance.setText(distanceText);
+        }
+
+        void setTimeText(String timeText) {
+            this.time.setText(timeText);
+        }
+
+        void setDateText(String dateText) {
+            this.date.setText(dateText);
+        }
+
+        @Override
+        public boolean onLongClick(View v) {
+            DeleteEntryDialogBuilder.show(StatisticsCardAdapter.this.context, (RealmInterface) data.get(getAdapterPosition()), new Runnable() {
+                @Override
+                public void run() {
+                    data.remove(getAdapterPosition());
+                    notifyDataSetChanged();
+                }
+            });
+            return true;
+        }
     }
 
     @Override
@@ -40,7 +100,7 @@ public class StatisticsCardAdapter extends RecyclerView.Adapter{
         StatisticsCardViewHolder statisticsCard = (StatisticsCardViewHolder) holder;
         RealmObject item = data.get(position);
         if (item instanceof RunEntry) {
-            RunEntry entry = (RunEntry) item;
+            final RunEntry entry = (RunEntry) item;
             RunType runType = RunType.fromString(entry.getType());
             String localRunType = RunTypeHelper.toLocalString(runType, this.resources);
             Drawable runTypeImage = RunTypeHelper.getDrawable(runType, this.resources);
@@ -51,7 +111,7 @@ public class StatisticsCardAdapter extends RecyclerView.Adapter{
             statisticsCard.setTimeText(Formatter.inMinutes(entry.getTime()));
         }
         if (item instanceof Penalty) {
-            Penalty penalty = (Penalty) item;
+            final Penalty penalty = (Penalty) item;
             statisticsCard.setTypeImage(this.resources.getDrawable(R.drawable.ic_thumb_down));
             statisticsCard.setTypeText(this.resources.getString(R.string.penalty));
             statisticsCard.setDistanceText(this.resources.getString(R.string.penalty_text1));

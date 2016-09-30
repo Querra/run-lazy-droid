@@ -13,6 +13,7 @@ public class RunLazyDroidApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+
         JodaTimeAndroid.init(getApplicationContext());
 
         Realm.init(this);
@@ -24,7 +25,8 @@ public class RunLazyDroidApplication extends Application {
                 .build();
         Realm.setDefaultConfiguration(realmConfiguration);
 
+
+
         PreferencesHelper.setDefaultValues(getApplicationContext(), false);
     }
-
 }

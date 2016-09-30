@@ -29,4 +29,8 @@
     <string name="penalty">Penalty</string>
     <string name="penalty_text1">I\'m disappointed…</string>
     <string name="penalty_text2">So disappointed in you…</string>
+    <string name="delete_entry">Delete entry</string>
+    <string name="delete">Delete</string>
+    <string name="delete_entry_query">Do you really want to delete this entry?</string>
+    <string name="cancel">Cancel</string>
 </resources>

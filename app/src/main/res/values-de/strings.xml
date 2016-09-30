@@ -22,4 +22,9 @@
     <string name="penalty">Strafe</string>
     <string name="penalty_text1">Ich bin so enttäuscht…</string>
     <string name="penalty_text2">So enttäuscht von dir…</string>
+    <string name="delete_entry">Eintrag löschen</string>
+    <string name="delete">Löschen</string>
+    <string name="delete_entry_query">Willst du diesen Eintrag wirklich löschen?</string>
+    <string name="cancel">Abbrechen</string>
+
 </resources>
