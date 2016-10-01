@@ -8,9 +8,13 @@ import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
+import android.view.View;
+import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -40,12 +44,38 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private LocationRequest locationRequest;
     private Polyline polyLine;
     private List<Location> locations = new ArrayList<>();
+    private boolean isTracking = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
+
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.activity_maps__fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!isTracking) {
+                    startTracking();
+                    ((FloatingActionButton) view).setImageDrawable(getDrawable(R.drawable.ic_menu));
+                }
+                else{
+
+                    Snackbar.make(findViewById(R.id.activity_maps__main_layout), "What up?", Snackbar.LENGTH_INDEFINITE)
+                            .setAction("Nothing much", new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    Toast.makeText(MapsActivity.this, "Alrighty then", Toast.LENGTH_SHORT).show();
+                                }
+                            })
+                            .show();
+                    ((FloatingActionButton) view).setImageDrawable(getDrawable(R.drawable.ic_start_tracking));
+                    isTracking = false;
+                }
+            }
+        });
+
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
@@ -99,6 +129,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     .addApi(LocationServices.API)
                     .build();
         }
+    }
+
+    private void startTracking() {
+        this.isTracking = true;
     }
 
     @NonNull
