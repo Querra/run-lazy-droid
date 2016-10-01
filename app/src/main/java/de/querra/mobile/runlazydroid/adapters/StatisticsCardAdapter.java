@@ -108,7 +108,7 @@ public class StatisticsCardAdapter extends RecyclerView.Adapter{
             statisticsCard.setTypeText(localRunType);
             statisticsCard.setDistanceText(Formatter.asKilometers(entry.getDistance()));
             statisticsCard.setDateText(Formatter.dateToString(entry.getCreated()));
-            statisticsCard.setTimeText(Formatter.inMinutes(entry.getTime()));
+            statisticsCard.setTimeText(Formatter.inMinutes(entry.getTime(), this.context));
         }
         if (item instanceof Penalty) {
             final Penalty penalty = (Penalty) item;

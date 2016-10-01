@@ -68,17 +68,17 @@ public class OverviewFragment extends Fragment {
 
         float weekGoal = PreferencesHelper.getWeekGoal(getActivity())+penaltyDistance;
         float distanceLeft = (weekGoal-distanceRun);
-        String target = "Target";
+        String target = getString(R.string.target);
         if(distanceLeft<0f){
             distanceLeft = 0f;
-            target += " - achieved";
+            target += " - " + getString(R.string.achieved);
         }
 
-        adapter.addItem("Distance run", Formatter.asKilometers(distanceRun));
+        adapter.addItem(getString(R.string.distance_run_literal), Formatter.asKilometers(distanceRun));
         adapter.addItem(target, Formatter.asKilometers(weekGoal));
-        adapter.addItem("Distance left", Formatter.asKilometers(distanceLeft));
-        adapter.addItem("Penalty", Formatter.penaltyToKilometers(getActivity(), numberOfPenalties));
-        adapter.addItem("Time left", Formatter.getDaysLeft(DateHelper.getNextSunday()));
+        adapter.addItem(getString(R.string.distance_left), Formatter.asKilometers(distanceLeft));
+        adapter.addItem(getString(R.string.penalty_literal), Formatter.penaltyToKilometers(getActivity(), numberOfPenalties));
+        adapter.addItem(getString(R.string.time_left), Formatter.getDaysLeft(DateHelper.getNextSunday(), getActivity()));
 
         list.setAdapter(adapter);
 

@@ -40,4 +40,14 @@
     <string name="time">Time</string>
     <string name="track_type">Track type</string>
     <string name="add_entry">Add Entry</string>
+    <string name="day">day</string>
+    <string name="days">days</string>
+    <string name="minute">minute</string>
+    <string name="minutes">minutes</string>
+    <string name="target">Target</string>
+    <string name="achieved">achieved</string>
+    <string name="distance_run_literal">Distance run</string>
+    <string name="distance_left">Distance left</string>
+    <string name="penalty_literal">Penalty</string>
+    <string name="time_left">Time left</string>
 </resources>

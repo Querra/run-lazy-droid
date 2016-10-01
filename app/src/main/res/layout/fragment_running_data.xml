@@ -20,95 +20,98 @@
         android:text="@string/add_running_data"/>
 
     <TextView
-        android:id="@+id/fragment_running_data__distance_label"
+        android:id="@+id/fragment_running_data__run_type_label"
         android:layout_below="@+id/fragment_running_data__title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="#FFF"
         android:textSize="16sp"
-        android:text="@string/distance"
-        android:layout_marginTop="20dp"/>
-
-    <SeekBar
-        android:id="@+id/fragment_running_data__distance_bar"
-        android:layout_below="@+id/fragment_running_data__distance_label"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:max="250"/>
-
-    <TextView
-        android:id="@+id/fragment_running_data__distance"
-        android:layout_below="@+id/fragment_running_data__distance_bar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:background="@color/colorSecondaryDark"
-        android:textColor="@color/black"
-        android:paddingStart="8dp"
-        android:text="0.0 km"
-        />
-
-
-    <TextView
-        android:id="@+id/fragment_running_data__time_label"
-        android:layout_below="@+id/fragment_running_data__distance"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="#FFF"
-        android:textSize="16sp"
-        android:text="@string/time"
-        android:layout_marginTop="20dp"/>
-
-    <SeekBar
-        android:id="@+id/fragment_running_data__time_bar"
-        android:layout_below="@+id/fragment_running_data__time_label"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:max="180"/>
-
-    <TextView
-        android:id="@+id/fragment_running_data__time"
-        android:layout_below="@+id/fragment_running_data__time_bar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:background="@color/colorSecondaryDark"
-        android:textColor="@color/black"
-        android:paddingStart="8dp"
-        android:text="0 min"
-        />
-
-    <TextView
-        android:id="@+id/fragment_running_data__run_type_label"
-        android:layout_below="@+id/fragment_running_data__time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="#FFF"
-        android:textSize="16sp"
         android:text="@string/track_type"
-        android:layout_marginTop="20dp"/>
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"/>
 
     <Spinner
         android:id="@+id/fragment_running_data__run_type_spinner"
         android:layout_below="@+id/fragment_running_data__run_type_label"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginBottom="20dp"
         android:background="@color/colorSecondary"
-        >
+        />
 
-    </Spinner>
+    <TextView
+        android:id="@+id/fragment_running_data__distance_label"
+        android:layout_below="@+id/fragment_running_data__run_type_spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#FFF"
+        android:textSize="16sp"
+        android:text="@string/distance"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"/>
+
+    <TextView
+        android:id="@+id/fragment_running_data__distance"
+        android:layout_below="@+id/fragment_running_data__distance_label"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:textSize="16sp"
+        android:background="@color/colorSecondary"
+        android:textColor="@color/black"
+        android:paddingStart="8dp"
+        android:text="0.0 km"
+        />
+
+    <SeekBar
+        android:id="@+id/fragment_running_data__distance_bar"
+        android:layout_below="@+id/fragment_running_data__distance"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:max="250"/>
+
+    <TextView
+        android:id="@+id/fragment_running_data__time_label"
+        android:layout_below="@+id/fragment_running_data__distance_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:textColor="#FFF"
+        android:textSize="16sp"
+        android:text="@string/time"/>
+
+    <TextView
+        android:id="@+id/fragment_running_data__time"
+        android:layout_below="@+id/fragment_running_data__time_label"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:background="@color/colorSecondary"
+        android:textColor="@color/black"
+        android:layout_marginBottom="10dp"
+        android:paddingStart="8dp"
+        android:text="0 min"/>
+
+    <SeekBar
+        android:id="@+id/fragment_running_data__time_bar"
+        android:layout_below="@+id/fragment_running_data__time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:max="180"/>
 
     <android.support.v7.widget.AppCompatButton
         android:id="@+id/fragment_running_data__submit"
         android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="@color/colorPrimary"
+        android:background="@color/colorSecondaryDark"
         android:textColor="#FFF"
         android:text="@string/add_entry"
-        android:layout_marginTop="20dp"/>
+        android:layout_marginBottom="20dp"/>
 
 </RelativeLayout>

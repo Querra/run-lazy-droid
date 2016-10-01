@@ -115,7 +115,7 @@ public class MainActivity extends AppCompatActivity
         goal.setText(Formatter.asKilometers(PreferencesHelper.getWeekGoal(this)));
 
         TextView penalty = (TextView) view.findViewById(R.id.nav_header_main__days_left);
-        penalty.setText(Formatter.getDaysLeft(DateHelper.getNextSunday()));
+        penalty.setText(Formatter.getDaysLeft(DateHelper.getNextSunday(), this));
     }
 
     @Override

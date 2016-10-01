@@ -73,13 +73,13 @@ public class RunningDataFragment extends Fragment{
         });
 
         final TextView time = (TextView) view.findViewById(R.id.fragment_running_data__time);
-        time.setText(Formatter.inMinutes(0));
+        time.setText(Formatter.inMinutes(0, getActivity()));
         final SeekBar timeBar = (SeekBar) view.findViewById(R.id.fragment_running_data__time_bar);
         timeBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean userChange) {
                 RunningDataFragment.this.roundedTime = (int) (progress / (float) TIME_SEEKBAR_MAX * TIME_MAX);
-                time.setText(Formatter.inMinutes(RunningDataFragment.this.roundedTime));
+                time.setText(Formatter.inMinutes(RunningDataFragment.this.roundedTime, getActivity()));
             }
 
             @Override

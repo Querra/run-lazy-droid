@@ -21,7 +21,7 @@
     <string name="unknown">Unbekannt</string>
     <string name="penalty">Strafe</string>
     <string name="penalty_text1">Ich bin so enttäuscht…</string>
-    <string name="penalty_text2">So enttäuscht von dir…</string>
+    <string name="penalty_text2">…so enttäuscht von dir!</string>
     <string name="delete_entry">Eintrag löschen</string>
     <string name="delete">Löschen</string>
     <string name="delete_entry_query">Willst du diesen Eintrag wirklich löschen?</string>
@@ -33,5 +33,14 @@
     <string name="time">Zeit</string>
     <string name="track_type">Streckenart</string>
     <string name="add_entry">Eintrag hinzufügen</string>
-
+    <string name="day">Tag</string>
+    <string name="days">Tage</string>
+    <string name="minute">Minute</string>
+    <string name="minutes">Minuten</string>
+    <string name="target">Ziel</string>
+    <string name="achieved">erreicht</string>
+    <string name="distance_run_literal">Strecke zurückgelegt</string>
+    <string name="distance_left">Verbleibende Strecke</string>
+    <string name="penalty_literal">Strafe</string>
+    <string name="time_left">Verbleibende Zeit</string>
 </resources>

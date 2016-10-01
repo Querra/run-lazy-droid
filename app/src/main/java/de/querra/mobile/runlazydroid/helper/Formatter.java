@@ -9,14 +9,16 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import de.querra.mobile.runlazydroid.R;
+
 public class Formatter {
     public static String dateToString(Date date){
         SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy");
         return formatter.format(date);
     }
 
-    public static String asKilometers(float kilometers){
-        return String.format(Locale.GERMANY, "%.1f km", kilometers);
+    public static String asKilometers(float km){
+        return String.format(Locale.getDefault(), "%.1f km", km);
     }
 
     public static String penaltyToKilometers(@NonNull Context context, int penalty){
@@ -31,25 +33,17 @@ public class Formatter {
         return PreferencesHelper.getDistanceRun(context)/(PreferencesHelper.getWeekGoal(context)+getPenaltyDistance(context, PreferencesHelper.getPenalties(context)));
     }
 
-    public static String getDaysLeft(LocalDate future){
+    public static String getDaysLeft(LocalDate future, Context context){
         int days = future.getDayOfYear() - LocalDate.now().getDayOfYear();
         Locale locale = Locale.getDefault();
         boolean single = days == 1;
-        String daysLiteral = single?"day":"days";
-        if (locale == Locale.GERMANY || locale == Locale.GERMAN){
-            daysLiteral = single?"Tag":"Tage";
-        }
+        String daysLiteral = single ? context.getString(R.string.day) : context.getString(R.string.days);
         return String.format(locale, "%d %s", days, daysLiteral);
     }
 
-    public static String inMinutes(int time) {
-        Locale locale = Locale.getDefault();
+    public static String inMinutes(int time, Context context) {
         boolean single = time == 1;
-        String timeLiteral = single?"minute":"minutes";
-        if (locale == Locale.GERMANY || locale == Locale.GERMAN){
-            timeLiteral = single?"Minute":"Minuten";
-        }
-
+        String timeLiteral = single?context.getString(R.string.minute):context.getString(R.string.minutes);
         return String.format(Locale.getDefault(), "%d %s", time, timeLiteral);
     }
 }
