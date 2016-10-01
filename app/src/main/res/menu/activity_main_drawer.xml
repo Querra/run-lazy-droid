@@ -7,6 +7,10 @@
             android:icon="@drawable/ic_eye"
             android:title="@string/overview" />
         <item
+            android:id="@+id/nav_map"
+            android:icon="@drawable/ic_place"
+            android:title="@string/map" />
+        <item
             android:id="@+id/nav_enter_running_data"
             android:icon="@drawable/ic_run"
             android:title="@string/add_running_data" />

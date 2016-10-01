@@ -51,4 +51,6 @@
     <string name="time_left">Time left</string>
     <string name="entry_added">Entry added</string>
     <string name="penalty_added">Penalty added</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="map">Map</string>
 </resources>

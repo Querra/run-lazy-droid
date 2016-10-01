@@ -44,4 +44,5 @@
     <string name="time_left">Verbleibende Zeit</string>
     <string name="entry_added">Eintrag hinzugefügt</string>
     <string name="penalty_added">Strafe hinzugefügt</string>
+    <string name="map">Karte</string>
 </resources>

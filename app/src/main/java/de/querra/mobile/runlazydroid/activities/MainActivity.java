@@ -158,6 +158,8 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.nav_overview) {
             switchFragment(new OverviewFragment());
+        } else if (id == R.id.nav_map) {
+            startActivity(new Intent(this, MapsActivity.class));
         } else if (id == R.id.nav_enter_running_data) {
             switchFragment(new RunningDataFragment());
         } else if (id == R.id.nav_add_penalty) {
