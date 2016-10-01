@@ -26,5 +26,12 @@
     <string name="delete">Löschen</string>
     <string name="delete_entry_query">Willst du diesen Eintrag wirklich löschen?</string>
     <string name="cancel">Abbrechen</string>
+    <string name="been_naughty">Warst du wieder unartig?</string>
+    <string name="yes_please">Ja, bitte füge meine Strafe hinzu!</string>
+    <string name="add_running_data">Laufdaten hinzufügen</string>
+    <string name="distance">Strecke</string>
+    <string name="time">Zeit</string>
+    <string name="track_type">Streckenart</string>
+    <string name="add_entry">Eintrag hinzufügen</string>
 
 </resources>

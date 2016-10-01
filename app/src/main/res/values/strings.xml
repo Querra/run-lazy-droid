@@ -33,4 +33,11 @@
     <string name="delete">Delete</string>
     <string name="delete_entry_query">Do you really want to delete this entry?</string>
     <string name="cancel">Cancel</string>
+    <string name="been_naughty">Have you been naughty again?</string>
+    <string name="yes_please">Yes, Please add my Penalty!</string>
+    <string name="add_running_data">Add Running Data</string>
+    <string name="distance">Distance</string>
+    <string name="time">Time</string>
+    <string name="track_type">Track type</string>
+    <string name="add_entry">Add Entry</string>
 </resources>

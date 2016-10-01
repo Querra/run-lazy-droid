@@ -4,10 +4,6 @@
     android:id="@+id/activity_start"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     android:background="@drawable/retro_race_track"
     tools:context="de.querra.mobile.runlazydroid.activities.StartActivity">
 
@@ -19,8 +15,8 @@
         android:layout_centerHorizontal="true"
         android:text="Run Lazy Droid!"
         android:gravity="center"
-        android:textSize="40sp"
-        android:textColor="#FFF"/>
+        android:textSize="46sp"
+        android:textColor="@color/white"/>
 
     <ProgressBar
         android:id="@+id/activity_start__loading"
@@ -31,11 +27,12 @@
 
     <TextView
         android:layout_below="@+id/activity_start__loading"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="60dp"
         android:layout_centerHorizontal="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="#FFF"
+        android:textColor="@color/white"
+        android:textSize="18sp"
         android:text="@string/loading_data"/>
 
 </RelativeLayout>

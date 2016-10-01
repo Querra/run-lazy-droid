@@ -6,7 +6,7 @@ android {
     buildToolsVersion "24.0.2"
     defaultConfig {
         applicationId "de.querra.mobile.runlazydroid"
-        minSdkVersion 17
+        minSdkVersion 21
         targetSdkVersion 24
         versionCode 1
         versionName "1.0"
@@ -32,7 +32,7 @@ dependencies {
     compile 'com.android.support:support-v4:24.2.1'
 
     // facebook sdk
-    compile 'com.facebook.android:facebook-android-sdk:[4,5)'
+    compile 'com.facebook.android:facebook-android-sdk:4.+'
 
     // parcelable support
     compile 'org.parceler:parceler-api:1.1.5'

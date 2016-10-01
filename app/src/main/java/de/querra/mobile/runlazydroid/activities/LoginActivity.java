@@ -24,6 +24,7 @@ public class LoginActivity extends AppCompatActivity {
         this.callbackManager = CallbackManager.Factory.create();
 
         setContentView(R.layout.activity_login);
+
         LoginButton loginButton = (LoginButton) findViewById(R.id.login_button);
         loginButton.setReadPermissions("public_profile");
 

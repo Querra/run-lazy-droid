@@ -17,7 +17,7 @@
         android:textSize="20sp"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="20dp"
-        android:text="Add Running Data"/>
+        android:text="@string/add_running_data"/>
 
     <TextView
         android:id="@+id/fragment_running_data__distance_label"
@@ -26,7 +26,7 @@
         android:layout_height="wrap_content"
         android:textColor="#FFF"
         android:textSize="16sp"
-        android:text="Distance"
+        android:text="@string/distance"
         android:layout_marginTop="20dp"/>
 
     <SeekBar
@@ -43,7 +43,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="16sp"
-        android:background="@color/colorAccent"
+        android:background="@color/colorSecondaryDark"
+        android:textColor="@color/black"
         android:paddingStart="8dp"
         android:text="0.0 km"
         />
@@ -56,7 +57,7 @@
         android:layout_height="wrap_content"
         android:textColor="#FFF"
         android:textSize="16sp"
-        android:text="Time"
+        android:text="@string/time"
         android:layout_marginTop="20dp"/>
 
     <SeekBar
@@ -73,7 +74,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="16sp"
-        android:background="@color/colorAccent"
+        android:background="@color/colorSecondaryDark"
+        android:textColor="@color/black"
         android:paddingStart="8dp"
         android:text="0 min"
         />
@@ -85,7 +87,7 @@
         android:layout_height="wrap_content"
         android:textColor="#FFF"
         android:textSize="16sp"
-        android:text="Track type"
+        android:text="@string/track_type"
         android:layout_marginTop="20dp"/>
 
     <Spinner
@@ -94,7 +96,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:background="@color/colorAccent"
+        android:background="@color/colorSecondary"
         >
 
     </Spinner>
@@ -104,9 +106,9 @@
         android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="@color/colorButton"
+        android:background="@color/colorPrimary"
         android:textColor="#FFF"
-        android:text="Add Entry"
+        android:text="@string/add_entry"
         android:layout_marginTop="20dp"/>
 
 </RelativeLayout>

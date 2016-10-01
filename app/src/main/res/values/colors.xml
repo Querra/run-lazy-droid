@@ -2,6 +2,9 @@
 <resources>
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#0C9</color>
-    <color name="colorButton">#0A7</color>
+    <color name="colorSecondary">#0C9</color>
+    <color name="colorSecondaryDark">#0A7</color>
+    <color name="white">#FFF</color>
+    <color name="black">#000</color>
+    <color name="black_alpha">#A000</color>
 </resources>

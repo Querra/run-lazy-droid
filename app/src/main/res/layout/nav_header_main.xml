@@ -57,7 +57,7 @@
         android:layout_margin="-10dp"
         app:cpb_background_progressbar_color="#CCC"
         app:cpb_background_progressbar_width="5dp"
-        app:cpb_progressbar_color="@color/colorAccent"
+        app:cpb_progressbar_color="@color/colorSecondary"
         app:cpb_progressbar_width="8dp" />
 
     <LinearLayout

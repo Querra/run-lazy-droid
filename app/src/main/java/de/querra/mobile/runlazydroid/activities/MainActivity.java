@@ -81,7 +81,8 @@ public class MainActivity extends AppCompatActivity
             navigationView.setCheckedItem(R.id.nav_overview);
         }
 
-        switchFragment(new OverviewFragment());
+        OverviewFragment overviewFragment = new OverviewFragment();
+        getFragmentManager().beginTransaction().replace(R.id.content_main, overviewFragment).commit();
     }
 
     private void initUser() {
