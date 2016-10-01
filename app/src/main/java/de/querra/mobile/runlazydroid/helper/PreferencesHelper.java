@@ -9,34 +9,12 @@ import java.util.Date;
 
 public class PreferencesHelper {
 
-    public static final String DISTANCE_RUN = "distance_run";
-    public static final String PENALTIES = "penalties";
-    public static final String START_DATE = "start_date";
-    public static final String WEEK_GOAL = "week_goal";
-    public static final String PENALTY_DISTANCE = "penalty_distance";
+    public static final String START_DATE = "preference__start_date";
+    public static final String WEEK_GOAL = "preference__week_goal";
+    public static final String PENALTY_DISTANCE = "preference__penalty_distance";
 
     private static final String SAVED_PREFERENCES = "run_lazy_droid_saved_preferences";
     private static final String DEFAULTS_SET = "defaults_set";
-
-    public static float getDistanceRun(@NonNull Context context){
-        SharedPreferences sharedPreferences = context.getSharedPreferences(SAVED_PREFERENCES, Context.MODE_PRIVATE);
-        return sharedPreferences.getFloat(DISTANCE_RUN, 0f);
-    }
-
-    public static void setDistanceRun(@NonNull Context context, float distanceRun){
-        SharedPreferences sharedPreferences = context.getSharedPreferences(SAVED_PREFERENCES, Context.MODE_PRIVATE);
-        sharedPreferences.edit().putFloat(DISTANCE_RUN, distanceRun).apply();
-    }
-
-    public static int getPenalties(@NonNull Context context){
-        SharedPreferences sharedPreferences = context.getSharedPreferences(SAVED_PREFERENCES, Context.MODE_PRIVATE);
-        return sharedPreferences.getInt(PENALTIES, 0);
-    }
-
-    public static void setPenalties(@NonNull Context context, int penalties){
-        SharedPreferences sharedPreferences = context.getSharedPreferences(SAVED_PREFERENCES, Context.MODE_PRIVATE);
-        sharedPreferences.edit().putInt(PENALTIES, penalties).apply();
-    }
 
     public static Date getStartDate(@NonNull Context context){
         SharedPreferences sharedPreferences = context.getSharedPreferences(SAVED_PREFERENCES, Context.MODE_PRIVATE);
@@ -49,7 +27,7 @@ public class PreferencesHelper {
         sharedPreferences.edit().putLong(START_DATE, date.getTime()).apply();
     }
 
-    public static float getWeekGoal(@NonNull Context context){
+    public static float getWeekTarget(@NonNull Context context){
         SharedPreferences sharedPreferences = context.getSharedPreferences(SAVED_PREFERENCES, Context.MODE_PRIVATE);
         return sharedPreferences.getFloat(WEEK_GOAL, 0f);
     }
@@ -76,8 +54,6 @@ public class PreferencesHelper {
 
     public static void setDefaultValues(@NonNull Context context, boolean override){
         if (!areDefaultsSet(context) || override) {
-            setDistanceRun(context, 0f);
-            setPenalties(context, 0);
             setStartDate(context, new Date());
             setWeekGoal(context, 10f);
             setPenaltyDistance(context, 5f);

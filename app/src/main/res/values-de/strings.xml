@@ -5,7 +5,6 @@
 
     <string name="action_settings">Einstellungen</string>
     <string name="overview">Übersicht</string>
-    <string name="enter_running_data">Laufdaten eingeben</string>
     <string name="add_penalty">Strafe hinzufügen</string>
     <string name="settings">Einstellungen</string>
     <string name="communicate">Mitteilen</string>
@@ -43,4 +42,6 @@
     <string name="distance_left">Verbleibende Strecke</string>
     <string name="penalty_literal">Strafe</string>
     <string name="time_left">Verbleibende Zeit</string>
+    <string name="entry_added">Eintrag hinzugefügt</string>
+    <string name="penalty_added">Strafe hinzugefügt</string>
 </resources>

@@ -7,7 +7,7 @@ import android.support.v7.app.AlertDialog;
 
 import de.querra.mobile.runlazydroid.R;
 import de.querra.mobile.runlazydroid.data.RealmInterface;
-import de.querra.mobile.runlazydroid.data.entities.finder.RealmOperator;
+import de.querra.mobile.runlazydroid.data.RealmOperator;
 
 public class DeleteEntryDialogBuilder {
     public static void show(Context context, final RealmInterface realmObject, final Runnable runnable){

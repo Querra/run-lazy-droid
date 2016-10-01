@@ -9,7 +9,7 @@
         <item
             android:id="@+id/nav_enter_running_data"
             android:icon="@drawable/ic_run"
-            android:title="@string/enter_running_data" />
+            android:title="@string/add_running_data" />
         <item
             android:id="@+id/nav_add_penalty"
             android:icon="@drawable/ic_thumb_down"

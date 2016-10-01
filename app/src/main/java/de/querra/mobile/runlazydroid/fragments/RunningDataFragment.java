@@ -1,8 +1,6 @@
 package de.querra.mobile.runlazydroid.fragments;
 
 import android.app.Fragment;
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatButton;
 import android.view.LayoutInflater;
@@ -13,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -21,11 +20,11 @@ import java.util.List;
 import java.util.Locale;
 
 import de.querra.mobile.runlazydroid.R;
+import de.querra.mobile.runlazydroid.data.RealmOperator;
 import de.querra.mobile.runlazydroid.data.entities.RunEntry;
 import de.querra.mobile.runlazydroid.entities.RunType;
 import de.querra.mobile.runlazydroid.helper.Formatter;
 import de.querra.mobile.runlazydroid.helper.MathHelper;
-import de.querra.mobile.runlazydroid.helper.RealmHelper;
 import de.querra.mobile.runlazydroid.helper.RunTypeHelper;
 
 public class RunningDataFragment extends Fragment{
@@ -35,7 +34,6 @@ public class RunningDataFragment extends Fragment{
     private static final int TIME_MAX = 180;
     private static final int TIME_SEEKBAR_MAX = 180;
 
-    private OnFragmentInteractionListener mListener;
     private String runType;
     private float roundedDistance;
     private int roundedTime;
@@ -123,37 +121,13 @@ public class RunningDataFragment extends Fragment{
                 runEntry.setDistance(RunningDataFragment.this.roundedDistance);
                 runEntry.setTime(RunningDataFragment.this.roundedTime);
                 runEntry.setType(RunTypeHelper.localStringToName(RunningDataFragment.this.runType, getResources()));
-                RealmHelper.saveOrUpdate(runEntry);
+                RealmOperator.saveOrUpdate(runEntry);
+                Toast.makeText(getActivity(), R.string.entry_added, Toast.LENGTH_SHORT).show();
             }
         });
 
         return view;
     }
 
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onOverviewFragmentInteraction(uri);
-        }
-    }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
-
-    public interface OnFragmentInteractionListener {
-        void onOverviewFragmentInteraction(Uri uri);
-    }
 }

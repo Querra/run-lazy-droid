@@ -7,7 +7,6 @@
 
     <string name="action_settings">Settings</string>
     <string name="overview">Overview</string>
-    <string name="enter_running_data">Enter running data</string>
     <string name="add_penalty">Add penalty</string>
     <string name="settings">Settings</string>
     <string name="communicate">Communicate</string>
@@ -50,4 +49,6 @@
     <string name="distance_left">Distance left</string>
     <string name="penalty_literal">Penalty</string>
     <string name="time_left">Time left</string>
+    <string name="entry_added">Entry added</string>
+    <string name="penalty_added">Penalty added</string>
 </resources>
