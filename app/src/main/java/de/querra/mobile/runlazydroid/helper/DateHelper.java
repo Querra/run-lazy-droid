@@ -6,7 +6,11 @@ public class DateHelper {
     public static LocalDate getLastSunday(){
         LocalDate today = LocalDate.now();
         LocalDate startOfToday = today.toDateTimeAtStartOfDay().toLocalDate();
-        return startOfToday.minusDays(today.getDayOfWeek());
+        int dayOfWeek = today.getDayOfWeek();
+        if(dayOfWeek == 7){
+            return startOfToday;
+        }
+        return startOfToday.minusDays(dayOfWeek);
     }
 
     public static LocalDate getNextSunday(){
