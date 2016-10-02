@@ -1,56 +1,87 @@
 <resources>
+    <!-- App -->
     <string name="app_name">Run Lazy Droid</string>
     <string name="facebook_app_id">188946641516321</string>
 
+    <!-- Drawer -->
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
-    <string name="action_settings">Settings</string>
+    <!-- Drawer menu -->
     <string name="overview">Overview</string>
     <string name="add_penalty">Add penalty</string>
     <string name="settings">Settings</string>
+    <string name="options">Options</string>
+    <string name="logout">Logout</string>
+    <string name="statistics">Statistics</string>
     <string name="communicate">Communicate</string>
     <string name="share">Share</string>
     <string name="send">Send</string>
+
+    <!-- Start -->
     <string name="loading_data">Loading data…</string>
     <string name="log_in_to_continue">Please log in to continue</string>
+
+    <!-- Preferences strings -->
     <string name="distance_run">distance_run</string>
     <string name="penalties">penalties</string>
     <string name="start_date">start_date</string>
     <string name="week_goal">week_goal</string>
     <string name="penalty_distance">penalty_distance</string>
-    <string name="options">Options</string>
-    <string name="logout">Logout</string>
-    <string name="statistics">Statistics</string>
+
+    <!-- Run types -->
+    <string name="map_run">Mapped run</string>
     <string name="track">Track</string>
     <string name="treadmill">Treadmill</string>
     <string name="unknown">Unknown</string>
+
+    <!-- Penalty -->
     <string name="penalty">Penalty</string>
     <string name="penalty_text1">I\'m disappointed…</string>
     <string name="penalty_text2">So disappointed in you…</string>
+
+    <!-- Delete entry -->
     <string name="delete_entry">Delete entry</string>
     <string name="delete">Delete</string>
     <string name="delete_entry_query">Do you really want to delete this entry?</string>
     <string name="cancel">Cancel</string>
+
+    <!-- Add penalty -->
     <string name="been_naughty">Have you been naughty again?</string>
     <string name="yes_please">Yes, Please add my Penalty!</string>
+    <string name="penalty_added">Penalty added</string>
+
+    <!-- Add entry -->
     <string name="add_running_data">Add Running Data</string>
     <string name="distance">Distance</string>
     <string name="time">Time</string>
     <string name="track_type">Track type</string>
     <string name="add_entry">Add Entry</string>
+    <string name="entry_added">Entry added</string>
+
+    <!-- Literals -->
     <string name="day">day</string>
     <string name="days">days</string>
     <string name="minute">minute</string>
     <string name="minutes">minutes</string>
+
+    <!-- Overview -->
     <string name="target">Target</string>
     <string name="achieved">achieved</string>
     <string name="distance_run_literal">Distance run</string>
     <string name="distance_left">Distance left</string>
     <string name="penalty_literal">Penalty</string>
     <string name="time_left">Time left</string>
-    <string name="entry_added">Entry added</string>
-    <string name="penalty_added">Penalty added</string>
+
+    <!-- Map -->
     <string name="title_activity_maps">Map</string>
     <string name="map">Map</string>
+    <string name="entry_saved">Entry has been saved</string>
+    <string name="entry_not_saved">Entry could not be saved. Is there enough space on your system?</string>
+    <string name="connection_failed">Connection failed</string>
+    <string name="connection_failed_message">Not connected, retry connection?</string>
+    <string name="reconnect">Reconnect</string>
+    <string name="stop_tracking_question">Do you want to stop tracking?</string>
+    <string name="stop_tracking">Stop tracking</string>
+    <string name="add_run_question">Do you want to add this run to your entries?</string>
 </resources>

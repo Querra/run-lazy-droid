@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorPrimary">#0C9</color>
+    <color name="colorPrimaryDark">#0A7</color>
     <color name="colorSecondary">#0C9</color>
     <color name="colorSecondaryDark">#0A7</color>
+    <color name="colorSecondaryAlpha">#50A7</color>
     <color name="white">#FFF</color>
     <color name="black">#000</color>
-    <color name="black_alpha">#A000</color>
+    <color name="black_alpha_strong">#A000</color>
+    <color name="black_alpha_weak">#5000</color>
     <color name="white_alpha">#CFFF</color>
 </resources>

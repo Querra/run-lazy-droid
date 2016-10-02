@@ -8,4 +8,12 @@ public class MathHelper {
         bd = bd.setScale(decimalPlace, BigDecimal.ROUND_HALF_UP);
         return bd.floatValue();
     }
+
+    public static int getDifferenceInMinutes(long millisStart, long millisEnd){
+        return getMinutesFromMillis(millisEnd - millisStart);
+    }
+
+    public static int getMinutesFromMillis(long millis){
+        return (int) ((float)millis/60000f);
+    }
 }

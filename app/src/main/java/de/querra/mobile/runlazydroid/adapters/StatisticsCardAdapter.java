@@ -2,6 +2,7 @@ package de.querra.mobile.runlazydroid.adapters;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -19,6 +20,7 @@ import de.querra.mobile.runlazydroid.data.entities.Penalty;
 import de.querra.mobile.runlazydroid.data.entities.RunEntry;
 import de.querra.mobile.runlazydroid.entities.RunType;
 import de.querra.mobile.runlazydroid.helper.Formatter;
+import de.querra.mobile.runlazydroid.helper.ImageHelper;
 import de.querra.mobile.runlazydroid.helper.RunTypeHelper;
 import de.querra.mobile.runlazydroid.widgets.DeleteEntryDialogBuilder;
 import io.realm.RealmObject;
@@ -58,6 +60,9 @@ public class StatisticsCardAdapter extends RecyclerView.Adapter{
 
         void setTypeImage(Drawable drawable){
             this.typeImage.setImageDrawable(drawable);
+        }
+        void setTypeImage(Bitmap bitmap){
+            this.typeImage.setImageBitmap(bitmap);
         }
 
         void setTypeText(String typeText) {
@@ -103,8 +108,12 @@ public class StatisticsCardAdapter extends RecyclerView.Adapter{
             final RunEntry entry = (RunEntry) item;
             RunType runType = RunType.fromString(entry.getType());
             String localRunType = RunTypeHelper.toLocalString(runType, this.resources);
-            Drawable runTypeImage = RunTypeHelper.getDrawable(runType, this.resources);
-            statisticsCard.setTypeImage(runTypeImage);
+            if (runType == RunType.MAP_RUN){
+                statisticsCard.setTypeImage(ImageHelper.getImage(Formatter.getFileName(entry.getId())));
+            }
+            else {
+                statisticsCard.setTypeImage(RunTypeHelper.getDrawable(runType, this.resources));
+            }
             statisticsCard.setTypeText(localRunType);
             statisticsCard.setDistanceText(Formatter.asKilometers(entry.getDistance()));
             statisticsCard.setDateText(Formatter.dateToString(entry.getCreated()));

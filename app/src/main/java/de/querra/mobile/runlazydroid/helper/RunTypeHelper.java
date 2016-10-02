@@ -10,6 +10,8 @@ public class RunTypeHelper {
 
     public static String toLocalString(RunType runType, Resources resources){
         switch (runType){
+            case MAP_RUN:
+                return resources.getString(R.string.map_run);
             case TRACK:
                 return resources.getString(R.string.track);
             case TREADMILL:

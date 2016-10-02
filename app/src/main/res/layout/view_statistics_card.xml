@@ -15,6 +15,7 @@
             android:id="@+id/view_statistics_card__type_image"
             android:layout_width="130dp"
             android:layout_height="match_parent"
+            android:scaleType="centerCrop"
             android:background="#FFF"/>
 
         <LinearLayout

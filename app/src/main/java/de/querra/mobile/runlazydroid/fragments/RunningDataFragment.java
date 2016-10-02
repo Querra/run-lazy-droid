@@ -1,7 +1,7 @@
 package de.querra.mobile.runlazydroid.fragments;
 
-import android.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.AppCompatButton;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,7 +27,7 @@ import de.querra.mobile.runlazydroid.helper.Formatter;
 import de.querra.mobile.runlazydroid.helper.MathHelper;
 import de.querra.mobile.runlazydroid.helper.RunTypeHelper;
 
-public class RunningDataFragment extends Fragment{
+public class RunningDataFragment extends Fragment {
 
     private static final int DISTANCE_MAX = 25;
     private static final int DISTANCE_SEEKBAR_MAX = 250;

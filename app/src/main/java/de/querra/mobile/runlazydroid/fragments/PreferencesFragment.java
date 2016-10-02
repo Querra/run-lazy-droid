@@ -1,17 +1,18 @@
 package de.querra.mobile.runlazydroid.fragments;
 
 import android.os.Bundle;
-import android.preference.ListPreference;
-import android.preference.PreferenceCategory;
-import android.preference.PreferenceFragment;
 import android.support.v4.content.res.ResourcesCompat;
+import android.support.v7.preference.ListPreference;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.takisoft.fix.support.v7.preference.PreferenceCategory;
+import com.takisoft.fix.support.v7.preference.PreferenceFragmentCompat;
+
 import de.querra.mobile.runlazydroid.R;
 
-public class PreferencesFragment extends PreferenceFragment {
+public class PreferencesFragment extends PreferenceFragmentCompat {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -24,6 +25,11 @@ public class PreferencesFragment extends PreferenceFragment {
         ListPreference listPreference = (ListPreference) ((PreferenceCategory) getPreferenceScreen().getPreference(1)).getPreference(0);
         listPreference.setEntries(entries);
         listPreference.setEntryValues(values);
+    }
+
+    @Override
+    public void onCreatePreferencesFix(Bundle savedInstanceState, String rootKey) {
+
     }
 
     @Override

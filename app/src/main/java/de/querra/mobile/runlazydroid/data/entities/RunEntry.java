@@ -6,7 +6,7 @@ import de.querra.mobile.runlazydroid.data.RealmInterface;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
-public class RunEntry extends RealmObject implements RealmInterface{
+public class RunEntry extends RealmObject implements RealmInterface {
 
     public static final String ID_FIELD = "id";
     public static final String CREATED_FIELD = "created";
@@ -20,32 +20,55 @@ public class RunEntry extends RealmObject implements RealmInterface{
     private Date created;
     private int time;
     private float distance;
+    private String imageFilepath;
 
-    public long getId() {return this.id;}
+    public long getId() {
+        return this.id;
+    }
+
     public void setId(long id) {
         this.id = id;
     }
-    public String getType() {return type;}
-    public void setType(String type) {this.type = type;}
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
     public Date getCreated() {
         return this.created;
     }
+
     public void setCreated(Date created) {
         this.created = created;
     }
+
     public int getTime() {
         return this.time;
     }
+
     public void setTime(int time) {
         this.time = time;
     }
+
     public float getDistance() {
         return this.distance;
     }
+
     public void setDistance(float distance) {
         this.distance = distance;
     }
 
+    public String getImageFilepath() {
+        return this.imageFilepath;
+    }
+
+    public void setImageFilepath(String imageFilepath) {
+        this.imageFilepath = imageFilepath;
+    }
 
     @Override
     public Date getSortDate() {

@@ -1,48 +1,77 @@
 <resources>
 
+    <!-- Drawer -->
     <string name="navigation_drawer_open">Navigationsmenü öffnen</string>
     <string name="navigation_drawer_close">Navigationsmenü schließen</string>
 
-    <string name="action_settings">Einstellungen</string>
+    <!-- Drawer menu -->
     <string name="overview">Übersicht</string>
     <string name="add_penalty">Strafe hinzufügen</string>
     <string name="settings">Einstellungen</string>
-    <string name="communicate">Mitteilen</string>
-    <string name="share">Teilen</string>
-    <string name="send">Senden</string>
-    <string name="loading_data">Daten werden geladen…</string>
-    <string name="log_in_to_continue">Bitte einloggen um fortzufahren</string>
     <string name="options">Optionen</string>
     <string name="logout">Ausloggen</string>
     <string name="statistics">Statistik</string>
+    <string name="communicate">Mitteilen</string>
+    <string name="share">Teilen</string>
+    <string name="send">Senden</string>
+
+    <!-- Start -->
+    <string name="loading_data">Daten werden geladen…</string>
+    <string name="log_in_to_continue">Bitte einloggen um fortzufahren</string>
+
+    <!-- Run types -->
+    <string name="map_run">Aufgezeichneter Lauf</string>
     <string name="track">Strecke</string>
     <string name="treadmill">Laufband</string>
     <string name="unknown">Unbekannt</string>
+
+    <!-- Penalty -->
     <string name="penalty">Strafe</string>
     <string name="penalty_text1">Ich bin so enttäuscht…</string>
     <string name="penalty_text2">…so enttäuscht von dir!</string>
+
+    <!-- Delete entry -->
     <string name="delete_entry">Eintrag löschen</string>
     <string name="delete">Löschen</string>
     <string name="delete_entry_query">Willst du diesen Eintrag wirklich löschen?</string>
     <string name="cancel">Abbrechen</string>
+
+    <!-- Add penalty -->
     <string name="been_naughty">Warst du wieder unartig?</string>
     <string name="yes_please">Ja, bitte füge meine Strafe hinzu!</string>
+    <string name="penalty_added">Strafe hinzugefügt</string>
+
+    <!-- Add entry -->
     <string name="add_running_data">Laufdaten hinzufügen</string>
     <string name="distance">Strecke</string>
     <string name="time">Zeit</string>
     <string name="track_type">Streckenart</string>
     <string name="add_entry">Eintrag hinzufügen</string>
+    <string name="entry_added">Eintrag hinzugefügt</string>
+
+    <!-- Literals -->
     <string name="day">Tag</string>
     <string name="days">Tage</string>
     <string name="minute">Minute</string>
     <string name="minutes">Minuten</string>
+
+    <!-- Overview -->
     <string name="target">Ziel</string>
     <string name="achieved">erreicht</string>
     <string name="distance_run_literal">Strecke zurückgelegt</string>
     <string name="distance_left">Verbleibende Strecke</string>
     <string name="penalty_literal">Strafe</string>
     <string name="time_left">Verbleibende Zeit</string>
-    <string name="entry_added">Eintrag hinzugefügt</string>
-    <string name="penalty_added">Strafe hinzugefügt</string>
+
+    <!-- Map -->
+    <string name="title_activity_maps">Karte</string>
     <string name="map">Karte</string>
+    <string name="entry_saved">Eintrag wurde gespeichert</string>
+    <string name="entry_not_saved">Eintrag konnte nicht gespeichert werden. Ist genug freier Speicherplatz vorhanden?</string>
+    <string name="connection_failed">Verbindung konnte nicht hergestellt werden</string>
+    <string name="connection_failed_message">Nicht verbunden. Versuchen Verbindung erneut herzustellen?</string>
+    <string name="stop_tracking_question">Möchtest du die Aufzeichnung beenden?</string>
+    <string name="reconnect">Erneut verbinden</string>
+    <string name="stop_tracking">Beenden</string>
+    <string name="add_run_question">Möchtest du diesen Lauf zu deinen Einträgen hinzufügen?</string>
 </resources>
