@@ -20,7 +20,6 @@ import android.widget.TextView;
 import com.facebook.AccessToken;
 import com.facebook.Profile;
 import com.facebook.login.LoginManager;
-import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.mikhaellopez.circularprogressbar.CircularProgressBar;
 
@@ -184,10 +183,9 @@ public abstract class BaseNavigationActivity extends AppCompatActivity
             switchFragment(new OverviewFragment(), true);
             onPrepareOverviewFragment();
         } else if (id == R.id.nav_map) {
-            this.mMap = new SupportMapFragment();
+            this.mMap = getMapFragment();
             switchFragment(this.mMap, true);
-            onPrepareMapFragment();
-            this.mMap.getMapAsync(getOnMapReady());
+            onSwitchedToMap();
         } else if (id == R.id.nav_enter_running_data) {
             switchFragment(new RunningDataFragment(), true);
         } else if (id == R.id.nav_add_penalty) {
@@ -213,6 +211,10 @@ public abstract class BaseNavigationActivity extends AppCompatActivity
         return true;
     }
 
+    protected abstract void onSwitchedToMap();
+
+    protected abstract SupportMapFragment getMapFragment();
+
     protected void switchFragment(Fragment fragment, boolean backstack) {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction().replace(R.id.content_main, fragment);
         if (backstack) {
@@ -231,11 +233,7 @@ public abstract class BaseNavigationActivity extends AppCompatActivity
 
     protected abstract void onPrepareOverviewFragment();
 
-    protected abstract void onPrepareMapFragment();
-
     protected abstract void onPrepareInitialFragment();
-
-    protected abstract OnMapReadyCallback getOnMapReady();
 
     public abstract int getLayout();
 
