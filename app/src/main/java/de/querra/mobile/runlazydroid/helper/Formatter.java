@@ -44,4 +44,10 @@ public class Formatter {
                 TimeUnit.MILLISECONDS.toMinutes(millis) % TimeUnit.HOURS.toMinutes(1),
                 TimeUnit.MILLISECONDS.toSeconds(millis) % TimeUnit.MINUTES.toSeconds(1));
     }
+
+    public static String minutesToTimeString(long minutes){
+        return String.format(Locale.getDefault(), "%02d:%02d",
+                TimeUnit.MINUTES.toHours(minutes),
+                TimeUnit.MINUTES.toMinutes(minutes) % TimeUnit.HOURS.toMinutes(1));
+    }
 }

@@ -9,20 +9,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-
 import de.querra.mobile.runlazydroid.R;
-import de.querra.mobile.runlazydroid.adapters.StatisticsCardAdapter;
-import de.querra.mobile.runlazydroid.data.RealmInterface;
-import de.querra.mobile.runlazydroid.data.entities.Penalty;
-import de.querra.mobile.runlazydroid.data.entities.RunEntry;
-import io.realm.Realm;
-import io.realm.RealmObject;
-import io.realm.RealmResults;
-import io.realm.Sort;
+import de.querra.mobile.runlazydroid.adapters.LabeledCardAdapter;
+import de.querra.mobile.runlazydroid.data.RealmCalculator;
+import de.querra.mobile.runlazydroid.helper.Formatter;
 
 public class StatisticsFragment extends Fragment {
 
@@ -38,27 +28,13 @@ public class StatisticsFragment extends Fragment {
 
         RecyclerView list = (RecyclerView) view.findViewById(R.id.fragment_statistics__list);
         list.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
-        StatisticsCardAdapter adapter = new StatisticsCardAdapter(getActivity());
+        LabeledCardAdapter adapter = new LabeledCardAdapter();
 
-        Realm realm = Realm.getDefaultInstance();
-        RealmResults<RunEntry> runEntries = realm.where(RunEntry.class).findAll().sort(RunEntry.CREATED_FIELD, Sort.DESCENDING);
-        RealmResults<Penalty> penalties = realm.where(Penalty.class).findAll().sort(Penalty.CREATED_FIELD, Sort.DESCENDING);
 
-        List<RealmInterface> dateSortList = new ArrayList<>();
-        dateSortList.addAll(runEntries);
-        dateSortList.addAll(penalties);
-        Collections.sort(dateSortList, new Comparator<RealmInterface>() {
-            @Override
-            public int compare(RealmInterface realmInterface, RealmInterface t1) {
-                return realmInterface.getSortDate().compareTo(t1.getSortDate());
-            }
-        });
-        List<RealmObject> realmObjects = new ArrayList<>();
-        for (RealmInterface realmInterface : dateSortList){
-            realmObjects.add((RealmObject) realmInterface);
-        }
-
-        adapter.addItems(realmObjects);
+        adapter.addItem("Total distance", Formatter.asKilometers(RealmCalculator.getAllTimeDistance()), null);
+        adapter.addItem("Total penalties", String.valueOf(RealmCalculator.getAllTimePenalties()), null);
+        adapter.addItem("Total penalty distance", Formatter.asKilometers(RealmCalculator.getAllTimePenaltyDistance()), null);
+        adapter.addItem("Total run time", Formatter.minutesToTimeString(RealmCalculator.getAllTimeRunTime()), null);
 
         list.setAdapter(adapter);
 

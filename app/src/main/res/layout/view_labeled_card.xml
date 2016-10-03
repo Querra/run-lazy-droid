@@ -9,29 +9,37 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <LinearLayout
+        android:layout_height="wrap_content"
+        android:padding="12dp">
+
+        <TextView
+            android:id="@+id/view_labeled_card__label"
+            style="@style/card_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="12dp"
-            android:layout_centerVertical="true"
-            android:orientation="vertical">
+            android:text="label" />
 
-            <TextView
-                android:id="@+id/view_labeled_card__label"
-                style="@style/card_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="label" />
+        <TextView
+            android:id="@+id/view_labeled_card__value"
+            style="@style/card_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/view_labeled_card__label"
+            android:text="value" />
 
-            <TextView
-                android:id="@+id/view_labeled_card__value"
-                style="@style/card_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/fragment_overview__distance_label"
-                android:text="value" />
-        </LinearLayout>
+        <TextView
+            android:id="@+id/view_labeled_card__message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/view_labeled_card__label"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="10dp"
+            android:background="@color/colorAccentAlphaStrong"
+            android:paddingEnd="5dp"
+            android:paddingStart="5dp"
+            android:text="message"
+            android:visibility="invisible"
+            android:textColor="@color/white" />
     </RelativeLayout>
 
 

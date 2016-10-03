@@ -50,11 +50,11 @@ public class StatisticsCardAdapter extends RecyclerView.Adapter{
 
         StatisticsCardViewHolder(View itemView) {
             super(itemView);
-            this.typeImage = (ImageView) itemView.findViewById(R.id.view_statistics_card__type_image);
-            this.type = (TextView) itemView.findViewById(R.id.view_statistics_card__type);
-            this.distance = (TextView) itemView.findViewById(R.id.view_statistics_card__distance);
-            this.time = (TextView) itemView.findViewById(R.id.view_statistics_card__time);
-            this.date = (TextView) itemView.findViewById(R.id.view_statistics_card__date);
+            this.typeImage = (ImageView) itemView.findViewById(R.id.view_timeline_card__type_image);
+            this.type = (TextView) itemView.findViewById(R.id.view_timeline_card__type);
+            this.distance = (TextView) itemView.findViewById(R.id.view_timeline_card__distance);
+            this.time = (TextView) itemView.findViewById(R.id.view_timeline_card__time);
+            this.date = (TextView) itemView.findViewById(R.id.view_timeline_card__date);
             itemView.setOnLongClickListener(this);
         }
 
@@ -96,7 +96,7 @@ public class StatisticsCardAdapter extends RecyclerView.Adapter{
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.view_statistics_card, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.view_timeline_card, parent, false);
         return new StatisticsCardViewHolder(view);
     }
 

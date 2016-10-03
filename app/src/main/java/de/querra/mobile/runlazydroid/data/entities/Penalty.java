@@ -15,6 +15,7 @@ public class Penalty extends RealmObject implements RealmInterface {
     private long id;
 
     private Date created;
+    private float distance;
 
     public long getId() {
         return id;
@@ -30,6 +31,14 @@ public class Penalty extends RealmObject implements RealmInterface {
 
     public void setCreated(Date created) {
         this.created = created;
+    }
+
+    public float getDistance() {
+        return this.distance;
+    }
+
+    public void setDistance(float distance) {
+        this.distance = distance;
     }
 
     @Override

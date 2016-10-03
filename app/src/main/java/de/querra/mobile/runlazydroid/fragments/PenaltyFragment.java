@@ -14,6 +14,7 @@ import java.util.Date;
 import de.querra.mobile.runlazydroid.R;
 import de.querra.mobile.runlazydroid.data.RealmOperator;
 import de.querra.mobile.runlazydroid.data.entities.Penalty;
+import de.querra.mobile.runlazydroid.helper.PreferencesHelper;
 
 public class PenaltyFragment extends Fragment {
 
@@ -36,6 +37,7 @@ public class PenaltyFragment extends Fragment {
                 Date created = new Date();
                 penalty.setId(created.getTime());
                 penalty.setCreated(created);
+                penalty.setDistance(PreferencesHelper.getPenaltyDistance(getActivity()));
                 RealmOperator.saveOrUpdate(penalty);
                 Toast.makeText(getActivity(), R.string.penalty_added, Toast.LENGTH_SHORT).show();
             }

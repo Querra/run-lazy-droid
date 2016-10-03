@@ -32,21 +32,23 @@ public class OverviewFragment extends Fragment {
         list.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
         LabeledCardAdapter adapter = new LabeledCardAdapter();
 
-        float penaltyDistance = RealmCalculator.getTotalPenaltyDistance(getActivity());
+        float penaltyDistance = RealmCalculator.getTotalPenaltyDistance();
         float distanceRun = RealmCalculator.getDistanceRun();
         float totalWeekGoal = PreferencesHelper.getWeekTarget(getActivity())+penaltyDistance;
         float distanceLeft = (totalWeekGoal - distanceRun);
         String target = getString(R.string.target);
+        boolean targetAchieved = false;
         if(distanceLeft<0f){
             distanceLeft = 0f;
-            target += " - " + getString(R.string.achieved);
+            targetAchieved = true;
         }
 
-        adapter.addItem(getString(R.string.time_left), Formatter.getDaysLeft(DateHelper.getNextSunday(), getActivity()));
-        adapter.addItem(getString(R.string.distance_left), Formatter.asKilometers(distanceLeft));
-        adapter.addItem(getString(R.string.distance_run_literal), Formatter.asKilometers(distanceRun));
-        adapter.addItem(target, Formatter.asKilometers(totalWeekGoal));
-        adapter.addItem(getString(R.string.penalty_literal), Formatter.asKilometers(penaltyDistance));
+        String daysLeft = Formatter.getDaysLeft(DateHelper.getNextSunday(), getActivity());
+        adapter.addItem(getString(R.string.time_left), daysLeft, Integer.valueOf(daysLeft.split(" ")[0])<3&&distanceLeft>0f?getString(R.string.hurry_up):null);
+        adapter.addItem(getString(R.string.distance_left), Formatter.asKilometers(distanceLeft), targetAchieved?getString(R.string.done):null);
+        adapter.addItem(getString(R.string.distance_run_literal), Formatter.asKilometers(distanceRun), distanceRun>30f?getString(R.string.wow):distanceRun>25f?getString(R.string.great):distanceRun>20f?getString(R.string.nice):distanceRun<2f?getString(R.string.time_for_a_run):null);
+        adapter.addItem(target, Formatter.asKilometers(totalWeekGoal), targetAchieved?getString(R.string.achieved):null);
+        adapter.addItem(getString(R.string.penalty_literal), Formatter.asKilometers(penaltyDistance), penaltyDistance>0f?getString(R.string.really):null);
 
         list.setAdapter(adapter);
 

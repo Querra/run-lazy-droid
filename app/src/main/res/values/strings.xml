@@ -1,7 +1,7 @@
 <resources>
     <!-- App -->
-    <string name="app_name">Run Lazy Droid</string>
-    <string name="facebook_app_id">188946641516321</string>
+    <string name="app_name" translatable="false">Run Lazy Droid</string>
+    <string name="facebook_app_id" translatable="false">188946641516321</string>
 
     <!-- Drawer -->
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -13,6 +13,7 @@
     <string name="settings">Settings</string>
     <string name="options">Options</string>
     <string name="logout">Logout</string>
+    <string name="time_line">Timeline</string>
     <string name="statistics">Statistics</string>
     <string name="communicate">Communicate</string>
     <string name="share">Share</string>
@@ -23,15 +24,15 @@
     <string name="log_in_to_continue">Please log in to continue</string>
 
     <!-- Preferences strings -->
-    <string name="distance_run">distance_run</string>
-    <string name="penalties">penalties</string>
-    <string name="start_date">start_date</string>
-    <string name="week_goal">week_goal</string>
-    <string name="penalty_distance">penalty_distance</string>
+    <string name="distance_run" translatable="false">distance_run</string>
+    <string name="penalties" translatable="false">penalties</string>
+    <string name="start_date" translatable="false">start_date</string>
+    <string name="week_goal" translatable="false">week_goal</string>
+    <string name="penalty_distance" translatable="false">penalty_distance</string>
 
     <!-- Run types -->
     <string name="map_run">Mapped run</string>
-    <string name="track">Track</string>
+    <string name="track">Run</string>
     <string name="treadmill">Treadmill</string>
     <string name="unknown">Unknown</string>
 
@@ -67,7 +68,7 @@
 
     <!-- Overview -->
     <string name="target">Target</string>
-    <string name="achieved">achieved</string>
+    <string name="achieved">Achieved</string>
     <string name="distance_run_literal">Distance run</string>
     <string name="distance_left">Distance left</string>
     <string name="penalty_literal">Penalty</string>
@@ -84,4 +85,11 @@
     <string name="stop_tracking_question">Do you want to stop tracking?</string>
     <string name="stop_tracking">Stop tracking</string>
     <string name="add_run_question">Do you want to add this run to your entries?</string>
+    <string name="hurry_up">Hurry up!</string>
+    <string name="wow" translatable="false">WOW!</string>
+    <string name="great">Great!</string>
+    <string name="nice">Nice!</string>
+    <string name="time_for_a_run">Time to go for a run!</string>
+    <string name="done">Done</string>
+    <string name="really">Really?</string>
 </resources>

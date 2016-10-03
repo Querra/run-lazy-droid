@@ -5,9 +5,13 @@
     <color name="colorSecondary">#0C9</color>
     <color name="colorSecondaryDark">#0A7</color>
     <color name="colorSecondaryAlpha">#50A7</color>
+    <color name="colorSecondaryAlphaStrong">#90A7</color>
+    <color name="colorAccent">#C08</color>
+    <color name="colorAccentAlphaStrong">#CC08</color>
     <color name="white">#FFF</color>
     <color name="black">#000</color>
-    <color name="black_alpha_strong">#A000</color>
+    <color name="black_alpha_strong">#9000</color>
     <color name="black_alpha_weak">#5000</color>
     <color name="white_alpha">#CFFF</color>
+
 </resources>

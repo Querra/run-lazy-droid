@@ -9,8 +9,9 @@
     <string name="add_penalty">Strafe hinzufügen</string>
     <string name="settings">Einstellungen</string>
     <string name="options">Optionen</string>
-    <string name="logout">Ausloggen</string>
+    <string name="time_line">Verlauf</string>
     <string name="statistics">Statistik</string>
+    <string name="logout">Ausloggen</string>
     <string name="communicate">Mitteilen</string>
     <string name="share">Teilen</string>
     <string name="send">Senden</string>
@@ -20,8 +21,8 @@
     <string name="log_in_to_continue">Bitte einloggen um fortzufahren</string>
 
     <!-- Run types -->
-    <string name="map_run">Aufgezeichneter Lauf</string>
-    <string name="track">Strecke</string>
+    <string name="map_run">Lauf (Karte)</string>
+    <string name="track">Lauf</string>
     <string name="treadmill">Laufband</string>
     <string name="unknown">Unbekannt</string>
 
@@ -57,7 +58,7 @@
 
     <!-- Overview -->
     <string name="target">Ziel</string>
-    <string name="achieved">erreicht</string>
+    <string name="achieved">Erreicht</string>
     <string name="distance_run_literal">Strecke zurückgelegt</string>
     <string name="distance_left">Verbleibende Strecke</string>
     <string name="penalty_literal">Strafe</string>
@@ -74,4 +75,12 @@
     <string name="reconnect">Erneut verbinden</string>
     <string name="stop_tracking">Beenden</string>
     <string name="add_run_question">Möchtest du diesen Lauf zu deinen Einträgen hinzufügen?</string>
+    <string name="done">Fertig</string>
+    <string name="great">Großartig!</string>
+    <string name="hurry_up">Beeil dich!</string>
+    <string name="nice">Nicht schlecht!</string>
+    <string name="really">Wirklich?</string>
+    <string name="time_for_a_run">Zeit laufen zu gehen!</string>
+    <string name="wow"></string>
+
 </resources>

@@ -32,6 +32,7 @@ import de.querra.mobile.runlazydroid.fragments.PenaltyFragment;
 import de.querra.mobile.runlazydroid.fragments.PreferencesFragment;
 import de.querra.mobile.runlazydroid.fragments.RunningDataFragment;
 import de.querra.mobile.runlazydroid.fragments.StatisticsFragment;
+import de.querra.mobile.runlazydroid.fragments.TimeLineFragment;
 import de.querra.mobile.runlazydroid.helper.DateHelper;
 import de.querra.mobile.runlazydroid.helper.Formatter;
 import de.querra.mobile.runlazydroid.widgets.ProfilePictureView;
@@ -122,7 +123,12 @@ public abstract class BaseNavigationActivity extends AppCompatActivity
         userFirstName.setText(this.user.getFirstName());
 
         TextView target = (TextView) view.findViewById(R.id.nav_header_main__target);
-        target.setText(Formatter.asKilometers(RealmCalculator.getDistanceLeft(this)));
+        float distanceLeft = RealmCalculator.getDistanceLeft(this);
+        if(distanceLeft<0f){
+            distanceLeft = 0f;
+            target.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_flag, 0, R.drawable.ic_check, 0);
+        }
+        target.setText(Formatter.asKilometers(distanceLeft));
 
         TextView penalty = (TextView) view.findViewById(R.id.nav_header_main__days_left);
         penalty.setText(Formatter.getDaysLeft(DateHelper.getNextSunday(), this));
@@ -181,6 +187,8 @@ public abstract class BaseNavigationActivity extends AppCompatActivity
             switchFragment(new PenaltyFragment(), true);
         } else if (id == R.id.nav_settings) {
             switchFragment(new PreferencesFragment(), true);
+        } else if (id == R.id.nav_time_line) {
+            switchFragment(new TimeLineFragment(), true);
         } else if (id == R.id.nav_statistics) {
             switchFragment(new StatisticsFragment(), true);
         } else if (id == R.id.nav_logout) {
