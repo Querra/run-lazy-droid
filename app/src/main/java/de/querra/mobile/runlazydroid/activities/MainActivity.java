@@ -21,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
@@ -88,8 +89,6 @@ public class MainActivity extends BaseNavigationActivity
         if (this.googleApiClient == null) {
             this.googleApiClient = new GoogleApiClient.Builder(this)
                     .addConnectionCallbacks(new GoogleApiClient.ConnectionCallbacks() {
-
-
                         @Override
                         public void onConnected(@Nullable Bundle bundle) {
                             MainActivity.this.connected = true;
@@ -103,19 +102,8 @@ public class MainActivity extends BaseNavigationActivity
                     .addOnConnectionFailedListener(new GoogleApiClient.OnConnectionFailedListener() {
                         @Override
                         public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-                            new AlertDialog.Builder(MainActivity.this)
-                                    .setTitle(R.string.connection_failed)
-                                    .setMessage(R.string.connection_failed_message)
-                                    .setCancelable(true)
-                                    .setNegativeButton(R.string.cancel, null)
-                                    .setPositiveButton(R.string.reconnect, new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialog, int which) {
-                                            MainActivity.this.googleApiClient.connect();
-                                        }
-                                    })
-                                    .create()
-                                    .show();
+                            //Let google handle this
+                            GoogleApiAvailability.getInstance().getErrorDialog(MainActivity.this, connectionResult.getErrorCode(), 0);
                         }
                     })
                     .addApi(LocationServices.API)
@@ -293,7 +281,7 @@ public class MainActivity extends BaseNavigationActivity
     @Override
     protected void onPrepareOverviewFragment() {
         this.floatingActionButton.setVisibility(View.VISIBLE);
-        this.floatingActionButton.setImageDrawable(getResources().getDrawable(R.drawable.ic_add, null));
+        this.floatingActionButton.setImageDrawable(getResources().getDrawable(R.drawable.ic_add));
         this.floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -307,7 +295,7 @@ public class MainActivity extends BaseNavigationActivity
     @Override
     protected void onPrepareMapFragment() {
         this.floatingActionButton.setVisibility(View.VISIBLE);
-        this.floatingActionButton.setImageDrawable(getResources().getDrawable(R.drawable.ic_start_tracking, null));
+        this.floatingActionButton.setImageDrawable(getResources().getDrawable(R.drawable.ic_start_tracking));
         this.floatingActionButton.setOnClickListener(getMapOnClickListener());
     }
 
@@ -335,14 +323,14 @@ public class MainActivity extends BaseNavigationActivity
                         LocationServices.FusedLocationApi.requestLocationUpdates(MainActivity.this.googleApiClient, getLocationRequest(), getLocationListener());
                     }
                     startTracking();
-                    ((FloatingActionButton) view).setImageDrawable(getDrawable(R.drawable.ic_menu));
+                    ((FloatingActionButton) view).setImageDrawable(getResources().getDrawable(R.drawable.ic_menu));
                 } else {
                     Snackbar.make(findViewById(R.id.activity_main__main_layout), R.string.stop_tracking_question, Snackbar.LENGTH_INDEFINITE)
                             .setAction(R.string.stop_tracking, new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
                                     stopTracking();
-                                    ((FloatingActionButton) view).setImageDrawable(getDrawable(R.drawable.ic_start_tracking));
+                                    ((FloatingActionButton) view).setImageDrawable(getResources().getDrawable(R.drawable.ic_start_tracking));
                                     new AlertDialog.Builder(MainActivity.this)
                                             .setTitle(R.string.add_entry)
                                             .setMessage(R.string.add_run_question)

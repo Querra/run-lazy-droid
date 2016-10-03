@@ -27,7 +27,9 @@
             android:layout_marginStart="10dp"
             android:layout_marginTop="6dp"
             android:layout_toEndOf="@+id/view_timeline_card__type_image"
-            android:text="type" />
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/view_timeline_card__type_image"
+            android:text="type"/>
 
         <TextView
             android:id="@+id/view_timeline_card__distance"
@@ -39,6 +41,8 @@
             android:drawableStart="@drawable/ic_run_white"
             android:drawablePadding="8dp"
             android:gravity="center"
+            android:layout_alignLeft="@+id/view_timeline_card__type"
+            android:drawableLeft="@drawable/ic_run_white"
             android:text="distance"/>
 
         <TextView
@@ -52,7 +56,10 @@
             android:drawableStart="@drawable/ic_time"
             android:gravity="center"
             android:drawablePadding="8dp"
-            android:text="value" />
+            android:layout_alignLeft="@+id/view_timeline_card__distance"
+            android:layout_marginRight="10dp"
+            android:drawableLeft="@drawable/ic_time"
+            android:text="value"/>
 
         <TextView
             android:id="@+id/view_timeline_card__date"
@@ -65,7 +72,9 @@
             android:paddingEnd="5dp"
             android:layout_alignBaseline="@+id/view_timeline_card__type"
             android:text="date"
-            android:textColor="@color/white" />
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:textColor="@color/white"/>
 
     </RelativeLayout>
 

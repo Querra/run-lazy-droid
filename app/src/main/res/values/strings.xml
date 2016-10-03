@@ -86,10 +86,11 @@
     <string name="stop_tracking">Stop tracking</string>
     <string name="add_run_question">Do you want to add this run to your entries?</string>
     <string name="hurry_up">Hurry up!</string>
-    <string name="wow" translatable="false">WOW!</string>
+    <string name="wow">WOW!</string>
     <string name="great">Great!</string>
     <string name="nice">Nice!</string>
     <string name="time_for_a_run">Time to go for a run!</string>
     <string name="done">Done</string>
     <string name="really">Really?</string>
+    <string name="play_service_update_needed">Cannot connect. Please update your version of Google Play Services to use the Map feature.</string>
 </resources>

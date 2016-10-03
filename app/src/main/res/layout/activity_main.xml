@@ -54,6 +54,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="start|top"
         android:layout_marginStart="15dp"
+        android:layout_marginLeft="15dp"
         android:layout_marginTop="80dp"
         android:background="@color/colorSecondaryAlpha"
         android:orientation="vertical"
@@ -67,6 +68,7 @@
             android:layout_marginBottom="5dp"
             android:drawablePadding="5dp"
             android:drawableStart="@drawable/ic_time"
+            android:drawableLeft="@drawable/ic_time"
             android:text="time"
             android:textColor="@color/white"
             android:textSize="20sp" />
@@ -77,6 +79,7 @@
             android:layout_height="wrap_content"
             android:drawablePadding="5dp"
             android:drawableStart="@drawable/ic_run_white"
+            android:drawableLeft="@drawable/ic_run_white"
             android:text="distance"
             android:textColor="@color/white"
             android:textSize="20sp" />
@@ -85,12 +88,13 @@
     </LinearLayout>
 
 <android.support.design.widget.FloatingActionButton
-android:id="@+id/activity_main__fab"
-android:layout_width="wrap_content"
-android:layout_height="wrap_content"
-android:layout_alignParentBottom="true"
-android:layout_alignParentEnd="true"
-android:layout_gravity="end|bottom"
-android:layout_margin="@dimen/fab_margin" />
+    android:id="@+id/activity_main__fab"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:layout_alignParentEnd="true"
+    android:layout_alignParentRight="true"
+    android:layout_gravity="end|bottom"
+    android:layout_margin="@dimen/fab_margin" />
 
 </android.support.design.widget.CoordinatorLayout>

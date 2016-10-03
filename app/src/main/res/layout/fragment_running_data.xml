@@ -1,13 +1,15 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingTop="10dp"
-    android:paddingBottom="10dp"
-    android:paddingStart="30dp"
-    android:paddingEnd="30dp"
-    android:gravity="center_horizontal"
-    tools:context="de.querra.mobile.runlazydroid.fragments.RunningDataFragment">
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+                android:paddingBottom="10dp"
+                android:paddingEnd="30dp"
+                android:paddingLeft="30dp"
+                android:paddingRight="30dp"
+                android:paddingStart="30dp"
+                android:paddingTop="10dp"
+                tools:context="de.querra.mobile.runlazydroid.fragments.RunningDataFragment">
 
     <TextView
         android:id="@+id/fragment_running_data__title"
@@ -61,7 +63,7 @@
         android:textColor="@color/black"
         android:paddingStart="8dp"
         android:text="0.0 km"
-        />
+        android:paddingLeft="8dp"/>
 
     <SeekBar
         android:id="@+id/fragment_running_data__distance_bar"
@@ -93,6 +95,7 @@
         android:textColor="@color/black"
         android:layout_marginBottom="10dp"
         android:paddingStart="8dp"
+        android:paddingLeft="8dp"
         android:text="0 min"/>
 
     <SeekBar
