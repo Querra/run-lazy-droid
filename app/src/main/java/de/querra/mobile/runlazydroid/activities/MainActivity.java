@@ -128,7 +128,9 @@ public class MainActivity extends BaseNavigationActivity
         this.stopTrackTime = new Date().getTime();
         stopDisplay();
         LocationServices.FusedLocationApi.removeLocationUpdates(this.googleApiClient, this.locationListener);
-        mMap.addCircle(getCircle(locations.get(locations.size() - 1)));
+        if (locations.size() != 0) {
+            mMap.addCircle(getCircle(locations.get(locations.size() - 1)));
+        }
     }
 
     private void stopDisplay() {
