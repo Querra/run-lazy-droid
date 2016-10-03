@@ -114,24 +114,31 @@ public abstract class BaseNavigationActivity extends AppCompatActivity
         }
 
         ProfilePictureView profileImage = (ProfilePictureView) view.findViewById(R.id.nav_header_main__profilePicture);
-        profileImage.setProfileId(this.user.getId());
+        if (profileImage != null) {
+            profileImage.setProfileId(this.user.getId());
+        }
 
         CircularProgressBar progress = (CircularProgressBar) view.findViewById(R.id.nav_header_main__progress);
-        progress.setProgressWithAnimation(RealmCalculator.getProgress(this));
-
-        TextView userFirstName = (TextView) view.findViewById(R.id.nav_header_main__user_first_name);
-        userFirstName.setText(this.user.getFirstName());
-
-        TextView target = (TextView) view.findViewById(R.id.nav_header_main__target);
-        float distanceLeft = RealmCalculator.getDistanceLeft(this);
-        if(distanceLeft<0f){
-            distanceLeft = 0f;
-            target.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_flag, 0, R.drawable.ic_check, 0);
+        if (progress != null) {
+            progress.setProgressWithAnimation(RealmCalculator.getProgress(this));
         }
-        target.setText(Formatter.asKilometers(distanceLeft));
-
+        TextView userFirstName = (TextView) view.findViewById(R.id.nav_header_main__user_first_name);
+        if (userFirstName != null) {
+            userFirstName.setText(this.user.getFirstName());
+        }
+        TextView target = (TextView) view.findViewById(R.id.nav_header_main__target);
+        if (target != null) {
+            float distanceLeft = RealmCalculator.getDistanceLeft(this);
+            if (distanceLeft < 0f) {
+                distanceLeft = 0f;
+                target.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_flag, 0, R.drawable.ic_check, 0);
+            }
+            target.setText(Formatter.asKilometers(distanceLeft));
+        }
         TextView penalty = (TextView) view.findViewById(R.id.nav_header_main__days_left);
-        penalty.setText(Formatter.getDaysLeft(DateHelper.getNextSunday(), this));
+        if (penalty != null) {
+            penalty.setText(Formatter.getDaysLeft(DateHelper.getNextSunday(), this));
+        }
     }
 
     @Override
