@@ -135,6 +135,9 @@ public class MapHandler {
                     .addApi(LocationServices.API)
                     .build();
         }
+        if (!this.googleApiClient.isConnected() || !this.googleApiClient.isConnecting()){
+            this.googleApiClient.connect();
+        }
     }
 
     public void handleFabClick(final FloatingActionButton view) {
