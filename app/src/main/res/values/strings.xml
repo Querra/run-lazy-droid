@@ -38,8 +38,8 @@
 
     <!-- Penalty -->
     <string name="penalty">Penalty</string>
-    <string name="penalty_text1">I\'m disappointed…</string>
-    <string name="penalty_text2">So disappointed in you…</string>
+    <string name="penalty_text1">That\'s really…</string>
+    <string name="penalty_text2">…disappointing!</string>
 
     <!-- Delete entry -->
     <string name="delete_entry">Delete entry</string>
@@ -92,5 +92,4 @@
     <string name="time_for_a_run">Time to go for a run!</string>
     <string name="done">Done</string>
     <string name="really">Really?</string>
-    <string name="play_service_update_needed">Cannot connect. Please update your version of Google Play Services to use the Map feature.</string>
 </resources>

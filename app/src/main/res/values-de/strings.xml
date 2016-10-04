@@ -28,8 +28,8 @@
 
     <!-- Penalty -->
     <string name="penalty">Strafe</string>
-    <string name="penalty_text1">Ich bin so enttäuscht…</string>
-    <string name="penalty_text2">…so enttäuscht von dir!</string>
+    <string name="penalty_text1">Das ist echt…</string>
+    <string name="penalty_text2">…enttäuschend!</string>
 
     <!-- Delete entry -->
     <string name="delete_entry">Eintrag löschen</string>

@@ -93,7 +93,4 @@ public class MainActivity extends BaseNavigationActivity {
     protected void onPrepareInitialFragment() {
         onPrepareOverviewFragment();
     }
-
-
-
 }
