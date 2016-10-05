@@ -82,5 +82,9 @@
     <string name="really">Wirklich?</string>
     <string name="time_for_a_run">Zeit zu Laufen!</string>
     <string name="wow">WOW!</string>
+    <string name="total_distance">Gesamte zurückgelegte Laufstrecke</string>
+    <string name="total_penalty_distance">Gesamte Strecke aus Strafen</string>
+    <string name="total_pentalties">Gesamtanzahl von Strafen</string>
+    <string name="total_run_time">Gesamte Laufzeit</string>
 
 </resources>

@@ -40,10 +40,10 @@ public class StatisticsFragment extends Fragment {
         LabeledCardAdapter adapter = new LabeledCardAdapter();
 
 
-        adapter.addItem("Total distance", this.formatter.asKilometers(this.realmService.getAllTimeDistance()), null);
-        adapter.addItem("Total penalties", String.valueOf(this.realmService.getAllTimePenalties()), null);
-        adapter.addItem("Total penalty distance", this.formatter.asKilometers(this.realmService.getAllTimePenaltyDistance()), null);
-        adapter.addItem("Total run time", this.formatter.minutesToTimeString(this.realmService.getAllTimeRunTime()), null);
+        adapter.addItem(getString(R.string.total_distance), this.formatter.asKilometers(this.realmService.getAllTimeDistance()), null);
+        adapter.addItem(getString(R.string.total_pentalties), String.valueOf(this.realmService.getAllTimePenalties()), null);
+        adapter.addItem(getString(R.string.total_penalty_distance), this.formatter.asKilometers(this.realmService.getAllTimePenaltyDistance()), null);
+        adapter.addItem(getString(R.string.total_run_time), this.formatter.minutesToTimeString(this.realmService.getAllTimeRunTime()), null);
 
         list.setAdapter(adapter);
 

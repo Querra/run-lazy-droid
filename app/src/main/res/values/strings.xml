@@ -92,4 +92,8 @@
     <string name="time_for_a_run">Time to go for a run!</string>
     <string name="done">Done</string>
     <string name="really">Really?</string>
+    <string name="total_distance">Total distance run</string>
+    <string name="total_pentalties">Total penalties</string>
+    <string name="total_penalty_distance">Total penalty distance</string>
+    <string name="total_run_time">Total run time</string>
 </resources>
