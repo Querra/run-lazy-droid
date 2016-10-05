@@ -28,7 +28,6 @@ import javax.inject.Inject;
 
 import de.querra.mobile.runlazydroid.R;
 import de.querra.mobile.runlazydroid.RunLazyDroidApplication;
-import de.querra.mobile.runlazydroid.helper.RealmCalculator;
 import de.querra.mobile.runlazydroid.entities.User;
 import de.querra.mobile.runlazydroid.fragments.OverviewFragment;
 import de.querra.mobile.runlazydroid.fragments.PenaltyFragment;
@@ -38,6 +37,7 @@ import de.querra.mobile.runlazydroid.fragments.StatisticsFragment;
 import de.querra.mobile.runlazydroid.fragments.TimeLineFragment;
 import de.querra.mobile.runlazydroid.helper.DateHelper;
 import de.querra.mobile.runlazydroid.helper.Formatter;
+import de.querra.mobile.runlazydroid.services.RealmService;
 import de.querra.mobile.runlazydroid.widgets.ProfilePictureView;
 
 public abstract class BaseNavigationActivity extends AppCompatActivity
@@ -50,7 +50,7 @@ public abstract class BaseNavigationActivity extends AppCompatActivity
     @Inject
     DateHelper dateHelper;
     @Inject
-    RealmCalculator realmCalculator;
+    RealmService realmService;
 
     protected User user;
     protected SupportMapFragment mMap;
@@ -134,7 +134,7 @@ public abstract class BaseNavigationActivity extends AppCompatActivity
 
         CircularProgressBar progress = (CircularProgressBar) view.findViewById(R.id.nav_header_main__progress);
         if (progress != null) {
-            progress.setProgressWithAnimation(this.realmCalculator.getProgress());
+            progress.setProgressWithAnimation(this.realmService.getProgress());
         }
         TextView userFirstName = (TextView) view.findViewById(R.id.nav_header_main__user_first_name);
         if (userFirstName != null) {
@@ -142,7 +142,7 @@ public abstract class BaseNavigationActivity extends AppCompatActivity
         }
         TextView target = (TextView) view.findViewById(R.id.nav_header_main__target);
         if (target != null) {
-            float distanceLeft = this.realmCalculator.getDistanceLeft();
+            float distanceLeft = this.realmService.getDistanceLeft();
             if (distanceLeft < 0f) {
                 distanceLeft = 0f;
                 target.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_flag, 0, R.drawable.ic_check, 0);

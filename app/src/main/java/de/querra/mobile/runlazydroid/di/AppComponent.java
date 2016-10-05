@@ -7,16 +7,16 @@ import de.querra.mobile.runlazydroid.RunLazyDroidApplication;
 import de.querra.mobile.runlazydroid.activities.BaseNavigationActivity;
 import de.querra.mobile.runlazydroid.activities.MapHandler;
 import de.querra.mobile.runlazydroid.adapters.StatisticsCardAdapter;
-import de.querra.mobile.runlazydroid.fragments.PenaltyFragment;
-import de.querra.mobile.runlazydroid.helper.PreferencesHelper;
-import de.querra.mobile.runlazydroid.helper.RealmCalculator;
 import de.querra.mobile.runlazydroid.fragments.OverviewFragment;
+import de.querra.mobile.runlazydroid.fragments.PenaltyFragment;
 import de.querra.mobile.runlazydroid.fragments.RunningDataFragment;
 import de.querra.mobile.runlazydroid.fragments.StatisticsFragment;
 import de.querra.mobile.runlazydroid.helper.Formatter;
-import de.querra.mobile.runlazydroid.helper.ImageHelper;
 import de.querra.mobile.runlazydroid.helper.MathHelper;
 import de.querra.mobile.runlazydroid.helper.RunTypeHelper;
+import de.querra.mobile.runlazydroid.services.ImageServiceImplementation;
+import de.querra.mobile.runlazydroid.services.PreferencesServiceImplementation;
+import de.querra.mobile.runlazydroid.services.RealmServiceImplementation;
 
 @Singleton
 @Component(modules = {AppModule.class})
@@ -43,15 +43,16 @@ public interface AppComponent {
     // Helper
     void inject(Formatter formatter);
 
-    void inject(RealmCalculator calculator);
-
-    void inject(ImageHelper helper);
-
     void inject(MathHelper helper);
 
-    void inject(PreferencesHelper helper);
-
     void inject(RunTypeHelper helper);
+
+    // Services
+    void inject(PreferencesServiceImplementation service);
+
+    void inject(RealmServiceImplementation service);
+
+    void inject(ImageServiceImplementation service);
 
     // Special
     void inject(MapHandler mapHandler);

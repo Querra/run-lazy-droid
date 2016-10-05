@@ -17,12 +17,12 @@ import de.querra.mobile.runlazydroid.R;
 import de.querra.mobile.runlazydroid.RunLazyDroidApplication;
 import de.querra.mobile.runlazydroid.data.RealmOperator;
 import de.querra.mobile.runlazydroid.data.entities.Penalty;
-import de.querra.mobile.runlazydroid.helper.PreferencesHelper;
+import de.querra.mobile.runlazydroid.services.PreferencesService;
 
 public class PenaltyFragment extends Fragment {
 
     @Inject
-    PreferencesHelper preferencesHelper;
+    PreferencesService preferencesService;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -43,7 +43,7 @@ public class PenaltyFragment extends Fragment {
                 Date created = new Date();
                 penalty.setId(created.getTime());
                 penalty.setCreated(created);
-                penalty.setDistance(preferencesHelper.getPenaltyDistance());
+                penalty.setDistance(preferencesService.getPenaltyDistance());
                 RealmOperator.saveOrUpdate(penalty);
                 Toast.makeText(getActivity(), R.string.penalty_added, Toast.LENGTH_SHORT).show();
             }

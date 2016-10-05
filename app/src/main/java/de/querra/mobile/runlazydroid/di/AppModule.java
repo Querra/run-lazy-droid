@@ -9,13 +9,16 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
-import de.querra.mobile.runlazydroid.helper.RealmCalculator;
 import de.querra.mobile.runlazydroid.helper.DateHelper;
 import de.querra.mobile.runlazydroid.helper.Formatter;
-import de.querra.mobile.runlazydroid.helper.ImageHelper;
 import de.querra.mobile.runlazydroid.helper.MathHelper;
-import de.querra.mobile.runlazydroid.helper.PreferencesHelper;
 import de.querra.mobile.runlazydroid.helper.RunTypeHelper;
+import de.querra.mobile.runlazydroid.services.ImageService;
+import de.querra.mobile.runlazydroid.services.ImageServiceImplementation;
+import de.querra.mobile.runlazydroid.services.PreferencesService;
+import de.querra.mobile.runlazydroid.services.PreferencesServiceImplementation;
+import de.querra.mobile.runlazydroid.services.RealmService;
+import de.querra.mobile.runlazydroid.services.RealmServiceImplementation;
 
 @Module
 public class AppModule {
@@ -47,7 +50,7 @@ public class AppModule {
 
     @Provides
     @Singleton
-    SharedPreferences provideSharedPreferances() {
+    SharedPreferences provideSharedPreferences() {
         return this.application.getSharedPreferences(SAVED_PREFERENCES, Context.MODE_PRIVATE);
     }
 
@@ -63,17 +66,6 @@ public class AppModule {
         return new DateHelper();
     }
 
-    @Provides
-    @Singleton
-    RealmCalculator provideRealmCalculator() {
-        return new RealmCalculator();
-    }
-
-    @Provides
-    @Singleton
-    ImageHelper provideImageHelper() {
-        return new ImageHelper();
-    }
 
     @Provides
     @Singleton
@@ -83,8 +75,20 @@ public class AppModule {
 
     @Provides
     @Singleton
-    PreferencesHelper providePreferenesHelper() {
-        return new PreferencesHelper();
+    RealmService provideRealmService() {
+        return new RealmServiceImplementation();
+    }
+
+    @Provides
+    @Singleton
+    ImageService provideImageService() {
+        return new ImageServiceImplementation();
+    }
+
+    @Provides
+    @Singleton
+    PreferencesService providePreferencesService() {
+        return new PreferencesServiceImplementation();
     }
 
     @Provides

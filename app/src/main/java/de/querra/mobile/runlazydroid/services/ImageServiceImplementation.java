@@ -1,4 +1,4 @@
-package de.querra.mobile.runlazydroid.helper;
+package de.querra.mobile.runlazydroid.services;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -16,15 +16,16 @@ import javax.inject.Inject;
 
 import de.querra.mobile.runlazydroid.RunLazyDroidApplication;
 
-public class ImageHelper {
+public class ImageServiceImplementation implements ImageService{
 
     @Inject
     Context context;
 
-    public ImageHelper(){
+    public ImageServiceImplementation(){
         RunLazyDroidApplication.getAppComponent().inject(this);
     }
 
+    @Override
     public boolean saveImage(Bitmap bitmap, String filename){
         // Assume block needs to be inside a Try/Catch block.
         String path = Environment.getExternalStorageDirectory().toString();
@@ -54,6 +55,7 @@ public class ImageHelper {
         return true;
     }
 
+    @Override
     public Bitmap getImage(String filename){
         String path = String.format("%s/%s", Environment.getExternalStorageDirectory(),filename);
         BitmapFactory.Options options = new BitmapFactory.Options();

@@ -13,10 +13,10 @@ import javax.inject.Inject;
 import de.querra.mobile.runlazydroid.R;
 import de.querra.mobile.runlazydroid.RunLazyDroidApplication;
 import de.querra.mobile.runlazydroid.adapters.LabeledCardAdapter;
-import de.querra.mobile.runlazydroid.helper.RealmCalculator;
 import de.querra.mobile.runlazydroid.helper.DateHelper;
 import de.querra.mobile.runlazydroid.helper.Formatter;
-import de.querra.mobile.runlazydroid.helper.PreferencesHelper;
+import de.querra.mobile.runlazydroid.services.PreferencesService;
+import de.querra.mobile.runlazydroid.services.RealmService;
 
 public class OverviewFragment extends Fragment {
 
@@ -25,9 +25,9 @@ public class OverviewFragment extends Fragment {
     @Inject
     DateHelper dateHelper;
     @Inject
-    RealmCalculator realmCalculator;
+    RealmService realmService;
     @Inject
-    PreferencesHelper preferencesHelper;
+    PreferencesService preferencesService;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -44,9 +44,9 @@ public class OverviewFragment extends Fragment {
         list.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
         LabeledCardAdapter adapter = new LabeledCardAdapter();
 
-        float penaltyDistance = this.realmCalculator.getTotalPenaltyDistance();
-        float distanceRun = this.realmCalculator.getDistanceRun();
-        float totalWeekGoal = this.preferencesHelper.getWeekTarget()+penaltyDistance;
+        float penaltyDistance = this.realmService.getTotalPenaltyDistance();
+        float distanceRun = this.realmService.getDistanceRun();
+        float totalWeekGoal = this.preferencesService.getWeekTarget()+penaltyDistance;
         float distanceLeft = (totalWeekGoal - distanceRun);
         String target = getString(R.string.target);
         boolean targetAchieved = false;

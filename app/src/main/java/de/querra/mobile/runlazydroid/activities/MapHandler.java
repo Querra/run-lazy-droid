@@ -46,15 +46,15 @@ import de.querra.mobile.runlazydroid.data.RealmOperator;
 import de.querra.mobile.runlazydroid.data.entities.RunEntry;
 import de.querra.mobile.runlazydroid.entities.RunType;
 import de.querra.mobile.runlazydroid.helper.Formatter;
-import de.querra.mobile.runlazydroid.helper.ImageHelper;
 import de.querra.mobile.runlazydroid.helper.MathHelper;
+import de.querra.mobile.runlazydroid.services.ImageService;
 
 public class MapHandler {
 
     @Inject
     Formatter formatter;
     @Inject
-    ImageHelper imageHelper;
+    ImageService imageService;
     @Inject
     MathHelper mathHelper;
 
@@ -341,7 +341,7 @@ public class MapHandler {
         runEntry.setImageFilepath(fileName);
         RealmOperator.saveOrUpdate(runEntry);
         String saved = this.activity.getString(R.string.entry_not_saved);
-        if (this.imageHelper.saveImage(bitmap, fileName)) {
+        if (this.imageService.saveImage(bitmap, fileName)) {
             saved = this.activity.getString(R.string.entry_saved);
         }
         Toast.makeText(this.activity, saved, Toast.LENGTH_SHORT).show();

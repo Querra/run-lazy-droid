@@ -9,7 +9,7 @@ import javax.inject.Inject;
 import de.querra.mobile.runlazydroid.di.AppComponent;
 import de.querra.mobile.runlazydroid.di.AppModule;
 import de.querra.mobile.runlazydroid.di.DaggerAppComponent;
-import de.querra.mobile.runlazydroid.helper.PreferencesHelper;
+import de.querra.mobile.runlazydroid.services.PreferencesService;
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
 
@@ -18,7 +18,7 @@ public class RunLazyDroidApplication extends Application {
     private static AppComponent appComponent;
 
     @Inject
-    PreferencesHelper preferencesHelper;
+    PreferencesService preferencesService;
 
     @Override
     public void onCreate() {
@@ -41,7 +41,7 @@ public class RunLazyDroidApplication extends Application {
                 .build();
         Realm.setDefaultConfiguration(realmConfiguration);
 
-        this.preferencesHelper.setDefaultValues(false);
+        this.preferencesService.setDefaultValues(false);
     }
 
     public static AppComponent getAppComponent(){

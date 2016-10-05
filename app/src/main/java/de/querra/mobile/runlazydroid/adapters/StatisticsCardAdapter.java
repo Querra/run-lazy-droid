@@ -23,8 +23,8 @@ import de.querra.mobile.runlazydroid.data.entities.Penalty;
 import de.querra.mobile.runlazydroid.data.entities.RunEntry;
 import de.querra.mobile.runlazydroid.entities.RunType;
 import de.querra.mobile.runlazydroid.helper.Formatter;
-import de.querra.mobile.runlazydroid.helper.ImageHelper;
 import de.querra.mobile.runlazydroid.helper.RunTypeHelper;
+import de.querra.mobile.runlazydroid.services.ImageService;
 import de.querra.mobile.runlazydroid.widgets.DeleteEntryDialogBuilder;
 import io.realm.RealmObject;
 
@@ -40,7 +40,7 @@ public class StatisticsCardAdapter extends RecyclerView.Adapter{
     @Inject
     Context context;
     @Inject
-    ImageHelper imageHelper;
+    ImageService imageService;
     @Inject
     RunTypeHelper runTypeHelper;
 
@@ -116,7 +116,7 @@ public class StatisticsCardAdapter extends RecyclerView.Adapter{
             RunType runType = RunType.fromString(entry.getType());
             String localRunType = this.runTypeHelper.toLocalString(runType);
             if (runType == RunType.MAP_RUN){
-                statisticsCard.setTypeImage(this.imageHelper.getImage(this.formatter.getFileName(entry.getId())));
+                statisticsCard.setTypeImage(this.imageService.getImage(this.formatter.getFileName(entry.getId())));
             }
             else {
                 statisticsCard.setTypeImage(this.runTypeHelper.getDrawable(runType));
