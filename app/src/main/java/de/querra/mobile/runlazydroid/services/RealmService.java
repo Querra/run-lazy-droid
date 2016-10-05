@@ -14,7 +14,7 @@ public interface RealmService {
 
     float getDistanceLeft();
 
-    Target getCurrentTarget();
+    Target getLastTarget();
 
     float getAllTimeDistance();
 
@@ -25,6 +25,8 @@ public interface RealmService {
     int getAllTimeRunTime();
 
     boolean targetNeedsUpdate();
+
+    boolean newTargetNeedsCopy();
 
     int getAllTimeTargetsAchieved();
 }

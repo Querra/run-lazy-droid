@@ -28,7 +28,7 @@ public class RealmServiceImplementation implements RealmService {
 
     @Override
     public float getWeekTargetWithPenalties() {
-        return getCurrentTarget().getBaseDistance() + getTotalPenaltyDistance();
+        return getLastTarget().getBaseDistance() + getTotalPenaltyDistance();
     }
 
     @Override
@@ -65,7 +65,7 @@ public class RealmServiceImplementation implements RealmService {
     }
 
     @Override
-    public Target getCurrentTarget() {
+    public Target getLastTarget() {
         RealmResults<Target> targets = this.realm.where(Target.class).findAllSorted(Target.CREATED_FIELD, Sort.ASCENDING);
         if (targets.size() == 0){
             return null;
@@ -113,8 +113,14 @@ public class RealmServiceImplementation implements RealmService {
 
     @Override
     public boolean targetNeedsUpdate() {
-        Target last = getCurrentTarget();
-        return last == null || last.getEndDate().before(new Date()) && last.isAchieved();
+        Target last = getLastTarget();
+        return last == null || last.getEndDate().before(new Date());
+    }
+
+    @Override
+    public boolean newTargetNeedsCopy() {
+        Target last = getLastTarget();
+        return last != null && !last.isAchieved();
     }
 
     @Override

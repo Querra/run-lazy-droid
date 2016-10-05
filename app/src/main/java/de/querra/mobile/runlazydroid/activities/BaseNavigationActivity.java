@@ -123,6 +123,7 @@ public abstract class BaseNavigationActivity extends AppCompatActivity
         onPrepareInitialFragment();
     }
 
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -140,7 +141,12 @@ public abstract class BaseNavigationActivity extends AppCompatActivity
         target.setCreated(now);
         target.setStartDate(this.dateHelper.getLastSunday().toDate());
         target.setEndDate(this.dateHelper.getNextSunday().toDate());
-        target.setBaseDistance(calculateBaseDistance());
+        if (this.realmService.newTargetNeedsCopy()){
+            target.setBaseDistance(this.realmService.getLastTarget().getBaseDistance());
+        }
+        else {
+            target.setBaseDistance(calculateBaseDistance());
+        }
         RealmOperator.saveOrUpdate(target);
     }
 
