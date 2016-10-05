@@ -23,8 +23,11 @@ import com.facebook.login.LoginManager;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.mikhaellopez.circularprogressbar.CircularProgressBar;
 
+import javax.inject.Inject;
+
 import de.querra.mobile.runlazydroid.R;
-import de.querra.mobile.runlazydroid.data.RealmCalculator;
+import de.querra.mobile.runlazydroid.RunLazyDroidApplication;
+import de.querra.mobile.runlazydroid.helper.RealmCalculator;
 import de.querra.mobile.runlazydroid.entities.User;
 import de.querra.mobile.runlazydroid.fragments.OverviewFragment;
 import de.querra.mobile.runlazydroid.fragments.PenaltyFragment;
@@ -41,6 +44,13 @@ public abstract class BaseNavigationActivity extends AppCompatActivity
 
     protected static final String USER = "user";
 
+    @Inject
+    Formatter formatter;
+    @Inject
+    DateHelper dateHelper;
+    @Inject
+    RealmCalculator realmCalculator;
+
     protected User user;
     protected SupportMapFragment mMap;
     protected FloatingActionButton floatingActionButton;
@@ -49,6 +59,8 @@ public abstract class BaseNavigationActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        RunLazyDroidApplication.getAppComponent().inject(this);
 
         setContentView(getLayout());
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -119,7 +131,7 @@ public abstract class BaseNavigationActivity extends AppCompatActivity
 
         CircularProgressBar progress = (CircularProgressBar) view.findViewById(R.id.nav_header_main__progress);
         if (progress != null) {
-            progress.setProgressWithAnimation(RealmCalculator.getProgress(this));
+            progress.setProgressWithAnimation(this.realmCalculator.getProgress());
         }
         TextView userFirstName = (TextView) view.findViewById(R.id.nav_header_main__user_first_name);
         if (userFirstName != null) {
@@ -127,16 +139,16 @@ public abstract class BaseNavigationActivity extends AppCompatActivity
         }
         TextView target = (TextView) view.findViewById(R.id.nav_header_main__target);
         if (target != null) {
-            float distanceLeft = RealmCalculator.getDistanceLeft(this);
+            float distanceLeft = this.realmCalculator.getDistanceLeft();
             if (distanceLeft < 0f) {
                 distanceLeft = 0f;
                 target.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_flag, 0, R.drawable.ic_check, 0);
             }
-            target.setText(Formatter.asKilometers(distanceLeft));
+            target.setText(this.formatter.asKilometers(distanceLeft));
         }
         TextView penalty = (TextView) view.findViewById(R.id.nav_header_main__days_left);
         if (penalty != null) {
-            penalty.setText(Formatter.getDaysLeft(DateHelper.getNextSunday(), this));
+            penalty.setText(this.formatter.getDaysLeft(this.dateHelper.getNextSunday()));
         }
     }
 

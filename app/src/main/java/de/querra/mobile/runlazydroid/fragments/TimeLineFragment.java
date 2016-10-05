@@ -38,7 +38,7 @@ public class TimeLineFragment extends Fragment {
 
         RecyclerView list = (RecyclerView) view.findViewById(R.id.fragment_timeline__list);
         list.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
-        StatisticsCardAdapter adapter = new StatisticsCardAdapter(getActivity());
+        StatisticsCardAdapter adapter = new StatisticsCardAdapter();
 
         Realm realm = Realm.getDefaultInstance();
         RealmResults<RunEntry> runEntries = realm.where(RunEntry.class).findAll().sort(RunEntry.CREATED_FIELD, Sort.DESCENDING);

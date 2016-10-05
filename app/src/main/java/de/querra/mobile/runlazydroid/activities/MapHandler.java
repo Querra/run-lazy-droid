@@ -38,7 +38,10 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import javax.inject.Inject;
+
 import de.querra.mobile.runlazydroid.R;
+import de.querra.mobile.runlazydroid.RunLazyDroidApplication;
 import de.querra.mobile.runlazydroid.data.RealmOperator;
 import de.querra.mobile.runlazydroid.data.entities.RunEntry;
 import de.querra.mobile.runlazydroid.entities.RunType;
@@ -47,6 +50,14 @@ import de.querra.mobile.runlazydroid.helper.ImageHelper;
 import de.querra.mobile.runlazydroid.helper.MathHelper;
 
 public class MapHandler {
+
+    @Inject
+    Formatter formatter;
+    @Inject
+    ImageHelper imageHelper;
+    @Inject
+    MathHelper mathHelper;
+
     private SupportMapFragment mapFragment;
     private Activity activity;
     private GoogleMap        mMap;
@@ -63,18 +74,19 @@ public class MapHandler {
     private boolean        isTracking    = false;
     private float          distance      = 0f;
     private Handler        timerHandler  = new Handler();
-    private Runnable       timerRunnable = new Runnable() {
-
-        @Override
-        public void run() {
-            if (displayTime != null && displayTime.getText() != null) {
-                displayTime.setText(Formatter.millisToTimeString(new Date().getTime() - startTrackTime));
-            }
-            timerHandler.postDelayed(this, 1000);
-        }
-    };
+    private Runnable       timerRunnable;
 
     public MapHandler(SupportMapFragment mapFragment, View displayContainer, Activity activity) {
+        RunLazyDroidApplication.getAppComponent().inject(this);
+        this.timerRunnable = new Runnable() {
+            @Override
+            public void run() {
+                if (displayTime != null && displayTime.getText() != null) {
+                    displayTime.setText(formatter.millisToTimeString(new Date().getTime() - startTrackTime));
+                }
+                timerHandler.postDelayed(this, 1000);
+            }
+        };
         this.displayContainer = displayContainer;
         this.activity = activity;
         this.mapFragment = mapFragment;
@@ -320,16 +332,16 @@ public class MapHandler {
         RunEntry runEntry = new RunEntry();
         Date now = new Date();
         long id = now.getTime();
-        String fileName = Formatter.getFileName(id);
+        String fileName = this.formatter.getFileName(id);
         runEntry.setCreated(now);
         runEntry.setId(id);
         runEntry.setType(RunType.MAP_RUN.getName());
-        runEntry.setTime(MathHelper.getDifferenceInMinutes(this.startTrackTime, this.stopTrackTime));
+        runEntry.setTime(this.mathHelper.getDifferenceInMinutes(this.startTrackTime, this.stopTrackTime));
         runEntry.setDistance(this.distance / 1000);
         runEntry.setImageFilepath(fileName);
         RealmOperator.saveOrUpdate(runEntry);
         String saved = this.activity.getString(R.string.entry_not_saved);
-        if (ImageHelper.saveImage(this.activity.getContentResolver(), bitmap, fileName)) {
+        if (this.imageHelper.saveImage(bitmap, fileName)) {
             saved = this.activity.getString(R.string.entry_saved);
         }
         Toast.makeText(this.activity, saved, Toast.LENGTH_SHORT).show();

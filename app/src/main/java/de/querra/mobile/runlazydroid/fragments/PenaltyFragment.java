@@ -11,17 +11,23 @@ import android.widget.Toast;
 
 import java.util.Date;
 
+import javax.inject.Inject;
+
 import de.querra.mobile.runlazydroid.R;
+import de.querra.mobile.runlazydroid.RunLazyDroidApplication;
 import de.querra.mobile.runlazydroid.data.RealmOperator;
 import de.querra.mobile.runlazydroid.data.entities.Penalty;
 import de.querra.mobile.runlazydroid.helper.PreferencesHelper;
 
 public class PenaltyFragment extends Fragment {
 
+    @Inject
+    PreferencesHelper preferencesHelper;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        RunLazyDroidApplication.getAppComponent().inject(this);
     }
 
     @Override
@@ -37,7 +43,7 @@ public class PenaltyFragment extends Fragment {
                 Date created = new Date();
                 penalty.setId(created.getTime());
                 penalty.setCreated(created);
-                penalty.setDistance(PreferencesHelper.getPenaltyDistance(getActivity()));
+                penalty.setDistance(preferencesHelper.getPenaltyDistance());
                 RealmOperator.saveOrUpdate(penalty);
                 Toast.makeText(getActivity(), R.string.penalty_added, Toast.LENGTH_SHORT).show();
             }

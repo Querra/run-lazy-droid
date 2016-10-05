@@ -14,7 +14,10 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import de.querra.mobile.runlazydroid.R;
+import de.querra.mobile.runlazydroid.RunLazyDroidApplication;
 import de.querra.mobile.runlazydroid.data.RealmInterface;
 import de.querra.mobile.runlazydroid.data.entities.Penalty;
 import de.querra.mobile.runlazydroid.data.entities.RunEntry;
@@ -30,17 +33,25 @@ public class StatisticsCardAdapter extends RecyclerView.Adapter{
     private static final int RUN = 0;
     private static final int PENALTY = 1;
 
-    private List<RealmObject> data = new ArrayList<>();
-    private Resources resources;
-    private Context context;
+    @Inject
+    Formatter formatter;
+    @Inject
+    Resources resources;
+    @Inject
+    Context context;
+    @Inject
+    ImageHelper imageHelper;
+    @Inject
+    RunTypeHelper runTypeHelper;
 
-    public StatisticsCardAdapter(Context context){
+    private List<RealmObject> data = new ArrayList<>();
+
+    public StatisticsCardAdapter(){
         super();
-        this.context = context;
-        this.resources = context.getResources();
+        RunLazyDroidApplication.getAppComponent().inject(this);
     }
 
-    private class StatisticsCardViewHolder extends RecyclerView.ViewHolder implements View.OnLongClickListener{
+    public class StatisticsCardViewHolder extends RecyclerView.ViewHolder implements View.OnLongClickListener{
 
         private ImageView typeImage;
         private TextView type;
@@ -64,26 +75,22 @@ public class StatisticsCardAdapter extends RecyclerView.Adapter{
         void setTypeImage(Bitmap bitmap){
             this.typeImage.setImageBitmap(bitmap);
         }
-
         void setTypeText(String typeText) {
             this.type.setText(typeText);
         }
-
         void setDistanceText(String distanceText) {
             this.distance.setText(distanceText);
         }
-
         void setTimeText(String timeText) {
             this.time.setText(timeText);
         }
-
         void setDateText(String dateText) {
             this.date.setText(dateText);
         }
 
         @Override
         public boolean onLongClick(View v) {
-            DeleteEntryDialogBuilder.show(StatisticsCardAdapter.this.context, (RealmInterface) data.get(getAdapterPosition()), new Runnable() {
+            DeleteEntryDialogBuilder.show(context, (RealmInterface) data.get(getAdapterPosition()), new Runnable() {
                 @Override
                 public void run() {
                     data.remove(getAdapterPosition());
@@ -107,24 +114,24 @@ public class StatisticsCardAdapter extends RecyclerView.Adapter{
         if (item instanceof RunEntry) {
             final RunEntry entry = (RunEntry) item;
             RunType runType = RunType.fromString(entry.getType());
-            String localRunType = RunTypeHelper.toLocalString(runType, this.resources);
+            String localRunType = this.runTypeHelper.toLocalString(runType);
             if (runType == RunType.MAP_RUN){
-                statisticsCard.setTypeImage(ImageHelper.getImage(Formatter.getFileName(entry.getId())));
+                statisticsCard.setTypeImage(this.imageHelper.getImage(this.formatter.getFileName(entry.getId())));
             }
             else {
-                statisticsCard.setTypeImage(RunTypeHelper.getDrawable(runType, this.resources));
+                statisticsCard.setTypeImage(this.runTypeHelper.getDrawable(runType));
             }
             statisticsCard.setTypeText(localRunType);
-            statisticsCard.setDistanceText(Formatter.asKilometers(entry.getDistance()));
-            statisticsCard.setDateText(Formatter.dateToString(entry.getCreated()));
-            statisticsCard.setTimeText(Formatter.inMinutes(entry.getTime(), this.context));
+            statisticsCard.setDistanceText(this.formatter.asKilometers(entry.getDistance()));
+            statisticsCard.setDateText(this.formatter.dateToString(entry.getCreated()));
+            statisticsCard.setTimeText(this.formatter.inMinutes(entry.getTime()));
         }
         if (item instanceof Penalty) {
             final Penalty penalty = (Penalty) item;
             statisticsCard.setTypeImage(this.resources.getDrawable(R.drawable.ic_thumb_down));
             statisticsCard.setTypeText(this.resources.getString(R.string.penalty));
             statisticsCard.setDistanceText(this.resources.getString(R.string.penalty_text1));
-            statisticsCard.setDateText(Formatter.dateToString(penalty.getCreated()));
+            statisticsCard.setDateText(this.formatter.dateToString(penalty.getCreated()));
             statisticsCard.setTimeText(this.resources.getString(R.string.penalty_text2));
         }
     }

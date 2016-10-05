@@ -8,19 +8,31 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import javax.inject.Inject;
+
 import de.querra.mobile.runlazydroid.R;
+import de.querra.mobile.runlazydroid.RunLazyDroidApplication;
 import de.querra.mobile.runlazydroid.adapters.LabeledCardAdapter;
-import de.querra.mobile.runlazydroid.data.RealmCalculator;
+import de.querra.mobile.runlazydroid.helper.RealmCalculator;
 import de.querra.mobile.runlazydroid.helper.DateHelper;
 import de.querra.mobile.runlazydroid.helper.Formatter;
 import de.querra.mobile.runlazydroid.helper.PreferencesHelper;
 
 public class OverviewFragment extends Fragment {
 
+    @Inject
+    Formatter formatter;
+    @Inject
+    DateHelper dateHelper;
+    @Inject
+    RealmCalculator realmCalculator;
+    @Inject
+    PreferencesHelper preferencesHelper;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        RunLazyDroidApplication.getAppComponent().inject(this);
     }
 
     @Override
@@ -32,9 +44,9 @@ public class OverviewFragment extends Fragment {
         list.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
         LabeledCardAdapter adapter = new LabeledCardAdapter();
 
-        float penaltyDistance = RealmCalculator.getTotalPenaltyDistance();
-        float distanceRun = RealmCalculator.getDistanceRun();
-        float totalWeekGoal = PreferencesHelper.getWeekTarget(getActivity())+penaltyDistance;
+        float penaltyDistance = this.realmCalculator.getTotalPenaltyDistance();
+        float distanceRun = this.realmCalculator.getDistanceRun();
+        float totalWeekGoal = this.preferencesHelper.getWeekTarget()+penaltyDistance;
         float distanceLeft = (totalWeekGoal - distanceRun);
         String target = getString(R.string.target);
         boolean targetAchieved = false;
@@ -43,12 +55,12 @@ public class OverviewFragment extends Fragment {
             targetAchieved = true;
         }
 
-        String daysLeft = Formatter.getDaysLeft(DateHelper.getNextSunday(), getActivity());
+        String daysLeft = this.formatter.getDaysLeft(this.dateHelper.getNextSunday());
         adapter.addItem(getString(R.string.time_left), daysLeft, Integer.valueOf(daysLeft.split(" ")[0])<3&&distanceLeft>0f?getString(R.string.hurry_up):null);
-        adapter.addItem(getString(R.string.distance_left), Formatter.asKilometers(distanceLeft), targetAchieved?getString(R.string.done):null);
-        adapter.addItem(getString(R.string.distance_run_literal), Formatter.asKilometers(distanceRun), distanceRun>30f?getString(R.string.wow):distanceRun>25f?getString(R.string.great):distanceRun>20f?getString(R.string.nice):distanceRun<2f?getString(R.string.time_for_a_run):null);
-        adapter.addItem(target, Formatter.asKilometers(totalWeekGoal), targetAchieved?getString(R.string.achieved):null);
-        adapter.addItem(getString(R.string.penalty_literal), Formatter.asKilometers(penaltyDistance), penaltyDistance>0f?getString(R.string.really):null);
+        adapter.addItem(getString(R.string.distance_left), this.formatter.asKilometers(distanceLeft), targetAchieved?getString(R.string.done):null);
+        adapter.addItem(getString(R.string.distance_run_literal), this.formatter.asKilometers(distanceRun), distanceRun>30f?getString(R.string.wow):distanceRun>25f?getString(R.string.great):distanceRun>20f?getString(R.string.nice):distanceRun<2f?getString(R.string.time_for_a_run):null);
+        adapter.addItem(target, this.formatter.asKilometers(totalWeekGoal), targetAchieved?getString(R.string.achieved):null);
+        adapter.addItem(getString(R.string.penalty_literal), this.formatter.asKilometers(penaltyDistance), penaltyDistance>0f?getString(R.string.really):null);
 
         list.setAdapter(adapter);
 

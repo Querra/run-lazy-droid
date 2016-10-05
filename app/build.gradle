@@ -40,7 +40,8 @@ dependencies {
     compile 'net.danlew:android.joda:2.9.4.1'
 
     // dependancy injection
-    compile 'com.squareup.dagger:dagger-compiler:1.2.5'
+    compile 'com.google.dagger:dagger:2.7'
+    apt 'com.google.dagger:dagger-compiler:2.7'
 
     // maps
     compile 'com.google.android.gms:play-services-maps:9.6.1'

@@ -1,6 +1,6 @@
 package de.querra.mobile.runlazydroid.helper;
 
-import android.content.ContentResolver;
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Environment;
@@ -12,12 +12,23 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 
+import javax.inject.Inject;
+
+import de.querra.mobile.runlazydroid.RunLazyDroidApplication;
+
 public class ImageHelper {
-    public static boolean saveImage(ContentResolver contentResolver, Bitmap bitmap, String filename){
+
+    @Inject
+    Context context;
+
+    public ImageHelper(){
+        RunLazyDroidApplication.getAppComponent().inject(this);
+    }
+
+    public boolean saveImage(Bitmap bitmap, String filename){
         // Assume block needs to be inside a Try/Catch block.
         String path = Environment.getExternalStorageDirectory().toString();
-        OutputStream fOut = null;
-        Integer counter = 0;
+        OutputStream fOut;
         File file = new File(path, filename); // the File to save , append increasing numeric counter to prevent files from getting overwritten.
         try {
             fOut = new FileOutputStream(file);
@@ -35,7 +46,7 @@ public class ImageHelper {
         }
 
         try {
-            MediaStore.Images.Media.insertImage(contentResolver, file.getAbsolutePath(),file.getName(),file.getName());
+            MediaStore.Images.Media.insertImage(this.context.getContentResolver(), file.getAbsolutePath(),file.getName(),file.getName());
         } catch (FileNotFoundException e) {
             e.printStackTrace();
             return false;
@@ -43,7 +54,7 @@ public class ImageHelper {
         return true;
     }
 
-    public static Bitmap getImage(String filename){
+    public Bitmap getImage(String filename){
         String path = String.format("%s/%s", Environment.getExternalStorageDirectory(),filename);
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inSampleSize = 4;

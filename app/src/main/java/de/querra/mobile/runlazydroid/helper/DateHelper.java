@@ -3,7 +3,7 @@ package de.querra.mobile.runlazydroid.helper;
 import org.joda.time.LocalDate;
 
 public class DateHelper {
-    public static LocalDate getLastSunday(){
+    public LocalDate getLastSunday(){
         LocalDate today = LocalDate.now();
         LocalDate startOfToday = today.toDateTimeAtStartOfDay().toLocalDate();
         int dayOfWeek = today.getDayOfWeek();
@@ -13,7 +13,7 @@ public class DateHelper {
         return startOfToday.minusDays(dayOfWeek);
     }
 
-    public static LocalDate getNextSunday(){
+    public LocalDate getNextSunday(){
         return getLastSunday().plusDays(7);
     }
 }

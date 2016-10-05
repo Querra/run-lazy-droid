@@ -9,16 +9,25 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import javax.inject.Inject;
+
 import de.querra.mobile.runlazydroid.R;
+import de.querra.mobile.runlazydroid.RunLazyDroidApplication;
 import de.querra.mobile.runlazydroid.adapters.LabeledCardAdapter;
-import de.querra.mobile.runlazydroid.data.RealmCalculator;
+import de.querra.mobile.runlazydroid.helper.RealmCalculator;
 import de.querra.mobile.runlazydroid.helper.Formatter;
 
 public class StatisticsFragment extends Fragment {
 
+    @Inject
+    Formatter formatter;
+    @Inject
+    RealmCalculator realmCalculator;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        RunLazyDroidApplication.getAppComponent().inject(this);
     }
 
     @Override
@@ -31,10 +40,10 @@ public class StatisticsFragment extends Fragment {
         LabeledCardAdapter adapter = new LabeledCardAdapter();
 
 
-        adapter.addItem("Total distance", Formatter.asKilometers(RealmCalculator.getAllTimeDistance()), null);
-        adapter.addItem("Total penalties", String.valueOf(RealmCalculator.getAllTimePenalties()), null);
-        adapter.addItem("Total penalty distance", Formatter.asKilometers(RealmCalculator.getAllTimePenaltyDistance()), null);
-        adapter.addItem("Total run time", Formatter.minutesToTimeString(RealmCalculator.getAllTimeRunTime()), null);
+        adapter.addItem("Total distance", this.formatter.asKilometers(this.realmCalculator.getAllTimeDistance()), null);
+        adapter.addItem("Total penalties", String.valueOf(this.realmCalculator.getAllTimePenalties()), null);
+        adapter.addItem("Total penalty distance", this.formatter.asKilometers(this.realmCalculator.getAllTimePenaltyDistance()), null);
+        adapter.addItem("Total run time", this.formatter.minutesToTimeString(this.realmCalculator.getAllTimeRunTime()), null);
 
         list.setAdapter(adapter);
 

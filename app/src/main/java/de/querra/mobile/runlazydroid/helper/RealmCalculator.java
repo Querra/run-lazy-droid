@@ -1,26 +1,33 @@
-package de.querra.mobile.runlazydroid.data;
-
-import android.content.Context;
+package de.querra.mobile.runlazydroid.helper;
 
 import java.util.Date;
 
+import javax.inject.Inject;
+
+import de.querra.mobile.runlazydroid.RunLazyDroidApplication;
 import de.querra.mobile.runlazydroid.data.entities.Penalty;
 import de.querra.mobile.runlazydroid.data.entities.RunEntry;
-import de.querra.mobile.runlazydroid.helper.DateHelper;
 import io.realm.Realm;
 import io.realm.RealmResults;
 
-import static de.querra.mobile.runlazydroid.helper.PreferencesHelper.getWeekTarget;
-
 public class RealmCalculator {
 
-    public static float getWeekTargetWithPenalties(Context context){
-        return getWeekTarget(context) + getTotalPenaltyDistance();
+    @Inject
+    DateHelper dateHelper;
+    @Inject
+    PreferencesHelper preferencesHelper;
+
+    public RealmCalculator(){
+        RunLazyDroidApplication.getAppComponent().inject(this);
     }
 
-    public static float getDistanceRun(){
-        Date from = DateHelper.getLastSunday().toDate();
-        Date to = DateHelper.getNextSunday().toDate();
+    private float getWeekTargetWithPenalties(){
+        return this.preferencesHelper.getWeekTarget() + getTotalPenaltyDistance();
+    }
+
+    public float getDistanceRun(){
+        Date from = this.dateHelper.getLastSunday().toDate();
+        Date to = this.dateHelper.getNextSunday().toDate();
         Realm realm = Realm.getDefaultInstance();
         RealmResults<RunEntry> thisWeeksEntries = realm.where(RunEntry.class).between(RunEntry.CREATED_FIELD, from, to).findAll();
         float distanceRun = 0f;
@@ -30,9 +37,9 @@ public class RealmCalculator {
         return distanceRun;
     }
 
-    public static float getTotalPenaltyDistance(){
-        Date from = DateHelper.getLastSunday().toDate();
-        Date to = DateHelper.getNextSunday().toDate();
+    public float getTotalPenaltyDistance(){
+        Date from = this.dateHelper.getLastSunday().toDate();
+        Date to = this.dateHelper.getNextSunday().toDate();
         Realm realm = Realm.getDefaultInstance();
         float penaltyDistance = 0f;
         for(Penalty penalty : realm.where(Penalty.class).between(RunEntry.CREATED_FIELD, from, to).findAll()){
@@ -41,26 +48,15 @@ public class RealmCalculator {
         return penaltyDistance;
     }
 
-    public static int getTotalPenalties(){
-        Date from = DateHelper.getLastSunday().toDate();
-        Date to = DateHelper.getNextSunday().toDate();
-        Realm realm = Realm.getDefaultInstance();
-        int penalties = 0;
-        for(Penalty ignored : realm.where(Penalty.class).between(RunEntry.CREATED_FIELD, from, to).findAll()){
-            penalties++;
-        }
-        return penalties;
+    public int getProgress(){
+        return (int) (getDistanceRun()/getWeekTargetWithPenalties()*100f);
     }
 
-    public static int getProgress(Context context){
-        return (int) (getDistanceRun()/getWeekTargetWithPenalties(context)*100f);
+    public float getDistanceLeft(){
+        return getWeekTargetWithPenalties() - getDistanceRun();
     }
 
-    public static float getDistanceLeft(Context context){
-        return getWeekTargetWithPenalties(context) - getDistanceRun();
-    }
-
-    public static float getAllTimeDistance(){
+    public float getAllTimeDistance(){
         Realm realm = Realm.getDefaultInstance();
         RealmResults<RunEntry> entries = realm.where(RunEntry.class).findAll();
         float distanceRun = 0f;
@@ -70,7 +66,7 @@ public class RealmCalculator {
         return distanceRun;
     }
 
-    public static int getAllTimePenalties(){
+    public int getAllTimePenalties(){
         Realm realm = Realm.getDefaultInstance();
         int penalties = 0;
         for(Penalty ignored : realm.where(Penalty.class).findAll()){
@@ -79,7 +75,7 @@ public class RealmCalculator {
         return penalties;
     }
 
-    public static float getAllTimePenaltyDistance(){
+    public float getAllTimePenaltyDistance(){
         Realm realm = Realm.getDefaultInstance();
         float penaltyDistance = 0f;
         for(Penalty penalty : realm.where(Penalty.class).findAll()){
@@ -88,7 +84,7 @@ public class RealmCalculator {
         return penaltyDistance;
     }
 
-    public static int getAllTimeRunTime(){
+    public int getAllTimeRunTime(){
         Realm realm = Realm.getDefaultInstance();
         RealmResults<RunEntry> entries = realm.where(RunEntry.class).findAll();
         int time = 0;

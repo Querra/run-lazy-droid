@@ -19,7 +19,10 @@ import java.util.EnumSet;
 import java.util.List;
 import java.util.Locale;
 
+import javax.inject.Inject;
+
 import de.querra.mobile.runlazydroid.R;
+import de.querra.mobile.runlazydroid.RunLazyDroidApplication;
 import de.querra.mobile.runlazydroid.data.RealmOperator;
 import de.querra.mobile.runlazydroid.data.entities.RunEntry;
 import de.querra.mobile.runlazydroid.entities.RunType;
@@ -34,14 +37,23 @@ public class RunningDataFragment extends Fragment {
     private static final int TIME_MAX = 180;
     private static final int TIME_SEEKBAR_MAX = 180;
 
+    @Inject
+    Formatter formatter;
+    @Inject
+    MathHelper mathHelper;
+    @Inject
+    RunTypeHelper runTypeHelper;
+
     private String runType;
     private float roundedDistance;
     private int roundedTime;
 
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.runType = RunTypeHelper.toLocalString(RunType.DEFAULT, getResources());
+        RunLazyDroidApplication.getAppComponent().inject(this);
+        this.runType = this.runTypeHelper.toLocalString(RunType.DEFAULT);
     }
 
     @Override
@@ -50,13 +62,13 @@ public class RunningDataFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_running_data, container, false);
 
         final TextView distance = (TextView) view.findViewById(R.id.fragment_running_data__distance);
-        distance.setText(Formatter.asKilometers(0f));
+        distance.setText(this.formatter.asKilometers(0f));
         final SeekBar distanceBar = (SeekBar) view.findViewById(R.id.fragment_running_data__distance_bar);
         distanceBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean userChange) {
-                RunningDataFragment.this.roundedDistance = MathHelper.round((float) progress / (float) DISTANCE_SEEKBAR_MAX * DISTANCE_MAX, 1);
-                distance.setText(String.format(Locale.getDefault(), "%.1f km", RunningDataFragment.this.roundedDistance));
+                roundedDistance = mathHelper.round((float) progress / (float) DISTANCE_SEEKBAR_MAX * DISTANCE_MAX, 1);
+                distance.setText(String.format(Locale.getDefault(), "%.1f km", roundedDistance));
             }
 
             @Override
@@ -71,13 +83,13 @@ public class RunningDataFragment extends Fragment {
         });
 
         final TextView time = (TextView) view.findViewById(R.id.fragment_running_data__time);
-        time.setText(Formatter.inMinutes(0, getActivity()));
+        time.setText(this.formatter.inMinutes(0));
         final SeekBar timeBar = (SeekBar) view.findViewById(R.id.fragment_running_data__time_bar);
         timeBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean userChange) {
-                RunningDataFragment.this.roundedTime = (int) (progress / (float) TIME_SEEKBAR_MAX * TIME_MAX);
-                time.setText(Formatter.inMinutes(RunningDataFragment.this.roundedTime, getActivity()));
+                roundedTime = (int) (progress / (float) TIME_SEEKBAR_MAX * TIME_MAX);
+                time.setText(formatter.inMinutes(roundedTime));
             }
 
             @Override
@@ -94,19 +106,19 @@ public class RunningDataFragment extends Fragment {
         final Spinner runTypeSpinner = (Spinner) view.findViewById(R.id.fragment_running_data__run_type_spinner);
         List<String> runTypes = new ArrayList<>();
         for (RunType runType : EnumSet.allOf(RunType.class)){
-            runTypes.add(RunTypeHelper.toLocalString(runType, getResources()));
+            runTypes.add(this.runTypeHelper.toLocalString(runType));
         }
         ArrayAdapter<String> runTypeAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, runTypes);
         runTypeSpinner.setAdapter(runTypeAdapter);
         runTypeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
-                RunningDataFragment.this.runType = (String) adapterView.getItemAtPosition(position);
+                runType = (String) adapterView.getItemAtPosition(position);
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
-                RunningDataFragment.this.runType = RunTypeHelper.toLocalString(RunType.DEFAULT, getResources());
+                runType = runTypeHelper.toLocalString(RunType.DEFAULT);
             }
         });
 
@@ -118,9 +130,9 @@ public class RunningDataFragment extends Fragment {
                 Date now = new Date();
                 runEntry.setId(now.getTime());
                 runEntry.setCreated(now);
-                runEntry.setDistance(RunningDataFragment.this.roundedDistance);
-                runEntry.setTime(RunningDataFragment.this.roundedTime);
-                runEntry.setType(RunTypeHelper.localStringToName(RunningDataFragment.this.runType, getResources()));
+                runEntry.setDistance(roundedDistance);
+                runEntry.setTime(roundedTime);
+                runEntry.setType(runTypeHelper.localStringToName(runType));
                 RealmOperator.saveOrUpdate(runEntry);
                 Toast.makeText(getActivity(), R.string.entry_added, Toast.LENGTH_SHORT).show();
             }
