@@ -18,6 +18,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.facebook.AccessToken;
+import com.facebook.FacebookSdk;
 import com.facebook.Profile;
 import com.facebook.login.LoginManager;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -61,7 +62,9 @@ public abstract class BaseNavigationActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
 
         RunLazyDroidApplication.getAppComponent().inject(this);
-
+        if (!FacebookSdk.isInitialized()) {
+            FacebookSdk.sdkInitialize(getApplicationContext());
+        }
         setContentView(getLayout());
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

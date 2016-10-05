@@ -19,8 +19,7 @@ public class MainActivity extends BaseNavigationActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        // TODO: do anything?
+        // TODO: do week target logic here
     }
 
     @Override

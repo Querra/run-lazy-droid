@@ -16,8 +16,9 @@ public class StartActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        FacebookSdk.sdkInitialize(getApplicationContext());
+        if (!FacebookSdk.isInitialized()) {
+            FacebookSdk.sdkInitialize(getApplicationContext());
+        }
         AppEventsLogger.activateApp(getApplication());
         new Handler().postDelayed(new Runnable() {
             @Override
