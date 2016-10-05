@@ -8,7 +8,9 @@ import io.realm.annotations.PrimaryKey;
 
 public class Target extends RealmObject implements RealmInterface {
 
-    private static String ID_FIELD = "id";
+    private static final String ID_FIELD = "id";
+    public static final String CREATED_FIELD = "created";
+    public static final String ACHIEVED_FIELD = "achieved";
 
     @PrimaryKey
     private long id;
@@ -18,6 +20,54 @@ public class Target extends RealmObject implements RealmInterface {
     private Date endDate;
     private float baseDistance;
     private boolean achieved;
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public Date getCreated() {
+        return created;
+    }
+
+    public void setCreated(Date created) {
+        this.created = created;
+    }
+
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
+    }
+
+    public float getBaseDistance() {
+        return baseDistance;
+    }
+
+    public void setBaseDistance(float baseDistance) {
+        this.baseDistance = baseDistance;
+    }
+
+    public boolean isAchieved() {
+        return achieved;
+    }
+
+    public void setAchieved(boolean achieved) {
+        this.achieved = achieved;
+    }
 
     @Override
     public Date getSortDate() {

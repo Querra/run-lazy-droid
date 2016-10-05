@@ -19,6 +19,7 @@ import de.querra.mobile.runlazydroid.services.PreferencesService;
 import de.querra.mobile.runlazydroid.services.PreferencesServiceImplementation;
 import de.querra.mobile.runlazydroid.services.RealmService;
 import de.querra.mobile.runlazydroid.services.RealmServiceImplementation;
+import io.realm.Realm;
 
 @Module
 public class AppModule {
@@ -95,6 +96,12 @@ public class AppModule {
     @Singleton
     RunTypeHelper provideRunTypeHelper() {
         return new RunTypeHelper();
+    }
+
+    @Provides
+    @Singleton
+    Realm provideRealm(){
+        return Realm.getDefaultInstance();
     }
 
 }

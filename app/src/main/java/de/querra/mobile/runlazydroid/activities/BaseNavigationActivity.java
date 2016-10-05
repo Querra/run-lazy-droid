@@ -24,10 +24,14 @@ import com.facebook.login.LoginManager;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.mikhaellopez.circularprogressbar.CircularProgressBar;
 
+import java.util.Date;
+
 import javax.inject.Inject;
 
 import de.querra.mobile.runlazydroid.R;
 import de.querra.mobile.runlazydroid.RunLazyDroidApplication;
+import de.querra.mobile.runlazydroid.data.RealmOperator;
+import de.querra.mobile.runlazydroid.data.entities.Target;
 import de.querra.mobile.runlazydroid.entities.User;
 import de.querra.mobile.runlazydroid.fragments.OverviewFragment;
 import de.querra.mobile.runlazydroid.fragments.PenaltyFragment;
@@ -37,6 +41,7 @@ import de.querra.mobile.runlazydroid.fragments.StatisticsFragment;
 import de.querra.mobile.runlazydroid.fragments.TimeLineFragment;
 import de.querra.mobile.runlazydroid.helper.DateHelper;
 import de.querra.mobile.runlazydroid.helper.Formatter;
+import de.querra.mobile.runlazydroid.services.PreferencesService;
 import de.querra.mobile.runlazydroid.services.RealmService;
 import de.querra.mobile.runlazydroid.widgets.ProfilePictureView;
 
@@ -51,6 +56,8 @@ public abstract class BaseNavigationActivity extends AppCompatActivity
     DateHelper dateHelper;
     @Inject
     RealmService realmService;
+    @Inject
+    PreferencesService preferencesService;
 
     protected User user;
     protected SupportMapFragment mMap;
@@ -68,6 +75,12 @@ public abstract class BaseNavigationActivity extends AppCompatActivity
         setContentView(getLayout());
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        // check if target has to be updated and act accordingly
+        if (this.realmService.targetNeedsUpdate()) {
+            createTarget();
+        }
+
 
         this.floatingActionButton = getFloatingActionButton();
 
@@ -108,6 +121,34 @@ public abstract class BaseNavigationActivity extends AppCompatActivity
 
         switchFragment(getInitialFragment(), false);
         onPrepareInitialFragment();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (this.realmService.targetNeedsUpdate()) {
+            createTarget();
+        }
+
+    }
+
+    private void createTarget() {
+        Target target = new Target();
+        Date now = new Date();
+        target.setId(now.getTime());
+        target.setAchieved(false);
+        target.setCreated(now);
+        target.setStartDate(this.dateHelper.getLastSunday().toDate());
+        target.setEndDate(this.dateHelper.getNextSunday().toDate());
+        target.setBaseDistance(calculateBaseDistance());
+        RealmOperator.saveOrUpdate(target);
+    }
+
+    private float calculateBaseDistance() {
+        int numberAchieved = this.realmService.getAllTimeTargetsAchieved();
+        float startValue = this.preferencesService.getWeekTarget();
+        float incrementDistance = this.preferencesService.getIncrementDistance();
+        return startValue + incrementDistance * numberAchieved;
     }
 
     private void initUser() {

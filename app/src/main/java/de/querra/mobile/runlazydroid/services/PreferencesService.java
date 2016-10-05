@@ -15,6 +15,10 @@ public interface PreferencesService {
 
     void setPenaltyDistance(float penaltyDistance);
 
+    float getIncrementDistance();
+
+    void setIncrementDistance(float incrementDistance);
+
     boolean areDefaultsSet();
 
     void setDefaultValues(boolean override);

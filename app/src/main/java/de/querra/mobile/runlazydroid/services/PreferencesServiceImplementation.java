@@ -17,6 +17,7 @@ public class PreferencesServiceImplementation implements PreferencesService{
     public static final String START_DATE = "preference__start_date";
     public static final String WEEK_GOAL = "preference__week_goal";
     public static final String PENALTY_DISTANCE = "preference__penalty_distance";
+    public static final String INCREMENT_DISTANCE = "preference_increment_distance";
     private static final String DEFAULTS_SET = "defaults_set";
 
     public PreferencesServiceImplementation(){
@@ -55,6 +56,17 @@ public class PreferencesServiceImplementation implements PreferencesService{
     }
 
     @Override
+    public float getIncrementDistance() {
+        return this.sharedPreferences.getFloat(INCREMENT_DISTANCE, 1f);
+    }
+
+    @Override
+    public void setIncrementDistance(float incrementDistance) {
+        this.sharedPreferences.edit().putFloat(INCREMENT_DISTANCE, incrementDistance).apply();
+    }
+
+
+    @Override
     public boolean areDefaultsSet() {
         return this.sharedPreferences.getBoolean(DEFAULTS_SET, false);
     }
@@ -65,6 +77,7 @@ public class PreferencesServiceImplementation implements PreferencesService{
             setStartDate(new Date());
             setWeekTarget(10f);
             setPenaltyDistance(5f);
+            setIncrementDistance(1f);
         }
         this.sharedPreferences.edit().putBoolean(DEFAULTS_SET, true).apply();
     }

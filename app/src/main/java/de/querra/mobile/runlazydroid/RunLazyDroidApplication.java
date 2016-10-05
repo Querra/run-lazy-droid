@@ -28,8 +28,6 @@ public class RunLazyDroidApplication extends Application {
                 .appModule(new AppModule(this))
                 .build();
 
-        appComponent.inject(this);
-
         JodaTimeAndroid.init(getApplicationContext());
 
         Realm.init(this);
@@ -40,6 +38,8 @@ public class RunLazyDroidApplication extends Application {
                 .deleteRealmIfMigrationNeeded() // TODO: remove before release
                 .build();
         Realm.setDefaultConfiguration(realmConfiguration);
+
+        appComponent.inject(this);
 
         this.preferencesService.setDefaultValues(false);
     }

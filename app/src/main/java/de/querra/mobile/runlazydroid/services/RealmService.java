@@ -1,5 +1,7 @@
 package de.querra.mobile.runlazydroid.services;
 
+import de.querra.mobile.runlazydroid.data.entities.Target;
+
 public interface RealmService {
 
     float getWeekTargetWithPenalties();
@@ -12,6 +14,8 @@ public interface RealmService {
 
     float getDistanceLeft();
 
+    Target getCurrentTarget();
+
     float getAllTimeDistance();
 
     int getAllTimePenalties();
@@ -19,4 +23,8 @@ public interface RealmService {
     float getAllTimePenaltyDistance();
 
     int getAllTimeRunTime();
+
+    boolean targetNeedsUpdate();
+
+    int getAllTimeTargetsAchieved();
 }

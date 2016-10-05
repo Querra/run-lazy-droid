@@ -19,8 +19,8 @@ public class MainActivity extends BaseNavigationActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // TODO: do week target logic here
     }
+
 
     @Override
     protected void onSwitchedToMap() {
