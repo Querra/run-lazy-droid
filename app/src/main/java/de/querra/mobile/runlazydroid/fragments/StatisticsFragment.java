@@ -15,7 +15,7 @@ import de.querra.mobile.runlazydroid.R;
 import de.querra.mobile.runlazydroid.RunLazyDroidApplication;
 import de.querra.mobile.runlazydroid.adapters.LabeledCardAdapter;
 import de.querra.mobile.runlazydroid.helper.Formatter;
-import de.querra.mobile.runlazydroid.services.RealmService;
+import de.querra.mobile.runlazydroid.services.internal.RealmService;
 
 public class StatisticsFragment extends Fragment {
 

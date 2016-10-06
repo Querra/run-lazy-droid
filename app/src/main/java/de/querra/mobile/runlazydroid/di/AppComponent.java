@@ -14,9 +14,9 @@ import de.querra.mobile.runlazydroid.fragments.StatisticsFragment;
 import de.querra.mobile.runlazydroid.helper.Formatter;
 import de.querra.mobile.runlazydroid.helper.MathHelper;
 import de.querra.mobile.runlazydroid.helper.RunTypeHelper;
-import de.querra.mobile.runlazydroid.services.ImageServiceImplementation;
-import de.querra.mobile.runlazydroid.services.PreferencesServiceImplementation;
-import de.querra.mobile.runlazydroid.services.RealmServiceImplementation;
+import de.querra.mobile.runlazydroid.services.internal.ImageServiceImplementation;
+import de.querra.mobile.runlazydroid.services.internal.PreferencesServiceImplementation;
+import de.querra.mobile.runlazydroid.services.internal.RealmServiceImplementation;
 
 @Singleton
 @Component(modules = {AppModule.class})

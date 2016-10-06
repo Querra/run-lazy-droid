@@ -15,8 +15,8 @@ import de.querra.mobile.runlazydroid.RunLazyDroidApplication;
 import de.querra.mobile.runlazydroid.adapters.LabeledCardAdapter;
 import de.querra.mobile.runlazydroid.helper.DateHelper;
 import de.querra.mobile.runlazydroid.helper.Formatter;
-import de.querra.mobile.runlazydroid.services.PreferencesService;
-import de.querra.mobile.runlazydroid.services.RealmService;
+import de.querra.mobile.runlazydroid.services.internal.PreferencesService;
+import de.querra.mobile.runlazydroid.services.internal.RealmService;
 
 public class OverviewFragment extends Fragment {
 

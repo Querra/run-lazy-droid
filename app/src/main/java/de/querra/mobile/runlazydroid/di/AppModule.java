@@ -9,16 +9,17 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import de.querra.mobile.runlazydroid.activities.MainActivity;
 import de.querra.mobile.runlazydroid.helper.DateHelper;
 import de.querra.mobile.runlazydroid.helper.Formatter;
 import de.querra.mobile.runlazydroid.helper.MathHelper;
 import de.querra.mobile.runlazydroid.helper.RunTypeHelper;
-import de.querra.mobile.runlazydroid.services.ImageService;
-import de.querra.mobile.runlazydroid.services.ImageServiceImplementation;
-import de.querra.mobile.runlazydroid.services.PreferencesService;
-import de.querra.mobile.runlazydroid.services.PreferencesServiceImplementation;
-import de.querra.mobile.runlazydroid.services.RealmService;
-import de.querra.mobile.runlazydroid.services.RealmServiceImplementation;
+import de.querra.mobile.runlazydroid.services.internal.ImageService;
+import de.querra.mobile.runlazydroid.services.internal.ImageServiceImplementation;
+import de.querra.mobile.runlazydroid.services.internal.PreferencesService;
+import de.querra.mobile.runlazydroid.services.internal.PreferencesServiceImplementation;
+import de.querra.mobile.runlazydroid.services.internal.RealmService;
+import de.querra.mobile.runlazydroid.services.internal.RealmServiceImplementation;
 import io.realm.Realm;
 
 @Module
@@ -41,6 +42,12 @@ public class AppModule {
     @Singleton
     Context providesContext() {
         return this.application.getApplicationContext();
+    }
+
+    @Provides
+    @Singleton
+    MainActivity providesMainActivity() {
+        return new MainActivity();
     }
 
     @Provides

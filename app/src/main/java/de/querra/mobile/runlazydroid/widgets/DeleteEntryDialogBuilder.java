@@ -3,7 +3,7 @@ package de.querra.mobile.runlazydroid.widgets;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Handler;
-import android.support.v7.app.AlertDialog;
+import android.app.AlertDialog;
 
 import de.querra.mobile.runlazydroid.R;
 import de.querra.mobile.runlazydroid.data.RealmInterface;

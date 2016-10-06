@@ -1,5 +1,6 @@
 package de.querra.mobile.runlazydroid.adapters;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -24,7 +25,7 @@ import de.querra.mobile.runlazydroid.data.entities.RunEntry;
 import de.querra.mobile.runlazydroid.entities.RunType;
 import de.querra.mobile.runlazydroid.helper.Formatter;
 import de.querra.mobile.runlazydroid.helper.RunTypeHelper;
-import de.querra.mobile.runlazydroid.services.ImageService;
+import de.querra.mobile.runlazydroid.services.internal.ImageService;
 import de.querra.mobile.runlazydroid.widgets.DeleteEntryDialogBuilder;
 import io.realm.RealmObject;
 
@@ -45,10 +46,13 @@ public class StatisticsCardAdapter extends RecyclerView.Adapter{
     RunTypeHelper runTypeHelper;
 
     private List<RealmObject> data = new ArrayList<>();
+    private Activity activity;
 
-    public StatisticsCardAdapter(){
+
+    public StatisticsCardAdapter(Activity activity){
         super();
         RunLazyDroidApplication.getAppComponent().inject(this);
+        this.activity = activity;
     }
 
     public class StatisticsCardViewHolder extends RecyclerView.ViewHolder implements View.OnLongClickListener{
@@ -90,7 +94,7 @@ public class StatisticsCardAdapter extends RecyclerView.Adapter{
 
         @Override
         public boolean onLongClick(View v) {
-            DeleteEntryDialogBuilder.show(context, (RealmInterface) data.get(getAdapterPosition()), new Runnable() {
+            DeleteEntryDialogBuilder.show(activity, (RealmInterface) data.get(getAdapterPosition()), new Runnable() {
                 @Override
                 public void run() {
                     data.remove(getAdapterPosition());

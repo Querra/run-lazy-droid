@@ -41,8 +41,8 @@ import de.querra.mobile.runlazydroid.fragments.StatisticsFragment;
 import de.querra.mobile.runlazydroid.fragments.TimeLineFragment;
 import de.querra.mobile.runlazydroid.helper.DateHelper;
 import de.querra.mobile.runlazydroid.helper.Formatter;
-import de.querra.mobile.runlazydroid.services.PreferencesService;
-import de.querra.mobile.runlazydroid.services.RealmService;
+import de.querra.mobile.runlazydroid.services.internal.PreferencesService;
+import de.querra.mobile.runlazydroid.services.internal.RealmService;
 import de.querra.mobile.runlazydroid.widgets.ProfilePictureView;
 
 public abstract class BaseNavigationActivity extends AppCompatActivity

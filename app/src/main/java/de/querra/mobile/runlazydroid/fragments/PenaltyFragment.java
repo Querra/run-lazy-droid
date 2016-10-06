@@ -17,7 +17,7 @@ import de.querra.mobile.runlazydroid.R;
 import de.querra.mobile.runlazydroid.RunLazyDroidApplication;
 import de.querra.mobile.runlazydroid.data.RealmOperator;
 import de.querra.mobile.runlazydroid.data.entities.Penalty;
-import de.querra.mobile.runlazydroid.services.PreferencesService;
+import de.querra.mobile.runlazydroid.services.internal.PreferencesService;
 
 public class PenaltyFragment extends Fragment {
 

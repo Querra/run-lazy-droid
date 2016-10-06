@@ -1,4 +1,4 @@
-package de.querra.mobile.runlazydroid.services;
+package de.querra.mobile.runlazydroid.services.internal;
 
 import de.querra.mobile.runlazydroid.data.entities.Target;
 

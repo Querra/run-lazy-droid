@@ -21,33 +21,11 @@ public class MainActivity extends BaseNavigationActivity {
         super.onCreate(savedInstanceState);
     }
 
-
     @Override
-    protected void onSwitchedToMap() {
-        View displayContainer = findViewById(R.id.activity_maps__display_container);
-        this.mapHandler = new MapHandler(this.mapFragment, displayContainer, this);
-        this.mapHandler.initialize();
-    }
-
-    @Override
-    protected SupportMapFragment getMapFragment() {
-        this.mapFragment = new SupportMapFragment();
-        this.floatingActionButton.setVisibility(View.VISIBLE);
-        this.floatingActionButton.setImageDrawable(getResources().getDrawable(R.drawable.ic_start_tracking));
-        this.floatingActionButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(final View view) {
-                mapHandler.handleFabClick((FloatingActionButton) view);
-            }
-        });
-        return this.mapFragment;
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
+    protected void onStart() {
+        super.onStart();
         if (this.mapHandler != null) {
-            this.mapHandler.handleResume();
+            this.mapHandler.handleStart();
         }
     }
 
@@ -57,6 +35,39 @@ public class MainActivity extends BaseNavigationActivity {
             this.mapHandler.handleStop();
         }
         super.onStop();
+    }
+
+    @Override
+    protected void onDestroy() {
+        if (this.mapHandler != null) {
+            this.mapHandler.handleDestroy();
+        }
+        super.onDestroy();
+    }
+
+    @Override
+    protected void onSwitchedToMap() {
+        View displayContainer = findViewById(R.id.activity_maps__display_container);
+        if (this.mapHandler == null) {
+            this.mapHandler = new MapHandler(this.mapFragment, displayContainer, this);
+            this.mapHandler.initialize();
+        }
+    }
+
+    @Override
+    protected SupportMapFragment getMapFragment() {
+        if (this.mapFragment == null) {
+            this.mapFragment = new SupportMapFragment();
+        }
+        this.floatingActionButton.setVisibility(View.VISIBLE);
+        this.floatingActionButton.setImageDrawable(getResources().getDrawable(R.drawable.ic_start_tracking));
+        this.floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(final View view) {
+                mapHandler.handleFabClick((FloatingActionButton) view);
+            }
+        });
+        return this.mapFragment;
     }
 
     @Override

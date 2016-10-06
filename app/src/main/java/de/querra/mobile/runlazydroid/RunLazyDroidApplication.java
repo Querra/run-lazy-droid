@@ -9,7 +9,7 @@ import javax.inject.Inject;
 import de.querra.mobile.runlazydroid.di.AppComponent;
 import de.querra.mobile.runlazydroid.di.AppModule;
 import de.querra.mobile.runlazydroid.di.DaggerAppComponent;
-import de.querra.mobile.runlazydroid.services.PreferencesService;
+import de.querra.mobile.runlazydroid.services.internal.PreferencesService;
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
 
