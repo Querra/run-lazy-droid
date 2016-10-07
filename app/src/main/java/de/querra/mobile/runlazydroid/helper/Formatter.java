@@ -46,6 +46,15 @@ public class Formatter {
         return String.format(Locale.getDefault(), "%d %s", time, timeLiteral);
     }
 
+    public String inMinutesShort(int time) {
+        String timeLiteral = this.context.getString(R.string.min);
+        return String.format(Locale.getDefault(), "%d %s", time, timeLiteral);
+    }
+
+    public String asMinutesFromAverage(int time){
+        return String.format("%s %s", inMinutesShort(time), this.context.getString(R.string.estimate_from_average));
+    }
+
     public String getFileName(long id){
         return String.format("map%s.jpg", String.valueOf(id));
     }
@@ -60,5 +69,9 @@ public class Formatter {
         return String.format(Locale.getDefault(), "%02d:%02d",
                 TimeUnit.MINUTES.toHours(minutes),
                 TimeUnit.MINUTES.toMinutes(minutes) % TimeUnit.HOURS.toMinutes(1));
+    }
+
+    public String averageAsKmPerHour(float averageSpeed) {
+        return String.format(Locale.getDefault(), "%.1f km/h", (averageSpeed*60));
     }
 }

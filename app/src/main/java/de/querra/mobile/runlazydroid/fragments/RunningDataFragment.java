@@ -106,6 +106,9 @@ public class RunningDataFragment extends Fragment {
         final Spinner runTypeSpinner = (Spinner) view.findViewById(R.id.fragment_running_data__run_type_spinner);
         List<String> runTypes = new ArrayList<>();
         for (RunType runType : EnumSet.allOf(RunType.class)){
+            if (runType == RunType.MAP_RUN){
+                continue;
+            }
             runTypes.add(this.runTypeHelper.toLocalString(runType));
         }
         ArrayAdapter<String> runTypeAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, runTypes);

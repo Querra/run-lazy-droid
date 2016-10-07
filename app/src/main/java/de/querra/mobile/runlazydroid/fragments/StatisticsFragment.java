@@ -44,6 +44,12 @@ public class StatisticsFragment extends Fragment {
         adapter.addItem(getString(R.string.total_pentalties), String.valueOf(this.realmService.getAllTimePenalties()), null);
         adapter.addItem(getString(R.string.total_penalty_distance), this.formatter.asKilometers(this.realmService.getAllTimePenaltyDistance()), null);
         adapter.addItem(getString(R.string.total_run_time), this.formatter.minutesToTimeString(this.realmService.getAllTimeRunTime()), null);
+        float averageSpeed = this.realmService.getAverageSpeed();
+        String averageAsKmPerHour = this.formatter.averageAsKmPerHour(averageSpeed);
+        if (Math.round(averageSpeed) == 0){
+            averageAsKmPerHour = getString(R.string.not_available);
+        }
+        adapter.addItem(getString(R.string.total_average_speed), averageAsKmPerHour, null);
 
         list.setAdapter(adapter);
 

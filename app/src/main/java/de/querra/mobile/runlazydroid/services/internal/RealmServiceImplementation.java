@@ -1,5 +1,7 @@
 package de.querra.mobile.runlazydroid.services.internal;
 
+import android.support.annotation.NonNull;
+
 import java.util.Date;
 
 import javax.inject.Inject;
@@ -33,9 +35,7 @@ public class RealmServiceImplementation implements RealmService {
 
     @Override
     public float getDistanceRun() {
-        Date from = this.dateHelper.getLastSunday().toDate();
-        Date to = this.dateHelper.getNextSunday().toDate();
-        RealmResults<RunEntry> thisWeeksEntries = this.realm.where(RunEntry.class).between(RunEntry.CREATED_FIELD, from, to).findAll();
+        RealmResults<RunEntry> thisWeeksEntries = getWeekRunEntries();
         float distanceRun = 0f;
         for (RunEntry runEntry : thisWeeksEntries) {
             distanceRun += runEntry.getDistance();
@@ -43,15 +43,29 @@ public class RealmServiceImplementation implements RealmService {
         return distanceRun;
     }
 
-    @Override
-    public float getTotalPenaltyDistance() {
+
+    @NonNull
+    private RealmResults<RunEntry> getWeekRunEntries() {
         Date from = this.dateHelper.getLastSunday().toDate();
         Date to = this.dateHelper.getNextSunday().toDate();
+        return this.realm.where(RunEntry.class).between(RunEntry.CREATED_FIELD, from, to).findAll();
+    }
+
+    @Override
+    public float getTotalPenaltyDistance() {
+        RealmResults<Penalty> penalties = getWeekPenalties();
         float penaltyDistance = 0f;
-        for (Penalty penalty : this.realm.where(Penalty.class).between(RunEntry.CREATED_FIELD, from, to).findAll()) {
+        for (Penalty penalty : penalties) {
             penaltyDistance += penalty.getDistance();
         }
         return penaltyDistance;
+    }
+
+    @NonNull
+    private RealmResults<Penalty> getWeekPenalties() {
+        Date from = this.dateHelper.getLastSunday().toDate();
+        Date to = this.dateHelper.getNextSunday().toDate();
+        return this.realm.where(Penalty.class).between(RunEntry.CREATED_FIELD, from, to).findAll();
     }
 
     @Override
@@ -67,7 +81,7 @@ public class RealmServiceImplementation implements RealmService {
     @Override
     public Target getLastTarget() {
         RealmResults<Target> targets = this.realm.where(Target.class).findAllSorted(Target.CREATED_FIELD, Sort.ASCENDING);
-        if (targets.size() == 0){
+        if (targets.size() == 0) {
             return null;
         }
         return targets.last();
@@ -126,6 +140,24 @@ public class RealmServiceImplementation implements RealmService {
     @Override
     public int getAllTimeTargetsAchieved() {
         return this.realm.where(Target.class).equalTo(Target.ACHIEVED_FIELD, true).findAll().size();
+    }
+
+    @Override
+    public float getAverageSpeed() {
+        return getAllTimeDistance() / getAllTimeRunTime();
+    }
+
+    @Override
+    public float getAverageWeekSpeed() {
+        return getDistanceRun() / getWeekRunTime();
+    }
+
+    public float getWeekRunTime() {
+        int time = 0;
+        for (RunEntry entry : getWeekRunEntries()) {
+            time += entry.getTime();
+        }
+        return (float) time;
     }
 
 }

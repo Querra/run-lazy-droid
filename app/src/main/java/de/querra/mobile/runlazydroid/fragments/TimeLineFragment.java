@@ -15,7 +15,7 @@ import java.util.Comparator;
 import java.util.List;
 
 import de.querra.mobile.runlazydroid.R;
-import de.querra.mobile.runlazydroid.adapters.StatisticsCardAdapter;
+import de.querra.mobile.runlazydroid.adapters.TimelineCardAdapter;
 import de.querra.mobile.runlazydroid.data.RealmInterface;
 import de.querra.mobile.runlazydroid.data.entities.Penalty;
 import de.querra.mobile.runlazydroid.data.entities.RunEntry;
@@ -38,7 +38,7 @@ public class TimeLineFragment extends Fragment {
 
         RecyclerView list = (RecyclerView) view.findViewById(R.id.fragment_timeline__list);
         list.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
-        StatisticsCardAdapter adapter = new StatisticsCardAdapter(getActivity());
+        TimelineCardAdapter adapter = new TimelineCardAdapter(getActivity());
 
         Realm realm = Realm.getDefaultInstance();
         RealmResults<RunEntry> runEntries = realm.where(RunEntry.class).findAll().sort(RunEntry.CREATED_FIELD, Sort.DESCENDING);

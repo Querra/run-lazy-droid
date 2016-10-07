@@ -6,9 +6,10 @@ import dagger.Component;
 import de.querra.mobile.runlazydroid.RunLazyDroidApplication;
 import de.querra.mobile.runlazydroid.activities.BaseNavigationActivity;
 import de.querra.mobile.runlazydroid.activities.MapHandler;
-import de.querra.mobile.runlazydroid.adapters.StatisticsCardAdapter;
+import de.querra.mobile.runlazydroid.adapters.TimelineCardAdapter;
 import de.querra.mobile.runlazydroid.fragments.OverviewFragment;
 import de.querra.mobile.runlazydroid.fragments.PenaltyFragment;
+import de.querra.mobile.runlazydroid.fragments.PreferencesFragment;
 import de.querra.mobile.runlazydroid.fragments.RunningDataFragment;
 import de.querra.mobile.runlazydroid.fragments.StatisticsFragment;
 import de.querra.mobile.runlazydroid.helper.Formatter;
@@ -37,8 +38,10 @@ public interface AppComponent {
 
     void inject(StatisticsFragment fragment);
 
+    void inject(PreferencesFragment fragment);
+
     // Adapters
-    void inject(StatisticsCardAdapter adapter);
+    void inject(TimelineCardAdapter adapter);
 
     // Helper
     void inject(Formatter formatter);

@@ -8,7 +8,7 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <!-- Drawer menu -->
-    <string name="overview">Overview</string>
+    <string name="overview">Week overview</string>
     <string name="add_penalty">Add penalty</string>
     <string name="settings">Settings</string>
     <string name="options">Options</string>
@@ -92,8 +92,35 @@
     <string name="time_for_a_run">Time to go for a run!</string>
     <string name="done">Done</string>
     <string name="really">Really?</string>
-    <string name="total_distance">Total distance run</string>
-    <string name="total_pentalties">Total penalties</string>
-    <string name="total_penalty_distance">Total penalty distance</string>
-    <string name="total_run_time">Total run time</string>
+    <string name="total_distance">Distance run (total)</string>
+    <string name="total_pentalties">Number of penalties (total)</string>
+    <string name="total_penalty_distance">Penalty distance (total)</string>
+    <string name="total_run_time">Run time (total)</string>
+    <string name="min">min.</string>
+    <string name="estimate_from_average">(estimate)</string>
+    <string name="not_available">Not available yet</string>
+    <string name="total_average_speed">Average speed (total)</string>
+    <string name="average_speed">Average speed</string>
+    <string name="time_spent_running">Time spent running</string>
+    <string name="time_to_be_reckoned_with">Time to be reckoned with</string>
+    <string name="available_after_run">Available after run</string>
+
+    <!-- Preferences -->
+    <string name="preference__start_date">preference__start_date</string>
+    <string name="preference__week_target">preference__week_target</string>
+    <string name="preference__week_target_category_title">Week target</string>
+    <string name="preference__week_target__title">Initial week target</string>
+    <string name="preference__week_target__summary">What distance do you want to start with?</string>
+    <string name="preference__penalty_distance">preference__penalty_distance</string>
+    <string name="preference__penalty_category_title">Penalty</string>
+    <string name="preference__penalty_distance__title">Penalty distance</string>
+    <string name="preference__penalty_distance__summary">How much more will you run from a penalty?</string>
+    <string name="preference__distance_category_title">Distance</string>
+    <string name="preference__increment_distance">preference__increment_distance</string>
+    <string name="preference__increment_distance__title">Distance increment</string>
+    <string name="preference__increment_distance__summary">How much should the distance increase each week?</string>
+    <string name="preference__auto_increment_distance">preference__auto_increment_distance</string>
+    <string name="preference__auto_increment_distance__title">Activate distance increment</string>
+    <string name="preference__auto_increment_distance__summary">Check to activate automatic weekly increase of the run distance.</string>
+    <string name="preference__defaults_set">preference__defaults_set</string>
 </resources>

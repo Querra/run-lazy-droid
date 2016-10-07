@@ -46,8 +46,7 @@ public class OverviewFragment extends Fragment {
 
         float penaltyDistance = this.realmService.getTotalPenaltyDistance();
         float distanceRun = this.realmService.getDistanceRun();
-        float totalWeekGoal = this.preferencesService.getWeekTarget()+penaltyDistance;
-        float distanceLeft = (totalWeekGoal - distanceRun);
+        float distanceLeft = this.realmService.getDistanceLeft();
         String target = getString(R.string.target);
         boolean targetAchieved = false;
         if(distanceLeft<0f){
@@ -56,11 +55,32 @@ public class OverviewFragment extends Fragment {
         }
 
         String daysLeft = this.formatter.getDaysLeft(this.dateHelper.getNextSunday());
+        float averageTotalSpeed = this.realmService.getAverageSpeed();
+        int minutesToBeReckoned = 0;
+        if (Math.round(averageTotalSpeed*60) != 0){
+            minutesToBeReckoned = (int)(distanceLeft / averageTotalSpeed);
+        }
+        String minutesToBeReckonedWith = this.formatter.minutesToTimeString((long) minutesToBeReckoned);
+        String reckonedMessage = null;
+        if (minutesToBeReckoned == 0){
+            minutesToBeReckonedWith = getString(R.string.not_available);
+            reckonedMessage = getString(R.string.available_after_run);
+        }
         adapter.addItem(getString(R.string.time_left), daysLeft, Integer.valueOf(daysLeft.split(" ")[0])<3&&distanceLeft>0f?getString(R.string.hurry_up):null);
         adapter.addItem(getString(R.string.distance_left), this.formatter.asKilometers(distanceLeft), targetAchieved?getString(R.string.done):null);
+        adapter.addItem(getString(R.string.time_to_be_reckoned_with), minutesToBeReckonedWith, reckonedMessage);
         adapter.addItem(getString(R.string.distance_run_literal), this.formatter.asKilometers(distanceRun), distanceRun>30f?getString(R.string.wow):distanceRun>25f?getString(R.string.great):distanceRun>20f?getString(R.string.nice):distanceRun<2f?getString(R.string.time_for_a_run):null);
-        adapter.addItem(target, this.formatter.asKilometers(totalWeekGoal), targetAchieved?getString(R.string.achieved):null);
+        adapter.addItem(target, this.formatter.asKilometers(this.realmService.getWeekTargetWithPenalties()), targetAchieved?getString(R.string.achieved):null);
         adapter.addItem(getString(R.string.penalty_literal), this.formatter.asKilometers(penaltyDistance), penaltyDistance>0f?getString(R.string.really):null);
+        adapter.addItem(getString(R.string.time_spent_running), this.formatter.minutesToTimeString((long)this.realmService.getWeekRunTime()), null);
+        float averageWeekSpeed = this.realmService.getAverageWeekSpeed();
+        String averageAsKmPerHour = this.formatter.averageAsKmPerHour(averageWeekSpeed);
+        String averageMessage = null;
+        if (Math.round(averageWeekSpeed*60) == 0){
+            averageAsKmPerHour = getString(R.string.not_available);
+            averageMessage = getString(R.string.available_after_run);
+        }
+        adapter.addItem(getString(R.string.average_speed), averageAsKmPerHour, averageMessage);
 
         list.setAdapter(adapter);
 

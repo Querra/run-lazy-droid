@@ -5,7 +5,7 @@
     <string name="navigation_drawer_close">Navigationsmenü schließen</string>
 
     <!-- Drawer menu -->
-    <string name="overview">Übersicht</string>
+    <string name="overview">Wochenübersicht</string>
     <string name="add_penalty">Strafe hinzufügen</string>
     <string name="settings">Einstellungen</string>
     <string name="options">Optionen</string>
@@ -82,9 +82,17 @@
     <string name="really">Wirklich?</string>
     <string name="time_for_a_run">Zeit zu Laufen!</string>
     <string name="wow">WOW!</string>
-    <string name="total_distance">Gesamte zurückgelegte Laufstrecke</string>
-    <string name="total_penalty_distance">Gesamte Strecke aus Strafen</string>
-    <string name="total_pentalties">Gesamtanzahl von Strafen</string>
-    <string name="total_run_time">Gesamte Laufzeit</string>
+    <string name="total_distance">Laufstrecke (gesamt)</string>
+    <string name="total_penalty_distance">Laufstrecke durch Strafen (gesamt)</string>
+    <string name="total_pentalties">Anzahl an Strafen (gesamt)</string>
+    <string name="total_run_time">Laufzeit (gesamt)</string>
+    <string name="min">Min.</string>
+    <string name="estimate_from_average">(Schätzung)</string>
+    <string name="not_available">Noch nicht verfügbar</string>
+    <string name="total_average_speed">Durchschn. Geschwindigkeit (gesamt)</string>
+    <string name="average_speed">Durchschn. Geschwindigkeit</string>
+    <string name="time_spent_running">Zeit mit Laufen verbracht</string>
+    <string name="time_to_be_reckoned_with">Einzuplanende Zeit</string>
+    <string name="available_after_run">Nach Lauf verfügbar</string>
 
 </resources>

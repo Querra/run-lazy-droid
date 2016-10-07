@@ -29,4 +29,10 @@ public interface RealmService {
     boolean newTargetNeedsCopy();
 
     int getAllTimeTargetsAchieved();
+
+    float getAverageSpeed();
+
+    float getAverageWeekSpeed();
+
+    float getWeekRunTime();
 }

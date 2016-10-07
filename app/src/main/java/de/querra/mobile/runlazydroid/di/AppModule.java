@@ -25,7 +25,7 @@ import io.realm.Realm;
 @Module
 public class AppModule {
 
-    private static final String SAVED_PREFERENCES = "run_lazy_droid_saved_preferences";
+    public static final String SAVED_PREFERENCES = "run_lazy_droid_saved_preferences";
     private final Application application;
 
     public AppModule(Application application) {
