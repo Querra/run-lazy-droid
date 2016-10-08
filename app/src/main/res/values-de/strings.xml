@@ -94,5 +94,16 @@
     <string name="time_spent_running">Zeit mit Laufen verbracht</string>
     <string name="time_to_be_reckoned_with">Einzuplanende Zeit</string>
     <string name="available_after_run">Nach Lauf verfügbar</string>
+    <string name="preference__auto_increment_distance__summary">Aktivieren um die wöchentliche Erhöhung der Distanz einzuschalten.</string>
+    <string name="preference__auto_increment_distance__title">Streckenerhöhung aktivieren</string>
+    <string name="preference__distance_category_title">Strecke</string>
+    <string name="preference__increment_distance__summary">Um wieviel soll sich die Strecke jede Woche erhöhen?</string>
+    <string name="preference__increment_distance__title">Erhöhung der Strecke</string>
+    <string name="preference__penalty_category_title">Strafen</string>
+    <string name="preference__penalty_distance__summary">Wieviel weiter muss bei eienr Strafe gelaufen werden?</string>
+    <string name="preference__penalty_distance__title">Strafstrecke</string>
+    <string name="preference__week_target__summary">Mit welcher Strecke soll gestartet werden?</string>
+    <string name="preference__week_target__title">Anfängliches Wochenziel</string>
+    <string name="preference__week_target_category_title">Wochenziel</string>
 
 </resources>

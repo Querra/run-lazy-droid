@@ -105,21 +105,21 @@
     <string name="available_after_run">Available after run</string>
 
     <!-- Preferences -->
-    <string name="preference__start_date">preference__start_date</string>
-    <string name="preference__week_target">preference__week_target</string>
+    <string name="preference__start_date" translatable="false">preference__start_date</string>
+    <string name="preference__week_target" translatable="false">preference__week_target</string>
     <string name="preference__week_target_category_title">Week target</string>
     <string name="preference__week_target__title">Initial week target</string>
     <string name="preference__week_target__summary">What distance do you want to start with?</string>
-    <string name="preference__penalty_distance">preference__penalty_distance</string>
-    <string name="preference__penalty_category_title">Penalty</string>
+    <string name="preference__penalty_distance" translatable="false">preference__penalty_distance</string>
+    <string name="preference__penalty_category_title">Penalties</string>
     <string name="preference__penalty_distance__title">Penalty distance</string>
     <string name="preference__penalty_distance__summary">How much more will you run from a penalty?</string>
     <string name="preference__distance_category_title">Distance</string>
-    <string name="preference__increment_distance">preference__increment_distance</string>
+    <string name="preference__increment_distance" translatable="false">preference__increment_distance</string>
     <string name="preference__increment_distance__title">Distance increment</string>
     <string name="preference__increment_distance__summary">How much should the distance increase each week?</string>
-    <string name="preference__auto_increment_distance">preference__auto_increment_distance</string>
+    <string name="preference__auto_increment_distance" translatable="false">preference__auto_increment_distance</string>
     <string name="preference__auto_increment_distance__title">Activate distance increment</string>
     <string name="preference__auto_increment_distance__summary">Check to activate automatic weekly increase of the run distance.</string>
-    <string name="preference__defaults_set">preference__defaults_set</string>
+    <string name="preference__defaults_set" translatable="false">preference__defaults_set</string>
 </resources>
