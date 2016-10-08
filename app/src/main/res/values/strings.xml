@@ -1,7 +1,6 @@
 <resources>
     <!-- App -->
     <string name="app_name" translatable="false">Run Lazy Droid</string>
-    <string name="facebook_app_id" translatable="false">188946641516321</string>
 
     <!-- Drawer -->
     <string name="navigation_drawer_open">Open navigation drawer</string>
