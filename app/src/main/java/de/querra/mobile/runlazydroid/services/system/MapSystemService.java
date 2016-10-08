@@ -34,6 +34,7 @@ import static com.google.android.gms.location.LocationServices.FusedLocationApi;
 public class MapSystemService extends Service {
 
     private static final String TAG = "MapSystemService";
+    private static final float MAX_HUMAN_DISTANCE_PER_SECOND = 10; // in meters
 
     private IBinder binder = new MapServiceBinder();
     private List<Location> locations = new ArrayList<>();
@@ -45,6 +46,7 @@ public class MapSystemService extends Service {
     private GoogleApiClient googleApiClient;
     private boolean connected;
     private boolean trackingLocation;
+    private long lastSignalTime = -1;
 
     @Override
     public void onCreate() {
@@ -116,9 +118,9 @@ public class MapSystemService extends Service {
         }
         this.locationRequest = new LocationRequest();
         this.locationRequest
-                .setInterval(1000)
+                .setInterval(5000)
                 .setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY)
-                .setFastestInterval(500);
+                .setFastestInterval(3000);
         return this.locationRequest;
     }
 
@@ -130,20 +132,37 @@ public class MapSystemService extends Service {
         this.locationListener = new LocationListener() {
             @Override
             public void onLocationChanged(Location location) {
-                locations.add(location);
-                updateDistance();
+                float distance = calculateDistance(getLatLng(location), getLatLng(getCurrentLocation()));
+                // only count new location if it is outside 95% interval (2 * 68% interval) of the accuracy and within human limits
+                if (distance > (2 * location.getAccuracy()) && distance < (MAX_HUMAN_DISTANCE_PER_SECOND * secondsSinceLastUpdate())) {
+                    locations.add(location);
+                    updateDistance();
+                    lastSignalTime = new Date().getTime();
+                }
             }
         };
         return locationListener;
+    }
+
+    private long secondsSinceLastUpdate() {
+        long lastSignal = this.lastSignalTime;
+        if (lastSignal == -1) {
+            lastSignal = this.startTrackTime;
+        }
+        return (new Date().getTime() - lastSignal) / 1000;
     }
 
     private void updateDistance() {
         int last = this.locations.size() - 1;
         LatLng recentPoint = getLatLng(getCurrentLocation());
         LatLng lastPoint = getLatLng(this.locations.get(last - 1));
+        this.distance += calculateDistance(recentPoint, lastPoint);
+    }
+
+    private float calculateDistance(LatLng first, LatLng second) {
         float distance[] = new float[1];
-        Location.distanceBetween(recentPoint.latitude, recentPoint.longitude, lastPoint.latitude, lastPoint.longitude, distance);
-        this.distance += distance[0];
+        Location.distanceBetween(first.latitude, first.longitude, second.latitude, second.longitude, distance);
+        return distance[0];
     }
 
     public LatLng[] getLatLangList() {
@@ -214,7 +233,7 @@ public class MapSystemService extends Service {
                     .addApi(LocationServices.API)
                     .build();
         }
-        if (!this.googleApiClient.isConnected() || !this.googleApiClient.isConnecting()){
+        if (!this.googleApiClient.isConnected() || !this.googleApiClient.isConnecting()) {
             this.googleApiClient.connect();
         }
     }

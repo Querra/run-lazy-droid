@@ -83,9 +83,4 @@ public class PreferencesFragment extends PreferenceFragmentCompat {
         super.onPause();
     }
 
-    @Override
-    public void onDestroy() {
-        this.realm.close();
-        super.onDestroy();
-    }
 }

@@ -53,5 +53,12 @@
 
     </PreferenceCategory>
 
+    <PreferenceCategory android:title="Licenses">
+        <PreferenceScreen
+            android:title="View licenses"
+            android:summary="View open source licenses">
+            <intent android:action="de.querra.mobile.runlazydroid.activities.LicensesActivity"/>
+        </PreferenceScreen>
+    </PreferenceCategory>
 
 </PreferenceScreen>
