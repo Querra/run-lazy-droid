@@ -122,4 +122,27 @@
     <string name="preference__auto_increment_distance__title">Activate distance increment</string>
     <string name="preference__auto_increment_distance__summary">Check to activate automatic weekly increase of the run distance.</string>
     <string name="preference__defaults_set" translatable="false">preference__defaults_set</string>
+    <string name="preference__licenses_category_title">Licenses</string>
+    <string name="preference__licenses__title">View licenses</string>
+    <string name="preference__licenses__summary">View open source licenses</string>
+
+    <!-- Licenses -->
+    <string name="android_robot" translatable="false">Android Robot</string>
+    <string name="android_robot_license" translatable="false">The Android robot is reproduced or modified from work created and shared by Google and used according to terms described in the Creative Commons 3.0 Attribution License.</string>
+    <string name="circular_progressbar" translatable="false">CircularProgressBar</string>
+    <string name="circular_progressbar_license" translatable="false">CircularProgressBar by Lopez Mikhael is licensed under a Apache License 2.0. Based on a work at https://github.com/Pedramrn/CircularProgressBar.</string>
+    <string name="circular_progressbar_link" translatable="false">https://github.com/lopspower/CircularProgressBar</string>
+    <string name="dagger_2" translatable="false">Dagger 2</string>
+    <string name="dagger_2_license" translatable="false">Copyright 2012 The Dagger Authors \n\nLicensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with the License. You may obtain a copy of the License at\n\n http://www.apache.org/licenses/LICENSE-2.0\n\n Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an \"AS IS\" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.</string>
+    <string name="dagger_2_link" translatable="false">https://github.com/google/dagger</string>
+    <string name="facebook_sdk" translatable="false">Facebook SDK for Android</string>
+    <string name="facebook_sdk_license" translatable="false">Except as otherwise noted, the Facebook SDK for Android is licensed under the Facebook Platform License (https://github.com/facebook/facebook-android-sdk/blob/master/LICENSE.txt). \n\nUnless required by applicable law or agreed to in writing, software distributed under the License is distributed on an AS ISBASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.</string>
+    <string name="facebook_sdk_link" translatable="false">https://github.com/facebook/facebook-android-sdk</string>
+    <string name="joda_time" translatable="false">joda-time-android</string>
+    <string name="joda_time_license" translatable="false">https://www.apache.org/licenses/LICENSE-2.0</string>
+    <string name="joda_time_link" translatable="false">https://github.com/dlew/joda-time-android</string>
+    <string name="realm" translatable="false">Realm</string>
+    <string name="realm_license" translatable="false">Realm Java is published under the Apache 2.0 license. The underlying core is available under the Realm Core Binary License while we work to open-source it under the Apache 2.0 license. \n\nThis product is not being made available to any person located in Cuba, Iran, North Korea, Sudan, Syria or the Crimea region, or to any other person that is not eligible to receive the product under U.S. law.</string>
+    <string name="realm_link" translatable="false">https://github.com/realm/realm-java</string>
+
 </resources>

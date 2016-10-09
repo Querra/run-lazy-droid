@@ -105,5 +105,8 @@
     <string name="preference__week_target__summary">Mit welcher Strecke soll gestartet werden?</string>
     <string name="preference__week_target__title">Anfängliches Wochenziel</string>
     <string name="preference__week_target_category_title">Wochenziel</string>
+    <string name="preference__licenses__summary">Open Source Lizenzen anzeigen</string>
+    <string name="preference__licenses__title">Lizenzen anzeigen</string>
+    <string name="preference__licenses_category_title">Lizenzen</string>
 
 </resources>
