@@ -185,6 +185,7 @@ public class MapHandler {
         }
         Toast.makeText(this.activity, saved, Toast.LENGTH_SHORT).show();
         this.mapSystemService.resetData();
+        this.mMap.clear();
     }
 
     private void addToDataset() {
@@ -260,6 +261,7 @@ public class MapHandler {
                                         @Override
                                         public void onClick(DialogInterface dialog, int which) {
                                             mapSystemService.resetData();
+                                            mMap.clear();
                                         }
                                     })
                                     .setPositiveButton(R.string.add_entry, new DialogInterface.OnClickListener() {
@@ -274,5 +276,9 @@ public class MapHandler {
                     })
                     .show();
         }
+    }
+
+    public boolean isServiceTracking() {
+        return this.mapSystemService != null && this.mapSystemService.isTrackingLocation();
     }
 }

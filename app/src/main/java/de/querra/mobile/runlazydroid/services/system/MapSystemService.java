@@ -104,6 +104,7 @@ public class MapSystemService extends Service {
         this.startTrackTime = 0;
         this.stopTrackTime = 0;
         this.distance = 0f;
+        this.lastSignalTime = -1;
         this.locations.clear();
     }
 
@@ -236,6 +237,10 @@ public class MapSystemService extends Service {
         if (!this.googleApiClient.isConnected() || !this.googleApiClient.isConnecting()) {
             this.googleApiClient.connect();
         }
+    }
+
+    public boolean isTrackingLocation() {
+        return this.trackingLocation;
     }
 
     public class MapServiceBinder extends Binder {

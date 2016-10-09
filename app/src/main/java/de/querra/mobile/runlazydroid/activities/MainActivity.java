@@ -60,7 +60,11 @@ public class MainActivity extends BaseNavigationActivity {
             this.mapFragment = new SupportMapFragment();
         }
         this.floatingActionButton.setVisibility(View.VISIBLE);
-        this.floatingActionButton.setImageDrawable(getResources().getDrawable(R.drawable.ic_start_tracking));
+        int fabDrawableId = R.drawable.ic_start_tracking;
+        if (this.mapHandler != null && this.mapHandler.isServiceTracking()){
+            fabDrawableId = R.drawable.ic_menu;
+        }
+        this.floatingActionButton.setImageDrawable(getResources().getDrawable(fabDrawableId));
         this.floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View view) {
