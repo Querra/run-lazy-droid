@@ -30,7 +30,6 @@ import javax.inject.Inject;
 
 import de.querra.mobile.runlazydroid.R;
 import de.querra.mobile.runlazydroid.RunLazyDroidApplication;
-import de.querra.mobile.runlazydroid.data.RealmOperator;
 import de.querra.mobile.runlazydroid.data.entities.Target;
 import de.querra.mobile.runlazydroid.entities.User;
 import de.querra.mobile.runlazydroid.fragments.OverviewFragment;
@@ -76,11 +75,10 @@ public abstract class BaseNavigationActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        // check if target has to be updated and act accordingly
         if (this.realmService.targetNeedsUpdate()) {
+            this.realmService.handleTargetAchieved();
             createTarget();
         }
-
 
         this.floatingActionButton = getFloatingActionButton();
 
@@ -127,10 +125,11 @@ public abstract class BaseNavigationActivity extends AppCompatActivity
     @Override
     protected void onResume() {
         super.onResume();
+        // check if target has to be updated and act accordingly
         if (this.realmService.targetNeedsUpdate()) {
+            this.realmService.handleTargetAchieved();
             createTarget();
         }
-
     }
 
     private void createTarget() {
@@ -147,7 +146,7 @@ public abstract class BaseNavigationActivity extends AppCompatActivity
         else {
             target.setBaseDistance(calculateBaseDistance());
         }
-        RealmOperator.saveOrUpdate(target);
+        this.realmService.saveOrUpdate(target);
     }
 
     private float calculateBaseDistance() {
@@ -193,6 +192,9 @@ public abstract class BaseNavigationActivity extends AppCompatActivity
             if (distanceLeft < 0f) {
                 distanceLeft = 0f;
                 target.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_flag, 0, R.drawable.ic_check, 0);
+            }
+            else {
+                target.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_flag, 0, 0, 0);
             }
             target.setText(this.formatter.asKilometers(distanceLeft));
         }

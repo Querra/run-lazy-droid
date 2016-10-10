@@ -4,7 +4,6 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/RunLazyDroid.iml" filepath="$PROJECT_DIR$/RunLazyDroid.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/run-lazy-droid.iml" filepath="$PROJECT_DIR$/run-lazy-droid.iml" />
     </modules>
   </component>
 </project>

@@ -23,12 +23,12 @@ import javax.inject.Inject;
 
 import de.querra.mobile.runlazydroid.R;
 import de.querra.mobile.runlazydroid.RunLazyDroidApplication;
-import de.querra.mobile.runlazydroid.data.RealmOperator;
 import de.querra.mobile.runlazydroid.data.entities.RunEntry;
 import de.querra.mobile.runlazydroid.entities.RunType;
 import de.querra.mobile.runlazydroid.helper.Formatter;
 import de.querra.mobile.runlazydroid.helper.MathHelper;
 import de.querra.mobile.runlazydroid.helper.RunTypeHelper;
+import de.querra.mobile.runlazydroid.services.internal.RealmService;
 
 public class RunningDataFragment extends Fragment {
 
@@ -43,6 +43,8 @@ public class RunningDataFragment extends Fragment {
     MathHelper mathHelper;
     @Inject
     RunTypeHelper runTypeHelper;
+    @Inject
+    RealmService realmService;
 
     private String runType;
     private float roundedDistance;
@@ -136,7 +138,7 @@ public class RunningDataFragment extends Fragment {
                 runEntry.setDistance(roundedDistance);
                 runEntry.setTime(roundedTime);
                 runEntry.setType(runTypeHelper.localStringToName(runType));
-                RealmOperator.saveOrUpdate(runEntry);
+                realmService.saveOrUpdate(runEntry);
                 Toast.makeText(getActivity(), R.string.entry_added, Toast.LENGTH_SHORT).show();
             }
         });

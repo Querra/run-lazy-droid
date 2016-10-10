@@ -36,12 +36,12 @@ import javax.inject.Inject;
 
 import de.querra.mobile.runlazydroid.R;
 import de.querra.mobile.runlazydroid.RunLazyDroidApplication;
-import de.querra.mobile.runlazydroid.data.RealmOperator;
 import de.querra.mobile.runlazydroid.data.entities.RunEntry;
 import de.querra.mobile.runlazydroid.entities.RunType;
 import de.querra.mobile.runlazydroid.helper.Formatter;
 import de.querra.mobile.runlazydroid.helper.MathHelper;
 import de.querra.mobile.runlazydroid.services.internal.ImageService;
+import de.querra.mobile.runlazydroid.services.internal.RealmService;
 import de.querra.mobile.runlazydroid.services.system.MapSystemService;
 
 import static android.content.Context.BIND_AUTO_CREATE;
@@ -54,6 +54,8 @@ public class MapHandler {
     ImageService imageService;
     @Inject
     MathHelper mathHelper;
+    @Inject
+    RealmService realmService;
 
     private SupportMapFragment mapFragment;
     private Activity activity;
@@ -178,7 +180,7 @@ public class MapHandler {
         runEntry.setTime(this.mathHelper.getDifferenceInMinutes(this.mapSystemService.getStartTrackTime(), this.mapSystemService.getStopTrackTime()));
         runEntry.setDistance(this.mapSystemService.getDistance() / 1000);
         runEntry.setImageFilepath(fileName);
-        RealmOperator.saveOrUpdate(runEntry);
+        this.realmService.saveOrUpdate(runEntry);
         String saved = this.activity.getString(R.string.entry_not_saved);
         if (this.imageService.saveImage(bitmap, fileName)) {
             saved = this.activity.getString(R.string.entry_saved);

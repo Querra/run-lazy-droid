@@ -18,6 +18,7 @@ import de.querra.mobile.runlazydroid.helper.RunTypeHelper;
 import de.querra.mobile.runlazydroid.services.internal.ImageServiceImplementation;
 import de.querra.mobile.runlazydroid.services.internal.PreferencesServiceImplementation;
 import de.querra.mobile.runlazydroid.services.internal.RealmServiceImplementation;
+import de.querra.mobile.runlazydroid.widgets.DeleteEntryDialogBuilder;
 
 @Singleton
 @Component(modules = {AppModule.class})
@@ -59,4 +60,6 @@ public interface AppComponent {
 
     // Special
     void inject(MapHandler mapHandler);
+
+    void inject(DeleteEntryDialogBuilder deleteEntryDialogBuilder);
 }

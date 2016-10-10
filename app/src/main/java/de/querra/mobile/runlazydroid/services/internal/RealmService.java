@@ -1,6 +1,8 @@
 package de.querra.mobile.runlazydroid.services.internal;
 
+import de.querra.mobile.runlazydroid.data.RealmInterface;
 import de.querra.mobile.runlazydroid.data.entities.Target;
+import io.realm.RealmObject;
 
 public interface RealmService {
 
@@ -35,4 +37,10 @@ public interface RealmService {
     float getAverageWeekSpeed();
 
     float getWeekRunTime();
+
+    void handleTargetAchieved();
+
+    void delete(RealmInterface realmObject);
+
+    void saveOrUpdate(RealmObject realmObject);
 }

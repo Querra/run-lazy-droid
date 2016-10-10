@@ -20,6 +20,7 @@ import de.querra.mobile.runlazydroid.services.internal.PreferencesService;
 import de.querra.mobile.runlazydroid.services.internal.PreferencesServiceImplementation;
 import de.querra.mobile.runlazydroid.services.internal.RealmService;
 import de.querra.mobile.runlazydroid.services.internal.RealmServiceImplementation;
+import de.querra.mobile.runlazydroid.widgets.DeleteEntryDialogBuilder;
 import io.realm.Realm;
 
 @Module
@@ -111,4 +112,9 @@ public class AppModule {
         return Realm.getDefaultInstance();
     }
 
+    @Provides
+    @Singleton
+    DeleteEntryDialogBuilder providedeleteEntryDialogBuilder(){
+        return new DeleteEntryDialogBuilder();
+    }
 }

@@ -44,6 +44,8 @@ public class TimelineCardAdapter extends RecyclerView.Adapter{
     RunTypeHelper runTypeHelper;
     @Inject
     RealmService realmService;
+    @Inject
+    DeleteEntryDialogBuilder deleteEntryDialogBuilder;
 
     private List<RealmObject> data = new ArrayList<>();
     private Activity activity;
@@ -94,7 +96,7 @@ public class TimelineCardAdapter extends RecyclerView.Adapter{
 
         @Override
         public boolean onLongClick(View v) {
-            DeleteEntryDialogBuilder.show(activity, (RealmInterface) data.get(getAdapterPosition()), new Runnable() {
+            deleteEntryDialogBuilder.show(activity, (RealmInterface) data.get(getAdapterPosition()), new Runnable() {
                 @Override
                 public void run() {
                     data.remove(getAdapterPosition());
