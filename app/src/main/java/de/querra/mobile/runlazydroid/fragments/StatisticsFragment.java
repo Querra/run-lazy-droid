@@ -9,6 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.Locale;
+
 import javax.inject.Inject;
 
 import de.querra.mobile.runlazydroid.R;
@@ -40,13 +42,21 @@ public class StatisticsFragment extends Fragment {
         LabeledCardAdapter adapter = new LabeledCardAdapter();
 
 
+        int allTimeTargetsDone = this.realmService.getAllTimeTargets()-1;
+        int allTimeTargetsAchieved = this.realmService.getAllTimeTargetsAchieved();
+        int targetsFailed = allTimeTargetsDone - allTimeTargetsAchieved;
+        adapter.addItem(getString(R.string.targets_tackled), String.valueOf(allTimeTargetsDone), null);
+        float achievedPercentage = (float)allTimeTargetsAchieved /(float)allTimeTargetsDone*100;
+        adapter.addItem(getString(R.string.targets_achieved), String.format(Locale.getDefault(), "%.1f%s  (%d)", achievedPercentage, "%", allTimeTargetsAchieved), null);
+        float failedPercentage = (float)targetsFailed /(float)allTimeTargetsDone*100;;
+        adapter.addItem(getString(R.string.targets_failed), String.format(Locale.getDefault(), "%.1f%s  (%d)", failedPercentage, "%", targetsFailed), null);
         adapter.addItem(getString(R.string.total_distance), this.formatter.asKilometers(this.realmService.getAllTimeDistance()), null);
         adapter.addItem(getString(R.string.total_pentalties), String.valueOf(this.realmService.getAllTimePenalties()), null);
         adapter.addItem(getString(R.string.total_penalty_distance), this.formatter.asKilometers(this.realmService.getAllTimePenaltyDistance()), null);
         adapter.addItem(getString(R.string.total_run_time), this.formatter.minutesToTimeString(this.realmService.getAllTimeRunTime()), null);
         float averageSpeed = this.realmService.getAverageSpeed();
         String averageAsKmPerHour = this.formatter.averageAsKmPerHour(averageSpeed);
-        if (Math.round(averageSpeed) == 0){
+        if (Math.round(averageSpeed*60) == 0){
             averageAsKmPerHour = getString(R.string.not_available);
         }
         adapter.addItem(getString(R.string.total_average_speed), averageAsKmPerHour, null);

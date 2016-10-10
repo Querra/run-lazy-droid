@@ -144,5 +144,8 @@
     <string name="realm" translatable="false">Realm</string>
     <string name="realm_license" translatable="false">Realm Java is published under the Apache 2.0 license. The underlying core is available under the Realm Core Binary License while we work to open-source it under the Apache 2.0 license. \n\nThis product is not being made available to any person located in Cuba, Iran, North Korea, Sudan, Syria or the Crimea region, or to any other person that is not eligible to receive the product under U.S. law.</string>
     <string name="realm_link" translatable="false">https://github.com/realm/realm-java</string>
+    <string name="targets_achieved">Week targets achieved</string>
+    <string name="targets_tackled">Week targets tackled</string>
+    <string name="targets_failed">Targets failed</string>
 
 </resources>

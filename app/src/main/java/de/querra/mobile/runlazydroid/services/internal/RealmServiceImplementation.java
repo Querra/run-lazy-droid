@@ -48,6 +48,11 @@ public class RealmServiceImplementation implements RealmService {
     }
 
     @Override
+    public int getAllTimeTargets() {
+        return this.realm.where(Target.class).findAll().size();
+    }
+
+    @Override
     public float getWeekTargetWithPenalties() {
         return getLastTarget().getBaseDistance() + getTotalPenaltyDistance();
     }
@@ -144,7 +149,7 @@ public class RealmServiceImplementation implements RealmService {
 
     @Override
     public float getAverageSpeed() {
-        return getAllTimeDistance() / getAllTimeRunTime();
+        return getAllTimeDistance() / (float)getAllTimeRunTime();
     }
 
     @Override

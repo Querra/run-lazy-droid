@@ -43,4 +43,6 @@ public interface RealmService {
     void delete(RealmInterface realmObject);
 
     void saveOrUpdate(RealmObject realmObject);
+
+    int getAllTimeTargets();
 }
