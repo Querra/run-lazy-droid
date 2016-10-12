@@ -264,10 +264,6 @@ public abstract class BaseNavigationActivity extends AppCompatActivity
             LoginManager.getInstance().logOut();
             startActivity(new Intent(this, LoginActivity.class));
             finish();
-        } else if (id == R.id.nav_share) {
-            // TODO: share intent
-        } else if (id == R.id.nav_send) {
-            // TODO: share intent
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

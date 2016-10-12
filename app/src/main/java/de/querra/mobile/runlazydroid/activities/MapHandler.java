@@ -10,6 +10,8 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.location.Location;
+import android.net.Uri;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.IBinder;
 import android.support.annotation.NonNull;
@@ -173,12 +175,14 @@ public class MapHandler {
         RunEntry runEntry = new RunEntry();
         Date now = new Date();
         long id = now.getTime();
-        String fileName = this.formatter.getFileName(id);
+        final String fileName = this.formatter.getFileName(id);
         runEntry.setCreated(now);
         runEntry.setId(id);
         runEntry.setType(RunType.MAP_RUN.getName());
-        runEntry.setTime(this.mathHelper.getDifferenceInMinutes(this.mapSystemService.getStartTrackTime(), this.mapSystemService.getStopTrackTime()));
-        runEntry.setDistance(this.mapSystemService.getDistance() / 1000);
+        final int runTimeInMinutes = this.mathHelper.getDifferenceInMinutes(this.mapSystemService.getStartTrackTime(), this.mapSystemService.getStopTrackTime());
+        runEntry.setTime(runTimeInMinutes);
+        final float distance = this.mapSystemService.getDistance() / 1000;
+        runEntry.setDistance(distance);
         runEntry.setImageFilepath(fileName);
         this.realmService.saveOrUpdate(runEntry);
         String saved = this.activity.getString(R.string.entry_not_saved);
@@ -186,6 +190,23 @@ public class MapHandler {
             saved = this.activity.getString(R.string.entry_saved);
         }
         Toast.makeText(this.activity, saved, Toast.LENGTH_SHORT).show();
+        new AlertDialog.Builder(this.activity)
+                .setTitle("Share")
+                .setMessage("Do you want to share your run?")
+                .setPositiveButton("Share", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent shareIntent = new Intent();
+                        shareIntent.setAction(Intent.ACTION_SEND);
+                        shareIntent.putExtra(Intent.EXTRA_TEXT, String.format(Locale.getDefault(), "I ran %.1f km in %d minutes with Run Lazybot", distance, runTimeInMinutes));
+                        shareIntent.putExtra(Intent.EXTRA_STREAM, Uri.parse(Environment.getExternalStorageDirectory().toString()+"/"+fileName));
+                        shareIntent.setType("image/*");
+                        activity.startActivity(Intent.createChooser(shareIntent, "Share image via:"));
+                    }
+                }).setNegativeButton(activity.getString(R.string.cancel), null)
+                .setCancelable(true)
+                .create()
+                .show();
         this.mapSystemService.resetData();
         this.mMap.clear();
     }
