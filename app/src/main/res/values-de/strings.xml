@@ -111,5 +111,7 @@
     <string name="targets_achieved">Wochenziele erreicht</string>
     <string name="targets_failed">Wochenziele versagt</string>
     <string name="targets_tackled">Gesamte Wochenziele</string>
+    <string name="congrats">Glückwunsch, du hast gerade eine Trophäe und </string>
+    <string name="points"> Punkte</string>
 
 </resources>

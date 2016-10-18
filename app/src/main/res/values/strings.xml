@@ -147,5 +147,7 @@
     <string name="targets_achieved">Week targets achieved</string>
     <string name="targets_tackled">Week targets tackled</string>
     <string name="targets_failed">Targets failed</string>
+    <string name="points"> points</string>
+    <string name="congrats">Congratulations, you just won a badge and </string>
 
 </resources>

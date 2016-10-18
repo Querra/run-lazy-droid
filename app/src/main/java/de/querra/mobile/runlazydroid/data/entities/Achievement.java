@@ -16,7 +16,9 @@ public class Achievement extends RealmObject implements RealmInterface {
     private Date created;
     private String name;
     private String achievementCategory;
+    private String achievementLevel;
     private String flavorText;
+    private int points;
 
     public long getId() {
         return id;
@@ -50,12 +52,28 @@ public class Achievement extends RealmObject implements RealmInterface {
         this.achievementCategory = achievementCategory;
     }
 
+    public String getAchievementLevel() {
+        return achievementLevel;
+    }
+
+    public void setAchievementLevel(String achievementLevel) {
+        this.achievementLevel = achievementLevel;
+    }
+
     public String getFlavorText() {
         return flavorText;
     }
 
     public void setFlavorText(String flavorText) {
         this.flavorText = flavorText;
+    }
+
+    public int getPoints() {
+        return points;
+    }
+
+    public void setPoints(int points) {
+        this.points = points;
     }
 
     @Override

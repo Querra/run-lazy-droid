@@ -1,10 +1,17 @@
 package de.querra.mobile.runlazydroid.entities;
 
+import static de.querra.mobile.runlazydroid.entities.AchievementCategoryNames.ACTIVITY_NAME;
+import static de.querra.mobile.runlazydroid.entities.AchievementCategoryNames.DISTANCE_NAME;
+import static de.querra.mobile.runlazydroid.entities.AchievementCategoryNames.SPECIAL_NAME;
+import static de.querra.mobile.runlazydroid.entities.AchievementCategoryNames.SPEED_NAME;
+import static de.querra.mobile.runlazydroid.entities.AchievementCategoryNames.TIME_NAME;
+
 public enum AchievementCategory {
-    DISTANCE(AchievementCategoryNames.DISTANCE_NAME),
-    TIME(AchievementCategoryNames.TIME_NAME),
-    ACTIVITY(AchievementCategoryNames.ACTIVITY_NAME),
-    SPECIAL(AchievementCategoryNames.SPECIAL_NAME);
+    DISTANCE(DISTANCE_NAME),
+    TIME(TIME_NAME),
+    SPEED(SPEED_NAME),
+    ACTIVITY(ACTIVITY_NAME),
+    SPECIAL(SPECIAL_NAME);
 
     private final String name;
 
@@ -14,13 +21,15 @@ public enum AchievementCategory {
 
     public static AchievementCategory fromString(String achievementCategory){
         switch (achievementCategory){
-            case AchievementCategoryNames.DISTANCE_NAME:
+            case DISTANCE_NAME:
                 return DISTANCE;
-            case AchievementCategoryNames.TIME_NAME:
+            case TIME_NAME:
                 return TIME;
-            case AchievementCategoryNames.ACTIVITY_NAME:
+            case SPEED_NAME:
+                return SPEED;
+            case ACTIVITY_NAME:
                 return ACTIVITY;
-            case AchievementCategoryNames.SPECIAL_NAME:
+            case SPECIAL_NAME:
                 return SPECIAL;
         }
         return null;
