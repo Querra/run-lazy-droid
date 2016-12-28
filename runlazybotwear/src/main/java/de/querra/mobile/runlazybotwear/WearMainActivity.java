@@ -5,6 +5,10 @@ import android.os.Bundle;
 import android.support.wearable.view.WatchViewStub;
 import android.widget.TextView;
 
+import java.util.Locale;
+
+import de.querra.mobile.rlblib.helper.DateHelper;
+import de.querra.mobile.rlblib.helper.Formatter;
 import de.querra.mobile.runlazydroid.R;
 
 
@@ -21,6 +25,8 @@ public class WearMainActivity extends Activity {
             @Override
             public void onLayoutInflated(WatchViewStub stub) {
                 mTextView = (TextView) stub.findViewById(R.id.text);
+                String daysLeft = Formatter.getDaysLeft(WearMainActivity.this, DateHelper.getNextSunday());
+                mTextView.setText(String.format(Locale.getDefault(), "%s: %s", getString(R.string.time_left), daysLeft));
             }
         });
     }
