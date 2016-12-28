@@ -1,0 +1,117 @@
+<resources>
+
+    <!-- Drawer -->
+    <string name="navigation_drawer_open">Navigationsmenü öffnen</string>
+    <string name="navigation_drawer_close">Navigationsmenü schließen</string>
+
+    <!-- Drawer menu -->
+    <string name="overview">Wochenübersicht</string>
+    <string name="add_penalty">Strafe hinzufügen</string>
+    <string name="settings">Einstellungen</string>
+    <string name="options">Optionen</string>
+    <string name="time_line">Verlauf</string>
+    <string name="statistics">Statistik</string>
+    <string name="logout">Ausloggen</string>
+    <string name="communicate">Mitteilen</string>
+    <string name="share">Teilen</string>
+    <string name="send">Senden</string>
+
+    <!-- Start -->
+    <string name="loading_data">Daten werden geladen…</string>
+    <string name="log_in_to_continue">Bitte einloggen um fortzufahren</string>
+
+    <!-- Run types -->
+    <string name="map_run">Lauf (Karte)</string>
+    <string name="track">Lauf</string>
+    <string name="treadmill">Laufband</string>
+    <string name="unknown">Unbekannt</string>
+
+    <!-- Penalty -->
+    <string name="penalty">Strafe</string>
+    <string name="penalty_text1">Das ist echt…</string>
+    <string name="penalty_text2">…enttäuschend!</string>
+
+    <!-- Delete entry -->
+    <string name="delete_entry">Eintrag löschen</string>
+    <string name="delete">Löschen</string>
+    <string name="delete_entry_query">Willst du diesen Eintrag wirklich löschen?</string>
+    <string name="cancel">Abbrechen</string>
+
+    <!-- Add penalty -->
+    <string name="been_naughty">Warst du wieder unartig?</string>
+    <string name="yes_please">Ja, bitte füge meine Strafe hinzu!</string>
+    <string name="penalty_added">Strafe hinzugefügt</string>
+
+    <!-- Add entry -->
+    <string name="add_running_data">Laufdaten hinzufügen</string>
+    <string name="distance">Strecke</string>
+    <string name="time">Zeit</string>
+    <string name="track_type">Streckenart</string>
+    <string name="add_entry">Eintrag hinzufügen</string>
+    <string name="entry_added">Eintrag hinzugefügt</string>
+
+    <!-- Literals -->
+    <string name="day">Tag</string>
+    <string name="days">Tage</string>
+    <string name="minute">Minute</string>
+    <string name="minutes">Minuten</string>
+
+    <!-- Overview -->
+    <string name="target">Ziel</string>
+    <string name="achieved">Erreicht</string>
+    <string name="distance_run_literal">Strecke zurückgelegt</string>
+    <string name="distance_left">Verbleibende Strecke</string>
+    <string name="penalty_literal">Strafe</string>
+    <string name="time_left">Verbleibende Zeit</string>
+
+    <!-- Map -->
+    <string name="title_activity_maps">Karte</string>
+    <string name="map">Karte</string>
+    <string name="entry_saved">Eintrag wurde gespeichert</string>
+    <string name="entry_not_saved">Eintrag konnte nicht gespeichert werden. Ist genug freier Speicherplatz vorhanden?</string>
+    <string name="connection_failed">Verbindung konnte nicht hergestellt werden</string>
+    <string name="connection_failed_message">Nicht verbunden. Versuchen Verbindung erneut herzustellen?</string>
+    <string name="stop_tracking_question">Möchtest du die Aufzeichnung beenden?</string>
+    <string name="reconnect">Erneut verbinden</string>
+    <string name="stop_tracking">Beenden</string>
+    <string name="add_run_question">Möchtest du diesen Lauf zu deinen Einträgen hinzufügen?</string>
+    <string name="done">Fertig</string>
+    <string name="great">Großartig!</string>
+    <string name="hurry_up">Beeil dich!</string>
+    <string name="nice">Nicht schlecht!</string>
+    <string name="really">Wirklich?</string>
+    <string name="time_for_a_run">Zeit zu Laufen!</string>
+    <string name="wow">WOW!</string>
+    <string name="total_distance">Laufstrecke (gesamt)</string>
+    <string name="total_penalty_distance">Laufstrecke durch Strafen (gesamt)</string>
+    <string name="total_pentalties">Anzahl an Strafen (gesamt)</string>
+    <string name="total_run_time">Laufzeit (gesamt)</string>
+    <string name="min">Min.</string>
+    <string name="estimate_from_average">(Schätzung)</string>
+    <string name="not_available">Noch nicht verfügbar</string>
+    <string name="total_average_speed">Durchschn. Geschwindigkeit (gesamt)</string>
+    <string name="average_speed">Durchschn. Geschwindigkeit</string>
+    <string name="time_spent_running">Zeit mit Laufen verbracht</string>
+    <string name="time_to_be_reckoned_with">Einzuplanende Zeit</string>
+    <string name="available_after_run">Nach Lauf verfügbar</string>
+    <string name="preference__auto_increment_distance__summary">Aktivieren um die wöchentliche Erhöhung der Distanz einzuschalten.</string>
+    <string name="preference__auto_increment_distance__title">Streckenerhöhung aktivieren</string>
+    <string name="preference__distance_category_title">Strecke</string>
+    <string name="preference__increment_distance__summary">Um wieviel soll sich die Strecke jede Woche erhöhen?</string>
+    <string name="preference__increment_distance__title">Erhöhung der Strecke</string>
+    <string name="preference__penalty_category_title">Strafen</string>
+    <string name="preference__penalty_distance__summary">Wieviel weiter muss bei eienr Strafe gelaufen werden?</string>
+    <string name="preference__penalty_distance__title">Strafstrecke</string>
+    <string name="preference__week_target__summary">Mit welcher Strecke soll gestartet werden?</string>
+    <string name="preference__week_target__title">Anfängliches Wochenziel</string>
+    <string name="preference__week_target_category_title">Wochenziel</string>
+    <string name="preference__licenses__summary">Open Source Lizenzen anzeigen</string>
+    <string name="preference__licenses__title">Lizenzen anzeigen</string>
+    <string name="preference__licenses_category_title">Lizenzen</string>
+    <string name="targets_achieved">Wochenziele erreicht</string>
+    <string name="targets_failed">Wochenziele versagt</string>
+    <string name="targets_tackled">Gesamte Wochenziele</string>
+    <string name="congrats">Glückwunsch, du hast gerade eine Trophäe und </string>
+    <string name="points"> Punkte</string>
+
+</resources>

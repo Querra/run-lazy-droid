@@ -34,14 +34,11 @@ import com.google.android.gms.maps.model.PolylineOptions;
 import java.util.Date;
 import java.util.Locale;
 
-import javax.inject.Inject;
-
+import de.querra.mobile.rlblib.entities.RunType;
+import de.querra.mobile.rlblib.helper.Formatter;
+import de.querra.mobile.rlblib.helper.MathHelper;
 import de.querra.mobile.runlazydroid.R;
-import de.querra.mobile.runlazydroid.RunLazyDroidApplication;
 import de.querra.mobile.runlazydroid.data.entities.RunEntry;
-import de.querra.mobile.runlazydroid.entities.RunType;
-import de.querra.mobile.runlazydroid.helper.Formatter;
-import de.querra.mobile.runlazydroid.helper.MathHelper;
 import de.querra.mobile.runlazydroid.services.internal.ImageService;
 import de.querra.mobile.runlazydroid.services.internal.RealmService;
 import de.querra.mobile.runlazydroid.services.system.MapSystemService;
@@ -49,15 +46,6 @@ import de.querra.mobile.runlazydroid.services.system.MapSystemService;
 import static android.content.Context.BIND_AUTO_CREATE;
 
 public class MapHandler {
-
-    @Inject
-    Formatter formatter;
-    @Inject
-    ImageService imageService;
-    @Inject
-    MathHelper mathHelper;
-    @Inject
-    RealmService realmService;
 
     private SupportMapFragment mapFragment;
     private Activity activity;
@@ -88,13 +76,12 @@ public class MapHandler {
     };
 
     public MapHandler(SupportMapFragment mapFragment, View displayContainer, Activity activity) {
-        RunLazyDroidApplication.getAppComponent().inject(this);
 
         this.uiUpdate = new Runnable() {
             @Override
             public void run() {
                 if (displayTime != null && displayTime.getText() != null) {
-                    displayTime.setText(formatter.millisToTimeString(mapSystemService.getElapsedTime()));
+                    displayTime.setText(Formatter.millisToTimeString(mapSystemService.getElapsedTime()));
                 }
                 if (displayDistance != null && displayDistance.getText() != null) {
                     displayDistance.setText(String.format(Locale.getDefault(), "%.2f km", mapSystemService.getDistance() / 1000));
@@ -175,18 +162,18 @@ public class MapHandler {
         RunEntry runEntry = new RunEntry();
         Date now = new Date();
         long id = now.getTime();
-        final String fileName = this.formatter.getFileName(id);
+        final String fileName = Formatter.getFileName(id);
         runEntry.setCreated(now);
         runEntry.setId(id);
         runEntry.setType(RunType.MAP_RUN.getName());
-        final int runTimeInMinutes = this.mathHelper.getDifferenceInMinutes(this.mapSystemService.getStartTrackTime(), this.mapSystemService.getStopTrackTime());
+        final int runTimeInMinutes = MathHelper.getDifferenceInMinutes(this.mapSystemService.getStartTrackTime(), this.mapSystemService.getStopTrackTime());
         runEntry.setTime(runTimeInMinutes);
         final float distance = this.mapSystemService.getDistance() / 1000;
         runEntry.setDistance(distance);
         runEntry.setImageFilepath(fileName);
-        this.realmService.saveOrUpdate(runEntry);
+        RealmService.getInstance().saveOrUpdate(runEntry);
         String saved = this.activity.getString(R.string.entry_not_saved);
-        if (this.imageService.saveImage(bitmap, fileName)) {
+        if (ImageService.getInstance().saveImage(this.activity, bitmap, fileName)) {
             saved = this.activity.getString(R.string.entry_saved);
         }
         Toast.makeText(this.activity, saved, Toast.LENGTH_SHORT).show();

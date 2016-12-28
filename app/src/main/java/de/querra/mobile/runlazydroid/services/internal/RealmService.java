@@ -1,48 +1,193 @@
 package de.querra.mobile.runlazydroid.services.internal;
 
+import android.support.annotation.NonNull;
+
+import java.util.Date;
+import java.util.List;
+
+import de.querra.mobile.rlblib.helper.DateHelper;
 import de.querra.mobile.runlazydroid.data.RealmInterface;
+import de.querra.mobile.runlazydroid.data.entities.Penalty;
+import de.querra.mobile.runlazydroid.data.entities.RunEntry;
 import de.querra.mobile.runlazydroid.data.entities.Target;
+import io.realm.Realm;
 import io.realm.RealmObject;
+import io.realm.RealmResults;
+import io.realm.Sort;
 
-public interface RealmService {
+public class RealmService {
 
-    float getWeekTargetWithPenalties();
+    private static RealmService INSTANCE;
 
-    float getDistanceRun();
+    Realm realm = Realm.getDefaultInstance();
 
-    float getTotalPenaltyDistance();
+    private RealmService() {
+        // no external instantiation of singleton
+    }
 
-    int getProgress();
+    public void delete(RealmInterface realmObject){
+        this.realm.beginTransaction();
+        this.realm.where(realmObject.getRealmClass()).equalTo(realmObject.getIdField(), realmObject.getRealmId()).findAll().deleteFirstFromRealm();
+        this.realm.commitTransaction();
+    }
 
-    float getDistanceLeft();
+    public void saveOrUpdate(RealmObject realmObject){
+        this.realm.beginTransaction();
+        this.realm.copyToRealmOrUpdate(realmObject);
+        this.realm.commitTransaction();
+    }
 
-    Target getLastTarget();
+    public int getAllTimeTargets() {
+        return this.realm.where(Target.class).findAll().size();
+    }
 
-    float getAllTimeDistance();
+    public float getWeekTargetWithPenalties() {
+        return getLastTarget().getBaseDistance() + getTotalPenaltyDistance();
+    }
 
-    int getAllTimePenalties();
+    public float getDistanceRun() {
+        RealmResults<RunEntry> thisWeeksEntries = getWeekRunEntries();
+        return calculateRunDistance(thisWeeksEntries);
+    }
 
-    float getAllTimePenaltyDistance();
+    @NonNull
+    private RealmResults<RunEntry> getWeekRunEntries() {
+        Date from = DateHelper.getLastSunday().toDate();
+        Date to = DateHelper.getNextSunday().toDate();
+        return this.realm.where(RunEntry.class).between(RunEntry.CREATED_FIELD, from, to).findAll();
+    }
 
-    int getAllTimeRunTime();
+    public float getTotalPenaltyDistance() {
+        RealmResults<Penalty> penalties = getWeekPenalties();
+        return calculatePenaltyDistance(penalties);
+    }
 
-    boolean targetNeedsUpdate();
+    @NonNull
+    private RealmResults<Penalty> getWeekPenalties() {
+        Date from = DateHelper.getLastSunday().toDate();
+        Date to = DateHelper.getNextSunday().toDate();
+        return this.realm.where(Penalty.class).between(RunEntry.CREATED_FIELD, from, to).findAll();
+    }
 
-    boolean newTargetNeedsCopy();
+    public int getProgress() {
+        return (int) (getDistanceRun() / getWeekTargetWithPenalties() * 100f);
+    }
 
-    int getAllTimeTargetsAchieved();
+    public float getDistanceLeft() {
+        return getWeekTargetWithPenalties() - getDistanceRun();
+    }
 
-    float getAverageSpeed();
+    public Target getLastTarget() {
+        RealmResults<Target> targets = this.realm.where(Target.class).findAllSorted(Target.CREATED_FIELD, Sort.ASCENDING);
+        if (targets.size() == 0) {
+            return null;
+        }
+        return targets.last();
+    }
 
-    float getAverageWeekSpeed();
+    public float getAllTimeDistance() {
+        RealmResults<RunEntry> entries = this.realm.where(RunEntry.class).findAll();
+        return calculateRunDistance(entries);
+    }
 
-    float getWeekRunTime();
+    public int getAllTimePenalties() {
+        int penalties = 0;
+        for (Penalty ignored : this.realm.where(Penalty.class).findAll()) {
+            penalties++;
+        }
+        return penalties;
+    }
 
-    void handleTargetAchieved();
+    public float getAllTimePenaltyDistance() {
+        RealmResults<Penalty> allPenalties = this.realm.where(Penalty.class).findAll();
+        return calculatePenaltyDistance(allPenalties);
+    }
 
-    void delete(RealmInterface realmObject);
+    public int getAllTimeRunTime() {
+        RealmResults<RunEntry> entries = this.realm.where(RunEntry.class).findAll();
+        return calculateRunTime(entries);
+    }
 
-    void saveOrUpdate(RealmObject realmObject);
+    public boolean targetNeedsUpdate() {
+        Target last = getLastTarget();
+        return last == null || last.getEndDate().before(new Date());
+    }
 
-    int getAllTimeTargets();
+    public boolean newTargetNeedsCopy() {
+        Target last = getLastTarget();
+        return last != null && !last.isAchieved();
+    }
+
+    public int getAllTimeTargetsAchieved() {
+        return this.realm.where(Target.class).equalTo(Target.ACHIEVED_FIELD, true).findAll().size();
+    }
+
+    public float getAverageSpeed() {
+        return getAllTimeDistance() / (float)getAllTimeRunTime();
+    }
+
+    public float getAverageWeekSpeed() {
+        return getDistanceRun() / getWeekRunTime();
+    }
+
+    public float getWeekRunTime() {
+        return (float) calculateRunTime(getWeekRunEntries());
+    }
+
+    public void handleTargetAchieved() {
+        Target target = getLastTarget();
+        if (target == null){
+            return;
+        }
+        if (targetAchieved(target)){
+            this.realm.beginTransaction();
+            target.setAchieved(true);
+            this.realm.commitTransaction();
+        }
+    }
+
+    private boolean targetAchieved(Target target) {
+        float targetBaseDistance = target.getBaseDistance();
+        RealmResults<Penalty> penalties = this.realm.where(Penalty.class).between(Penalty.CREATED_FIELD, target.getStartDate(), target.getEndDate()).findAll();
+        float penaltyDistance = calculatePenaltyDistance(penalties);
+        RealmResults<RunEntry> targetEntries = this.realm.where(RunEntry.class).between(RunEntry.CREATED_FIELD, target.getStartDate(), target.getEndDate()).findAll();
+        float runDistance = calculateRunDistance(targetEntries);
+        return (targetBaseDistance + penaltyDistance) < runDistance;
+    }
+
+
+    private float calculateRunDistance(List<RunEntry> runEntries){
+        float runDistance = 0f;
+        for (RunEntry runEntry : runEntries){
+            runDistance += runEntry.getDistance();
+        }
+        return runDistance;
+    }
+
+    private float calculatePenaltyDistance(List<Penalty> penalties){
+        float penaltyDistance = 0f;
+        for (Penalty penalty : penalties){
+            penaltyDistance += penalty.getDistance();
+        }
+        return penaltyDistance;
+    }
+
+    private int calculateRunTime(List<RunEntry> entries) {
+        int time = 0;
+        for (RunEntry runEntry : entries) {
+            time += runEntry.getTime();
+        }
+        return time;
+    }
+
+    public static RealmService getInstance(){
+        if (INSTANCE == null){
+            synchronized (RealmService.class){
+                if (INSTANCE == null){
+                    INSTANCE = new RealmService();
+                }
+            }
+        }
+        return INSTANCE;
+    }
 }

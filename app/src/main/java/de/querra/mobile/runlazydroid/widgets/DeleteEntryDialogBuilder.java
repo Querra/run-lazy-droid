@@ -5,30 +5,20 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Handler;
 
-import javax.inject.Inject;
-
 import de.querra.mobile.runlazydroid.R;
-import de.querra.mobile.runlazydroid.RunLazyDroidApplication;
 import de.querra.mobile.runlazydroid.data.RealmInterface;
 import de.querra.mobile.runlazydroid.services.internal.RealmService;
 
 public class DeleteEntryDialogBuilder {
 
-    @Inject
-    RealmService realmService;
-
-    public DeleteEntryDialogBuilder(){
-        RunLazyDroidApplication.getAppComponent().inject(this);
-    }
-
-    public void show(Context context, final RealmInterface realmObject, final Runnable runnable){
+    public static void show(Context context, final RealmInterface realmObject, final Runnable runnable){
         new AlertDialog.Builder(context)
                 .setTitle(R.string.delete_entry)
                 .setMessage(R.string.delete_entry_query)
                 .setPositiveButton(R.string.delete, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        realmService.delete(realmObject);
+                        RealmService.getInstance().delete(realmObject);
                         new Handler().post(runnable);
                     }
                 })

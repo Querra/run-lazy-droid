@@ -15,16 +15,13 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.inject.Inject;
-
+import de.querra.mobile.rlblib.entities.RunType;
+import de.querra.mobile.rlblib.helper.Formatter;
+import de.querra.mobile.rlblib.helper.RunTypeHelper;
 import de.querra.mobile.runlazydroid.R;
-import de.querra.mobile.runlazydroid.RunLazyDroidApplication;
 import de.querra.mobile.runlazydroid.data.RealmInterface;
 import de.querra.mobile.runlazydroid.data.entities.Penalty;
 import de.querra.mobile.runlazydroid.data.entities.RunEntry;
-import de.querra.mobile.runlazydroid.entities.RunType;
-import de.querra.mobile.runlazydroid.helper.Formatter;
-import de.querra.mobile.runlazydroid.helper.RunTypeHelper;
 import de.querra.mobile.runlazydroid.services.internal.ImageService;
 import de.querra.mobile.runlazydroid.services.internal.RealmService;
 import de.querra.mobile.runlazydroid.widgets.DeleteEntryDialogBuilder;
@@ -32,20 +29,10 @@ import io.realm.RealmObject;
 
 public class TimelineCardAdapter extends RecyclerView.Adapter{
 
-    @Inject
-    Formatter formatter;
-    @Inject
     Resources resources;
-    @Inject
     Context context;
-    @Inject
     ImageService imageService;
-    @Inject
-    RunTypeHelper runTypeHelper;
-    @Inject
     RealmService realmService;
-    @Inject
-    DeleteEntryDialogBuilder deleteEntryDialogBuilder;
 
     private List<RealmObject> data = new ArrayList<>();
     private Activity activity;
@@ -53,8 +40,12 @@ public class TimelineCardAdapter extends RecyclerView.Adapter{
 
     public TimelineCardAdapter(Activity activity){
         super();
-        RunLazyDroidApplication.getAppComponent().inject(this);
         this.activity = activity;
+        this.context = activity;
+        this.resources = activity.getResources();
+        this.imageService = ImageService.getInstance();
+        this.realmService = RealmService.getInstance();
+
     }
 
     public class TimelineCardViewHolder extends RecyclerView.ViewHolder implements View.OnLongClickListener{
@@ -96,7 +87,7 @@ public class TimelineCardAdapter extends RecyclerView.Adapter{
 
         @Override
         public boolean onLongClick(View v) {
-            deleteEntryDialogBuilder.show(activity, (RealmInterface) data.get(getAdapterPosition()), new Runnable() {
+            DeleteEntryDialogBuilder.show(activity, (RealmInterface) data.get(getAdapterPosition()), new Runnable() {
                 @Override
                 public void run() {
                     data.remove(getAdapterPosition());
@@ -120,27 +111,27 @@ public class TimelineCardAdapter extends RecyclerView.Adapter{
         if (item instanceof RunEntry) {
             final RunEntry entry = (RunEntry) item;
             RunType runType = RunType.fromString(entry.getType());
-            String localRunType = this.runTypeHelper.toLocalString(runType);
+            String localRunType = RunTypeHelper.toLocalString(this.resources, runType);
             if (runType == RunType.MAP_RUN){
-                statisticsCard.setTypeImage(this.imageService.getImage(this.formatter.getFileName(entry.getId())));
+                statisticsCard.setTypeImage(this.imageService.getImage(Formatter.getFileName(entry.getId())));
             }
             else {
-                statisticsCard.setTypeImage(this.runTypeHelper.getDrawable(runType));
+                statisticsCard.setTypeImage(RunTypeHelper.getDrawable(this.resources, runType));
             }
             statisticsCard.setTypeText(localRunType);
-            statisticsCard.setDistanceText(this.formatter.asKilometers(entry.getDistance()));
-            statisticsCard.setDateText(this.formatter.dateToString(entry.getCreated()));
-            statisticsCard.setTimeText(this.formatter.inMinutes(entry.getTime()));
+            statisticsCard.setDistanceText(Formatter.asKilometers(entry.getDistance()));
+            statisticsCard.setDateText(Formatter.dateToString(entry.getCreated()));
+            statisticsCard.setTimeText(Formatter.inMinutes(this.context, entry.getTime()));
         }
         if (item instanceof Penalty) {
             final Penalty penalty = (Penalty) item;
             statisticsCard.setTypeImage(this.resources.getDrawable(R.drawable.ic_thumb_down));
             statisticsCard.setTypeText(this.resources.getString(R.string.penalty));
             float penaltyDistance = penalty.getDistance();
-            statisticsCard.setDistanceText(this.formatter.asKilometers(penaltyDistance));
-            statisticsCard.setDateText(this.formatter.dateToString(penalty.getCreated()));
+            statisticsCard.setDistanceText(Formatter.asKilometers(penaltyDistance));
+            statisticsCard.setDateText(Formatter.dateToString(penalty.getCreated()));
             int minutesFromAverage = (int) (penaltyDistance / this.realmService.getAverageSpeed());
-            String minutes = this.formatter.asMinutesFromAverage(minutesFromAverage);
+            String minutes = Formatter.asMinutesFromAverage(this.context, minutesFromAverage);
             if (minutesFromAverage == 0){
                 minutes = this.context.getString(R.string.not_available);
             }

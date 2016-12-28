@@ -11,26 +11,17 @@ import android.view.ViewGroup;
 
 import com.takisoft.fix.support.v7.preference.PreferenceFragmentCompat;
 
-import javax.inject.Inject;
-
 import de.querra.mobile.runlazydroid.R;
-import de.querra.mobile.runlazydroid.RunLazyDroidApplication;
 import de.querra.mobile.runlazydroid.data.entities.Target;
-import de.querra.mobile.runlazydroid.di.AppModule;
 import de.querra.mobile.runlazydroid.services.internal.PreferencesService;
 import de.querra.mobile.runlazydroid.services.internal.RealmService;
 import io.realm.Realm;
 
 public class PreferencesFragment extends PreferenceFragmentCompat {
 
-    @Inject
     PreferencesService preferencesService;
-
-    @Inject
     RealmService realmService;
-
-    @Inject
-    Realm realm;
+    Realm realm = Realm.getDefaultInstance();
 
     private SharedPreferences.OnSharedPreferenceChangeListener preferencesListener = new SharedPreferences.OnSharedPreferenceChangeListener() {
         @Override
@@ -38,7 +29,7 @@ public class PreferencesFragment extends PreferenceFragmentCompat {
             if (key.equals(getString(R.string.preference__week_target))){
                 Target lastTarget = realmService.getLastTarget();
                 realm.beginTransaction();
-                lastTarget.setBaseDistance(preferencesService.getWeekTarget());
+                lastTarget.setBaseDistance(preferencesService.getWeekTarget(getActivity()));
                 realm.commitTransaction();
             }
         }
@@ -47,10 +38,11 @@ public class PreferencesFragment extends PreferenceFragmentCompat {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        RunLazyDroidApplication.getAppComponent().inject(this);
+        this.preferencesService = PreferencesService.getInstance();
+        this.realmService = RealmService.getInstance();
 
         PreferenceManager preferenceManager = getPreferenceManager();
-        preferenceManager.setSharedPreferencesName(AppModule.SAVED_PREFERENCES);
+        preferenceManager.setSharedPreferencesName(PreferencesService.SAVED_PREFERENCES);
         preferenceManager.setSharedPreferencesMode(Context.MODE_PRIVATE);
 
         // Load the preferences from an XML resource

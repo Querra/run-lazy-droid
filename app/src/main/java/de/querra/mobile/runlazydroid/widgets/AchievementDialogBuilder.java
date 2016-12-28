@@ -10,8 +10,8 @@ import android.widget.TextView;
 
 import de.querra.mobile.runlazydroid.R;
 import de.querra.mobile.runlazydroid.data.entities.Achievement;
-import de.querra.mobile.runlazydroid.entities.AchievementCategory;
-import de.querra.mobile.runlazydroid.entities.AchievementLevel;
+import de.querra.mobile.rlblib.entities.AchievementCategory;
+import de.querra.mobile.rlblib.entities.AchievementLevel;
 
 public class AchievementDialogBuilder {
 

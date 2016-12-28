@@ -1,0 +1,154 @@
+<resources>
+
+    <!-- App -->
+    <string name="app_name">RLBLib</string>
+
+    <!-- Drawer -->
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <!-- Drawer menu -->
+    <string name="overview">Week overview</string>
+    <string name="add_penalty">Add penalty</string>
+    <string name="settings">Settings</string>
+    <string name="options">Options</string>
+    <string name="logout">Logout</string>
+    <string name="time_line">Timeline</string>
+    <string name="statistics">Statistics</string>
+    <string name="communicate">Communicate</string>
+    <string name="share">Share</string>
+    <string name="send">Send</string>
+
+    <!-- Start -->
+    <string name="loading_data">Loading data…</string>
+    <string name="log_in_to_continue">Please log in to continue</string>
+
+    <!-- Preferences strings -->
+    <string name="distance_run" translatable="false">distance_run</string>
+    <string name="penalties" translatable="false">penalties</string>
+    <string name="start_date" translatable="false">start_date</string>
+    <string name="week_goal" translatable="false">week_goal</string>
+    <string name="penalty_distance" translatable="false">penalty_distance</string>
+
+    <!-- Run types -->
+    <string name="map_run">Mapped run</string>
+    <string name="track">Run</string>
+    <string name="treadmill">Treadmill</string>
+    <string name="unknown">Unknown</string>
+
+    <!-- Penalty -->
+    <string name="penalty">Penalty</string>
+    <string name="penalty_text1">That\'s really…</string>
+    <string name="penalty_text2">…disappointing!</string>
+
+    <!-- Delete entry -->
+    <string name="delete_entry">Delete entry</string>
+    <string name="delete">Delete</string>
+    <string name="delete_entry_query">Do you really want to delete this entry?</string>
+    <string name="cancel">Cancel</string>
+
+    <!-- Add penalty -->
+    <string name="been_naughty">Have you been naughty again?</string>
+    <string name="yes_please">Yes, Please add my Penalty!</string>
+    <string name="penalty_added">Penalty added</string>
+
+    <!-- Add entry -->
+    <string name="add_running_data">Add Running Data</string>
+    <string name="distance">Distance</string>
+    <string name="time">Time</string>
+    <string name="track_type">Track type</string>
+    <string name="add_entry">Add Entry</string>
+    <string name="entry_added">Entry added</string>
+
+    <!-- Literals -->
+    <string name="day">day</string>
+    <string name="days">days</string>
+    <string name="minute">minute</string>
+    <string name="minutes">minutes</string>
+
+    <!-- Overview -->
+    <string name="target">Target</string>
+    <string name="achieved">Achieved</string>
+    <string name="distance_run_literal">Distance run</string>
+    <string name="distance_left">Distance left</string>
+    <string name="penalty_literal">Penalty</string>
+    <string name="time_left">Time left</string>
+
+    <!-- Map -->
+    <string name="title_activity_maps">Map</string>
+    <string name="map">Map</string>
+    <string name="entry_saved">Entry has been saved</string>
+    <string name="entry_not_saved">Entry could not be saved. Is there enough space on your system?</string>
+    <string name="connection_failed">Connection failed</string>
+    <string name="connection_failed_message">Not connected, retry connection?</string>
+    <string name="reconnect">Reconnect</string>
+    <string name="stop_tracking_question">Do you want to stop tracking?</string>
+    <string name="stop_tracking">Stop tracking</string>
+    <string name="add_run_question">Do you want to add this run to your entries?</string>
+    <string name="hurry_up">Hurry up!</string>
+    <string name="wow">WOW!</string>
+    <string name="great">Great!</string>
+    <string name="nice">Nice!</string>
+    <string name="time_for_a_run">Time to go for a run!</string>
+    <string name="done">Done</string>
+    <string name="really">Really?</string>
+    <string name="total_distance">Distance run (total)</string>
+    <string name="total_pentalties">Number of penalties (total)</string>
+    <string name="total_penalty_distance">Penalty distance (total)</string>
+    <string name="total_run_time">Run time (total)</string>
+    <string name="min">min.</string>
+    <string name="estimate_from_average">(estimate)</string>
+    <string name="not_available">Not available yet</string>
+    <string name="total_average_speed">Average speed (total)</string>
+    <string name="average_speed">Average speed</string>
+    <string name="time_spent_running">Time spent running</string>
+    <string name="time_to_be_reckoned_with">Time to be reckoned with</string>
+    <string name="available_after_run">Available after run</string>
+
+    <!-- Preferences -->
+    <string name="preference__start_date" translatable="false">preference__start_date</string>
+    <string name="preference__week_target" translatable="false">preference__week_target</string>
+    <string name="preference__week_target_category_title">Week target</string>
+    <string name="preference__week_target__title">Initial week target</string>
+    <string name="preference__week_target__summary">What distance do you want to start with?</string>
+    <string name="preference__penalty_distance" translatable="false">preference__penalty_distance</string>
+    <string name="preference__penalty_category_title">Penalties</string>
+    <string name="preference__penalty_distance__title">Penalty distance</string>
+    <string name="preference__penalty_distance__summary">How much more will you run from a penalty?</string>
+    <string name="preference__distance_category_title">Distance</string>
+    <string name="preference__increment_distance" translatable="false">preference__increment_distance</string>
+    <string name="preference__increment_distance__title">Distance increment</string>
+    <string name="preference__increment_distance__summary">How much should the distance increase each week?</string>
+    <string name="preference__auto_increment_distance" translatable="false">preference__auto_increment_distance</string>
+    <string name="preference__auto_increment_distance__title">Activate distance increment</string>
+    <string name="preference__auto_increment_distance__summary">Check to activate automatic weekly increase of the run distance.</string>
+    <string name="preference__defaults_set" translatable="false">preference__defaults_set</string>
+    <string name="preference__licenses_category_title">Licenses</string>
+    <string name="preference__licenses__title">View licenses</string>
+    <string name="preference__licenses__summary">View open source licenses</string>
+
+    <!-- Licenses -->
+    <string name="android_robot" translatable="false">Android Robot</string>
+    <string name="android_robot_license" translatable="false">The Android robot is reproduced or modified from work created and shared by Google and used according to terms described in the Creative Commons 3.0 Attribution License.</string>
+    <string name="circular_progressbar" translatable="false">CircularProgressBar</string>
+    <string name="circular_progressbar_license" translatable="false">CircularProgressBar by Lopez Mikhael is licensed under a Apache License 2.0. Based on a work at https://github.com/Pedramrn/CircularProgressBar.</string>
+    <string name="circular_progressbar_link" translatable="false">https://github.com/lopspower/CircularProgressBar</string>
+    <string name="dagger_2" translatable="false">Dagger 2</string>
+    <string name="dagger_2_license" translatable="false">Copyright 2012 The Dagger Authors \n\nLicensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with the License. You may obtain a copy of the License at\n\n http://www.apache.org/licenses/LICENSE-2.0\n\n Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an \"AS IS\" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.</string>
+    <string name="dagger_2_link" translatable="false">https://github.com/google/dagger</string>
+    <string name="facebook_sdk" translatable="false">Facebook SDK for Android</string>
+    <string name="facebook_sdk_license" translatable="false">Except as otherwise noted, the Facebook SDK for Android is licensed under the Facebook Platform License (https://github.com/facebook/facebook-android-sdk/blob/master/LICENSE.txt). \n\nUnless required by applicable law or agreed to in writing, software distributed under the License is distributed on an AS ISBASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.</string>
+    <string name="facebook_sdk_link" translatable="false">https://github.com/facebook/facebook-android-sdk</string>
+    <string name="joda_time" translatable="false">joda-time-android</string>
+    <string name="joda_time_license" translatable="false">https://www.apache.org/licenses/LICENSE-2.0</string>
+    <string name="joda_time_link" translatable="false">https://github.com/dlew/joda-time-android</string>
+    <string name="realm" translatable="false">Realm</string>
+    <string name="realm_license" translatable="false">Realm Java is published under the Apache 2.0 license. The underlying core is available under the Realm Core Binary License while we work to open-source it under the Apache 2.0 license. \n\nThis product is not being made available to any person located in Cuba, Iran, North Korea, Sudan, Syria or the Crimea region, or to any other person that is not eligible to receive the product under U.S. law.</string>
+    <string name="realm_link" translatable="false">https://github.com/realm/realm-java</string>
+    <string name="targets_achieved">Week targets achieved</string>
+    <string name="targets_tackled">Week targets tackled</string>
+    <string name="targets_failed">Targets failed</string>
+    <string name="points"> points</string>
+    <string name="congrats">Congratulations, you just won a badge and </string>
+
+</resources>
