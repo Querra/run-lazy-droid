@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@drawable/retro_race_track"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:background="@color/black_alpha_weak"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:text="Enter your name"
+        android:layout_marginBottom="20dp"/>
+
+    <EditText
+        android:hint="Profile name"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        android:id="@+id/activity_profile_name"
+        android:layout_width="240dp"
+        android:background="@color/colorPrimary"
+        android:layout_height="wrap_content"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:textSize="24sp"
+        android:layout_marginBottom="60dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:background="@color/black_alpha_weak"
+        android:text="Choose your profile picture"
+        android:layout_marginBottom="20dp"/>
+
+    <ImageView
+        android:id="@+id/activity_profile_picture"
+        android:layout_width="160dp"
+        android:layout_height="160dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/app_icon"
+        android:background="@color/black"
+        android:layout_marginBottom="40dp"/>
+
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/activity_profile_apply"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingEnd="100dp"
+        android:paddingStart="100dp"
+        android:textSize="20sp"
+        android:text="Apply"
+        android:textAllCaps="false"/>
+
+</LinearLayout>

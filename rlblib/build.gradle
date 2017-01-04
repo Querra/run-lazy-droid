@@ -46,6 +46,10 @@ dependencies {
     compile 'com.google.android.gms:play-services-maps:9.6.1'
     compile 'com.google.android.gms:play-services-location:9.6.1'
 
+    // Rx Java
+    compile 'io.reactivex:rxandroid:1.2.1'
+    compile 'io.reactivex:rxjava:1.2.4'
+
     // support preferences fragment fix
     compile 'com.takisoft.fix:preference-v7:24.2.1.0'
 }

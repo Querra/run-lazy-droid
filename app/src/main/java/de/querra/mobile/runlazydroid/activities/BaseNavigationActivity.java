@@ -1,7 +1,10 @@
 package de.querra.mobile.runlazydroid.activities;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -12,6 +15,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -24,6 +28,7 @@ import com.facebook.login.LoginManager;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.mikhaellopez.circularprogressbar.CircularProgressBar;
 
+import java.io.IOException;
 import java.util.Date;
 
 import de.querra.mobile.rlblib.entities.User;
@@ -31,6 +36,7 @@ import de.querra.mobile.rlblib.helper.DateHelper;
 import de.querra.mobile.rlblib.helper.Formatter;
 import de.querra.mobile.runlazydroid.R;
 import de.querra.mobile.runlazydroid.data.entities.Target;
+import de.querra.mobile.runlazydroid.fragments.AchievementFragment;
 import de.querra.mobile.runlazydroid.fragments.OverviewFragment;
 import de.querra.mobile.runlazydroid.fragments.PenaltyFragment;
 import de.querra.mobile.runlazydroid.fragments.PreferencesFragment;
@@ -44,7 +50,14 @@ import de.querra.mobile.runlazydroid.widgets.ProfilePictureView;
 public abstract class BaseNavigationActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    protected static final String USER = "user";
+    public static final String TAG = "BaseNavigationActivity";
+
+    public static final String USER = "user";
+    public static final String PROFILE_NAME = "profile_name";
+    public static final String LOGIN_TYPE = "login_type";
+    public static final String LOGIN_FACEBOOK = "login_facebook";
+    public static final String LOGIN_TEST = "login_test";
+    public static final String PROFILE_PICTURE = "profile_picture";
 
     RealmService realmService;
     PreferencesService preferencesService;
@@ -53,6 +66,9 @@ public abstract class BaseNavigationActivity extends AppCompatActivity
     protected SupportMapFragment mMap;
     protected FloatingActionButton floatingActionButton;
     protected NavigationView navigationView;
+    protected boolean isLoggedInWithFacebook;
+    protected Uri imageUri;
+    protected String userName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,8 +76,21 @@ public abstract class BaseNavigationActivity extends AppCompatActivity
         this.realmService = RealmService.getInstance();
         this.preferencesService = PreferencesService.getInstance();
 
-        if (!FacebookSdk.isInitialized()) {
+        Bundle extras = getIntent().getExtras();
+        String loginType = (String) extras.get(LOGIN_TYPE);
+        if (LOGIN_FACEBOOK.equals(loginType)) {
+            this.isLoggedInWithFacebook = true;
+        } else if (LOGIN_TEST.equals(loginType)) {
+            this.imageUri = (Uri) extras.get(PROFILE_PICTURE);
+            this.userName = (String) extras.get(PROFILE_NAME);
+        } else {
+            Log.e(TAG, "No valid login type found");
+            finish();
+        }
+
+        if (this.isLoggedInWithFacebook && !FacebookSdk.isInitialized()) {
             FacebookSdk.sdkInitialize(getApplicationContext());
+            initUser();
         }
         setContentView(getLayout());
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -73,8 +102,6 @@ public abstract class BaseNavigationActivity extends AppCompatActivity
         }
 
         this.floatingActionButton = getFloatingActionButton();
-
-        initUser();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -132,10 +159,9 @@ public abstract class BaseNavigationActivity extends AppCompatActivity
         target.setCreated(now);
         target.setStartDate(DateHelper.getLastSunday().toDate());
         target.setEndDate(DateHelper.getNextSunday().toDate());
-        if (this.realmService.newTargetNeedsCopy()){
+        if (this.realmService.newTargetNeedsCopy()) {
             target.setBaseDistance(this.realmService.getLastTarget().getBaseDistance());
-        }
-        else {
+        } else {
             target.setBaseDistance(calculateBaseDistance());
         }
         this.realmService.saveOrUpdate(target);
@@ -158,7 +184,7 @@ public abstract class BaseNavigationActivity extends AppCompatActivity
     }
 
     private void updateUser(View view) {
-        if (this.user == null) {
+        if (this.user == null && this.isLoggedInWithFacebook) {
             initUser();
             if (this.user == null) {
                 return;
@@ -167,33 +193,60 @@ public abstract class BaseNavigationActivity extends AppCompatActivity
 
         ProfilePictureView profileImage = (ProfilePictureView) view.findViewById(R.id.nav_header_main__profilePicture);
         if (profileImage != null) {
-            profileImage.setProfileId(this.user.getId());
+            if (this.isLoggedInWithFacebook) {
+                profileImage.setProfileId(this.user.getId());
+            } else {
+                if (this.imageUri != null) {
+                    try {
+                        Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), this.imageUri);
+                        profileImage.setDefaultProfilePicture(bitmap);
+                        profileImage.setProfileId(null);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
+
+        TextView userFirstName = (TextView) view.findViewById(R.id.nav_header_main__user_first_name);
+        if (userFirstName != null) {
+            if (this.isLoggedInWithFacebook) {
+                userFirstName.setText(this.user.getFirstName());
+            } else {
+                if (this.userName != null) {
+                    userFirstName.setText(this.userName);
+                }
+            }
         }
 
         CircularProgressBar progress = (CircularProgressBar) view.findViewById(R.id.nav_header_main__progress);
-        if (progress != null) {
+        if (progress != null)
+
+        {
             progress.setProgressWithAnimation(this.realmService.getProgress());
         }
-        TextView userFirstName = (TextView) view.findViewById(R.id.nav_header_main__user_first_name);
-        if (userFirstName != null) {
-            userFirstName.setText(this.user.getFirstName());
-        }
+
         TextView target = (TextView) view.findViewById(R.id.nav_header_main__target);
-        if (target != null) {
+        if (target != null)
+
+        {
             float distanceLeft = this.realmService.getDistanceLeft();
             if (distanceLeft < 0f) {
                 distanceLeft = 0f;
                 target.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_flag, 0, R.drawable.ic_check, 0);
-            }
-            else {
+            } else {
                 target.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_flag, 0, 0, 0);
             }
             target.setText(Formatter.asKilometers(distanceLeft));
         }
+
         TextView penalty = (TextView) view.findViewById(R.id.nav_header_main__days_left);
-        if (penalty != null) {
+        if (penalty != null)
+
+        {
             penalty.setText(Formatter.getDaysLeft(this, DateHelper.getNextSunday()));
         }
+
     }
 
     @Override
@@ -252,6 +305,8 @@ public abstract class BaseNavigationActivity extends AppCompatActivity
             switchFragment(new TimeLineFragment(), true);
         } else if (id == R.id.nav_statistics) {
             switchFragment(new StatisticsFragment(), true);
+        } else if (id == R.id.nav_achievements) {
+            switchFragment(new AchievementFragment(), true);
         } else if (id == R.id.nav_logout) {
             LoginManager.getInstance().logOut();
             startActivity(new Intent(this, LoginActivity.class));
@@ -292,5 +347,4 @@ public abstract class BaseNavigationActivity extends AppCompatActivity
     protected abstract Fragment getInitialFragment();
 
     protected abstract FloatingActionButton getFloatingActionButton();
-
 }

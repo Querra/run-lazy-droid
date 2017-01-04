@@ -18,10 +18,12 @@ public class Achievement extends RealmObject implements RealmInterface {
     private String achievementCategory;
     private String achievementLevel;
     private String flavorText;
+    private boolean achieved;
+    private int drawableId;
     private int points;
 
     public long getId() {
-        return id;
+        return this.id;
     }
 
     public void setId(long id) {
@@ -29,7 +31,7 @@ public class Achievement extends RealmObject implements RealmInterface {
     }
 
     public Date getCreated() {
-        return created;
+        return this.created;
     }
 
     public void setCreated(Date created) {
@@ -37,7 +39,7 @@ public class Achievement extends RealmObject implements RealmInterface {
     }
 
     public String getName() {
-        return name;
+        return this.name;
     }
 
     public void setName(String name) {
@@ -45,7 +47,7 @@ public class Achievement extends RealmObject implements RealmInterface {
     }
 
     public String getAchievementCategory() {
-        return achievementCategory;
+        return this.achievementCategory;
     }
 
     public void setAchievementCategory(String achievementCategory) {
@@ -66,6 +68,22 @@ public class Achievement extends RealmObject implements RealmInterface {
 
     public void setFlavorText(String flavorText) {
         this.flavorText = flavorText;
+    }
+
+    public boolean isAchieved() {
+        return this.achieved;
+    }
+
+    public void setAchieved(boolean achieved) {
+        this.achieved = achieved;
+    }
+
+    public int getDrawableId() {
+        return this.drawableId;
+    }
+
+    public void setDrawableId(int drawableId) {
+        this.drawableId = drawableId;
     }
 
     public int getPoints() {

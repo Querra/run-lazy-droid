@@ -24,8 +24,15 @@
             android:textSize="30sp"
             android:textStyle="bold" />
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+
         <com.facebook.login.widget.LoginButton
-            android:id="@+id/login_button"
+            android:id="@+id/fb_login_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -33,6 +40,17 @@
             android:paddingBottom="12dp"
             android:paddingTop="12dp"
             android:textSize="18sp" />
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/test_login_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Test User Login"
+            android:textAllCaps="false"
+            android:paddingBottom="12dp"
+            android:paddingTop="12dp"
+            android:textSize="18sp" />
+        </LinearLayout>
     </LinearLayout>
 
 </RelativeLayout>

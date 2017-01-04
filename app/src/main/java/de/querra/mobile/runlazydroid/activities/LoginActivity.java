@@ -3,6 +3,7 @@ package de.querra.mobile.runlazydroid.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.AppCompatButton;
 import android.util.Log;
 
 import com.facebook.CallbackManager;
@@ -28,14 +29,14 @@ public class LoginActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_login);
 
-        LoginButton loginButton = (LoginButton) findViewById(R.id.login_button);
-        loginButton.setReadPermissions("public_profile");
+        LoginButton facebookLoginButton = (LoginButton) findViewById(R.id.fb_login_button);
+        facebookLoginButton.setReadPermissions("public_profile");
 
         // Callback registration
-        loginButton.registerCallback(this.callbackManager, new FacebookCallback<LoginResult>() {
+        facebookLoginButton.registerCallback(this.callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
-                startMainActivity();
+                goToMainActivity();
             }
 
             @Override
@@ -48,6 +49,14 @@ public class LoginActivity extends AppCompatActivity {
                 Log.e("Callback", "error");
             }
         });
+
+        AppCompatButton testLoginButton = (AppCompatButton) findViewById(R.id.test_login_button);
+        testLoginButton.setOnClickListener(v -> startProfileActivity());
+    }
+
+    private void startProfileActivity() {
+        startActivity(new Intent(this, ProfileActivity.class));
+        finish();
     }
 
 
@@ -58,8 +67,10 @@ public class LoginActivity extends AppCompatActivity {
     }
 
 
-    private void startMainActivity() {
-        startActivity(new Intent(this, MainActivity.class));
+    private void goToMainActivity() {
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.putExtra(MainActivity.LOGIN_TYPE, MainActivity.LOGIN_FACEBOOK);
+        startActivity(intent);
         finish();
     }
 

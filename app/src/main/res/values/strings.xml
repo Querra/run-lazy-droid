@@ -13,6 +13,7 @@
     <string name="options">Options</string>
     <string name="logout">Logout</string>
     <string name="time_line">Timeline</string>
+    <string name="achievements">Achievements</string>
     <string name="statistics">Statistics</string>
     <string name="communicate">Communicate</string>
     <string name="share">Share</string>
@@ -149,5 +150,6 @@
     <string name="targets_failed">Targets failed</string>
     <string name="points"> points</string>
     <string name="congrats">Congratulations, you just won a badge and </string>
+
 
 </resources>

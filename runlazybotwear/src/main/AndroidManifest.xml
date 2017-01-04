@@ -10,13 +10,13 @@
         android:label="@string/app_name"
         android:supportsRtl="false"
         android:theme="@android:style/Theme.DeviceDefault">
-        <activity android:name="de.querra.mobile.runlazybotwear.WearMainActivity" android:label="@string/app_name">
+        <context android:name="de.querra.mobile.runlazybotwear.WearMainActivity" android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
+        </context>
     </application>
 
 </manifest>

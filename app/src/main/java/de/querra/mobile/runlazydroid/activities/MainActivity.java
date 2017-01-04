@@ -65,11 +65,8 @@ public class MainActivity extends BaseNavigationActivity {
             fabDrawableId = R.drawable.ic_menu;
         }
         this.floatingActionButton.setImageDrawable(getResources().getDrawable(fabDrawableId));
-        this.floatingActionButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(final View view) {
-                mapHandler.handleFabClick((FloatingActionButton) view);
-            }
+        this.floatingActionButton.setOnClickListener(view -> {
+            mapHandler.handleFabClick((FloatingActionButton) view);
         });
         return this.mapFragment;
     }
@@ -93,13 +90,10 @@ public class MainActivity extends BaseNavigationActivity {
     protected void onPrepareOverviewFragment() {
         this.floatingActionButton.setVisibility(View.VISIBLE);
         this.floatingActionButton.setImageDrawable(getResources().getDrawable(R.drawable.ic_add));
-        this.floatingActionButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                switchFragment(new RunningDataFragment(), true);
-                MainActivity.this.navigationView.setCheckedItem(R.id.nav_enter_running_data);
-                MainActivity.this.floatingActionButton.setVisibility(View.INVISIBLE);
-            }
+        this.floatingActionButton.setOnClickListener(view -> {
+            switchFragment(new RunningDataFragment(), true);
+            MainActivity.this.navigationView.setCheckedItem(R.id.nav_enter_running_data);
+            MainActivity.this.floatingActionButton.setVisibility(View.INVISIBLE);
         });
     }
 

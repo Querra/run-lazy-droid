@@ -10,6 +10,7 @@ import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
 
 import de.querra.mobile.runlazydroid.R;
+import de.querra.mobile.runlazydroid.data.helper.AchievementHelper;
 
 public class StartActivity extends AppCompatActivity {
 
@@ -20,14 +21,10 @@ public class StartActivity extends AppCompatActivity {
             FacebookSdk.sdkInitialize(getApplicationContext());
         }
         AppEventsLogger.activateApp(getApplication());
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                updateWithToken(AccessToken.getCurrentAccessToken());
-            }
-        }, 1000);
+        new Handler().postDelayed(() -> updateWithToken(AccessToken.getCurrentAccessToken()), 1000);
 
         setContentView(R.layout.activity_start);
+        AchievementHelper.createAchievements();
     }
 
 

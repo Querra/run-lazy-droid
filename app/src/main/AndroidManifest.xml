@@ -15,8 +15,7 @@
         android:icon="@drawable/app_icon"
         android:label="@string/app_name"
         android:supportsRtl="false"
-        android:theme="@style/AppTheme.NoActionBar"
-        >
+        android:theme="@style/AppTheme.NoActionBar">
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
@@ -26,6 +25,11 @@
 
         <activity
             android:name="de.querra.mobile.runlazydroid.activities.MainActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="de.querra.mobile.runlazydroid.activities.ProfileActivity"
             android:configChanges="orientation|keyboardHidden"
             android:label="@string/app_name"
             android:screenOrientation="portrait" />

@@ -23,6 +23,10 @@
             android:icon="@drawable/ic_timeline"
             android:title="@string/time_line" />
         <item
+            android:id="@+id/nav_achievements"
+            android:icon="@drawable/ic_achievements"
+            android:title="@string/achievements" />
+        <item
             android:id="@+id/nav_statistics"
             android:icon="@drawable/ic_statistics"
             android:title="@string/statistics" />
